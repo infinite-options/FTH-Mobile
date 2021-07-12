@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:Class="FTH.ViewModel.FoodBanksMap">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <!--<Frame x:Name="mapFrame" HasShadow="False" BackgroundColor="Gray" Padding="0" HeightRequest="500" VerticalOptions="Center" Margin="20, 50" CornerRadius="10">-->
+                    <maps:Map
+                        x:Name="map2"
+                        IsVisible="true"
+                        HasZoomEnabled="True"
+                        HeightRequest="500"
+                        Margin="10,50">
+                    </maps:Map>
+                <!--</Frame>-->
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

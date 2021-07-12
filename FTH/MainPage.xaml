@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             x:Class="FTH.MainPage" NavigationPage.HasNavigationBar="False">
+
+    <!-- center all of the main page content -->
+    <ContentPage.Content>
+    <ScrollView>
+        <StackLayout>
+        <BoxView HeightRequest="70" BackgroundColor="Transparent"/>
+
+        <Label Text="Welcome to" TextColor="Black" FontAttributes="Bold" FontSize="35" HorizontalTextAlignment="Start" Margin="30,0,0,0"/>
+        <Label Text="Serving Now" TextColor="#E7404A" FontAttributes="Bold" FontSize="35" HorizontalTextAlignment="Start" Margin="30,0,0,20"/>
+
+        <Image HeightRequest="350" BackgroundColor="Transparent" Margin="10,0" Source="shopping.png" HorizontalOptions="Fill" VerticalOptions="Start"/>
+
+        <ImageButton x:Name="loginButton" Source="loginButton.png" Margin="60,20,60,0" Clicked="loginClicked"/>
+        <ImageButton x:Name="registerButton" Source="registerButton.png" Margin="60,5,60,10" Clicked="registerClicked"/>
+
+        </StackLayout>
+    </ScrollView>
+    </ContentPage.Content>
+
+    
+    
+</ContentPage>

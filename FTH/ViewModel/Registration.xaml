@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FTH.ViewModel.Registration" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout x:Name="mainStack">
+                <BoxView x:Name="headingBuffer" HeightRequest="20"/>
+
+                <Grid Margin="20, 0, 20, 10" HeightRequest="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton BackgroundColor="LightGray" HorizontalOptions="Start" HeightRequest="30" WidthRequest="50" Clicked="backClicked"/>
+                    <ImageButton Grid.Column="1" Source="menu.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="50"/>
+
+                </Grid>
+
+                <Label FontSize="30" HorizontalOptions="Center" Text="Registration" FontAttributes="Bold" Margin="0, 10,0,3"/>
+
+                <Frame x:Name="firstName" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="FNameEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="First Name (required)" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="lastName" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="LNameEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="Last Name (required)" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="phoneNum" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="phoneEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="Phone Number" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="affiliation" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="affilEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="School / Affiliation" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Grid ColumnSpacing="4" Margin="20,0.5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame x:Name="idTypeFrame" Padding="20,10"  BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32" VerticalOptions="Start">
+                        <!--<Entry x:Name="idTypeEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="ID Type" PlaceholderColor="Black"
+                               />-->
+                        <Button x:Name="idTypeButton" Text="ID Type ᐯ" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="idTypeClicked" FontSize="15" TextColor="Black"/>
+                    </Frame>
+
+                    <ListView Grid.Column="0" x:Name="idList" IsVisible="False" HeightRequest="185" Margin="0,40,0,0" ItemSelected="idListItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                <Frame CornerRadius="0" BorderColor="#E7404A" HeightRequest="18" Padding="0" HasShadow="False">
+                                    <Label Text="{Binding type}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="15" TextColor="#E7404A"/>
+                                </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+
+                    <Frame x:Name="idNum" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="1" VerticalOptions="Start">
+                        <Entry x:Name="idNumEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="ID Number" PlaceholderColor="Black"
+                               />
+                    </Frame>
+
+                </Grid>
+
+                <Label FontSize="30" HorizontalOptions="Center" Text="For Delivery Only" FontAttributes="Bold" Margin="0, 20,0,3"/>
+
+                <Frame x:Name="address" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="addressEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="Current Address" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Grid ColumnSpacing="4" Margin="20,0.5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame x:Name="city" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                        <Entry x:Name="cityEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="City" PlaceholderColor="Black"
+                               />
+                    </Frame>
+
+                    <Frame x:Name="zip" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="1">
+                        <Entry x:Name="zipEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="Zip Code" PlaceholderColor="Black"
+                               />
+                    </Frame>
+
+                </Grid>
+
+                <ImageButton x:Name="registerButton" Source="registerButton.png" Margin="60,20,60,0" Clicked="registerClicked" VerticalOptions="Center" HeightRequest="65" />
+
+                <Label Text="If you are unable to register, you can still&#10;browse food banks near you!" Margin="50,20,50,0"
+                       FontSize="12" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <ImageButton x:Name="browseButton" Source="browseButton.png" Margin="60,0,60,10" VerticalOptions="Center" HeightRequest="65"/>
+
+                <BoxView HeightRequest="90"/>
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    x:Class="FTH.ViewModel.CongratsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <StackLayout>
+                    <BoxView HeightRequest="70" BackgroundColor="Transparent"/>
+
+                    <Grid Margin="20, 0, 20, 10" HeightRequest="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ImageButton Grid.Column="1" Source="menu.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="50"/>
+
+                    </Grid>
+
+                    <Label Text="Congratulations!" TextColor="#E7404A" FontAttributes="Bold" FontSize="40" HorizontalTextAlignment="Center" Margin="0,20,0,0"/>
+                    <Label Text="Your account was&#10;successfully created" TextColor="Black" FontAttributes="Bold" FontSize="23" HorizontalTextAlignment="Center" Margin="0,0,0,20"/>
+
+                    <Image HeightRequest="350" BackgroundColor="Transparent" Margin="10,0" Source="highFive.png" HorizontalOptions="Fill" VerticalOptions="Start"/>
+
+                    <ImageButton x:Name="browseButton" Source="browseButton.png" Margin="60,20,60,0" />
+                
+                </StackLayout>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

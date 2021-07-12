@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FTH.ViewModel.LoginPage">
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout>
+                <BoxView x:Name="headingBuffer" HeightRequest="60"/>
+
+                <Grid Margin="20, 0, 20, 10" HeightRequest="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton BackgroundColor="LightGray" HorizontalOptions="Start" HeightRequest="30" WidthRequest="50" Clicked="backClicked"/>
+                    <ImageButton Grid.Column="1" Source="menu.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="50"/>
+
+                </Grid>
+
+                <Label Text="Welcome to" TextColor="Black" FontAttributes="Bold" FontSize="37" HorizontalTextAlignment="Center" Margin="0, 40,0,0"/>
+                <Label Text="Serving Now" TextColor="#E7404A" FontAttributes="Bold" FontSize="37" HorizontalTextAlignment="Center" Margin="0,0,0,30"/>
+
+                <Label Text="Log in to your existing account" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="Black" FontSize="15" Margin="0,0,0,10"/>
+
+                <Frame x:Name="nameFrame" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="nameEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="Full Name" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="numFrame" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="numEntry" Keyboard="Text" FontSize="17" TextColor="Black" Placeholder="Phone Number / ID Number" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <ImageButton x:Name="loginButton" Source="loginButton.png" Margin="60,30,60,20" VerticalOptions="Center" HeightRequest="65"/>
+
+                <Label Text="Don't have an account?" Margin="50,0,50,0"
+                       FontSize="12" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <ImageButton x:Name="registerButton" Source="registerButton.png" Margin="60,0,60,10" VerticalOptions="Center" HeightRequest="65"/>
+
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

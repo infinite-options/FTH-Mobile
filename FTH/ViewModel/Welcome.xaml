@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FTH.ViewModel.Welcome">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+        <BoxView HeightRequest="50" BackgroundColor="Transparent"/>
+
+        <Label Text="Welcome to" TextColor="Black" FontSize="30" HorizontalTextAlignment="Start" Margin="30,0,0,20"/>
+        <Label Text="Feed the Hungry" TextColor="#E7404A" FontSize="40" HorizontalTextAlignment="Start" Margin="30,0,0,20"/>
+
+        <Image HeightRequest="300" BackgroundColor="LightGray" HorizontalOptions="Fill" VerticalOptions="Start"/>
+
+        <ImageButton x:Name="loginButton" Source="loginButton.png" Margin="30,10" />
+        <ImageButton x:Name="registerButton" Source="registerButton.png" Margin="30,10" />
+
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
