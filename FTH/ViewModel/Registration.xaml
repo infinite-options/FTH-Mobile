@@ -113,7 +113,7 @@
                 <Label Text="If you are unable to register, you can still&#10;browse food banks near you!" Margin="50,20,50,0"
                        FontSize="12" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
-                <ImageButton x:Name="browseButton" Source="browseButton.png" Margin="60,0,60,10" VerticalOptions="Center" HeightRequest="65"/>
+                <ImageButton x:Name="browseButton" Source="browseButton.png" Clicked="browseClicked" Margin="60,0,60,10" VerticalOptions="Center" HeightRequest="65"/>
 
                 <BoxView HeightRequest="90"/>
             </StackLayout>

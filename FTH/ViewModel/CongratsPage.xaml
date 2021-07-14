@@ -24,7 +24,7 @@
 
                     <Image HeightRequest="350" BackgroundColor="Transparent" Margin="10,0" Source="highFive.png" HorizontalOptions="Fill" VerticalOptions="Start"/>
 
-                    <ImageButton x:Name="browseButton" Source="browseButton.png" Margin="60,20,60,0" />
+                    <ImageButton x:Name="browseButton" Source="browseButton.png" Margin="60,20,60,0" Clicked="clickedFilter"/>
                 
                 </StackLayout>
 

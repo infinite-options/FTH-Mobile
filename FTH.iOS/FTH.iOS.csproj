@@ -194,6 +194,17 @@
     <BundleResource Include="Resources\browseButton.png" />
     <BundleResource Include="Resources\shopping.png" />
     <BundleResource Include="Resources\highFive.png" />
+    <BundleResource Include="Resources\dateSelected.png" />
+    <BundleResource Include="Resources\dateUnselected.png" />
+    <BundleResource Include="Resources\clock.png" />
+    <BundleResource Include="Resources\cannedFoods.png" />
+    <BundleResource Include="Resources\dairy.png" />
+    <BundleResource Include="Resources\snacks.png" />
+    <BundleResource Include="Resources\beverages.png" />
+    <BundleResource Include="Resources\desserts.png" />
+    <BundleResource Include="Resources\fruits.png" />
+    <BundleResource Include="Resources\meals.png" />
+    <BundleResource Include="Resources\vegetables.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />

@@ -4,6 +4,60 @@ using Xamarin.Forms;
 
 namespace FTH.Model
 {
+    public class Date1 : INotifyPropertyChanged
+    {
+        string img;
+        Color textcolor;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public string dotw { get; set; }
+        public string day { get; set; }
+        public string month { get; set; }
+        //public string fullDateTime { get; set; }
+        public string BackgroundImg
+        {
+            set
+            {
+                if (img != value)
+                {
+                    img = value;
+                    OnPropertyChanged("BackgroundImg");
+                }
+            }
+            get
+            {
+                return img;
+            }
+
+        }
+
+        public Color TextColor
+        {
+            set
+            {
+                if (textcolor != value)
+                {
+                    textcolor = value;
+                    OnPropertyChanged("TextColor");
+                }
+            }
+            get
+            {
+                return textcolor;
+            }
+
+        }
+
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
     public class Date : INotifyPropertyChanged
     {
         Color Fill;

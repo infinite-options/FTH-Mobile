@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    x:Class="FTH.ViewModel.Filter">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout x:Name="mainStack">
+                <BoxView x:Name="headingBuffer" HeightRequest="20"/>
+
+                <Grid Margin="20, 0, 20, 10" HeightRequest="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--<ImageButton BackgroundColor="LightGray" HorizontalOptions="Start" HeightRequest="30" WidthRequest="50" Clicked="backClicked"/>-->
+                    <ImageButton Grid.Column="1" Source="menu.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="50"/>
+
+                </Grid>
+
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" HeightRequest="70">
+                        <Frame HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button Text="Open Now" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        </Frame>
+
+                        <Frame  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button Text="Delivery" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        </Frame>
+
+                        <Frame  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button Text="Pick-Up" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        </Frame>
+
+                        <Frame x:Name="pickDateFrame"  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                            <Button x:Name="pickDateButton" Clicked="clickedShowDates" BackgroundColor="Transparent" Text="Pick a date" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        </Frame>
+
+                        <Frame  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button Text="Type of Food" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/> 
+                        </Frame>
+
+                    </StackLayout>
+                </ScrollView>
+
+                <CollectionView x:Name="dateCarousel" IsVisible="False" Margin="0, -10" HeightRequest="150" ItemsSource="{Binding availableDates}" HorizontalOptions="Fill">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal"  SnapPointsType="None" HorizontalItemSpacing="0"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="150" WidthRequest="65" HorizontalOptions="Fill" VerticalOptions="Fill">
+                                <Image Source="{Binding BackgroundImg}" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+
+                                <StackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding dotw}" FontAttributes="Bold" FontSize="18" TextColor="{Binding TextColor}" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding day}" FontAttributes="Bold" FontSize="18" TextColor="{Binding TextColor}" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding month}" FontSize="15" TextColor="{Binding TextColor}" HorizontalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <Button HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Clicked="dateChange"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Grid x:Name="clearDatesGrid" IsVisible="False">
+                <Label TextDecorations="Underline" FontAttributes="Bold" Text="Clear Selection" HorizontalOptions="Center" FontSize="15" TextColor="#E7404A"/>
+                <Button HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Clicked="clickedClearDates"/>
+                </Grid>
+
+                <Label Text="Food Banks" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" HorizontalTextAlignment="Start" Margin="20,40,20,20"/>
+
+                <CollectionView x:Name="foodBankColl" HeightRequest="600" BackgroundColor="White">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                        Orientation="Vertical"
+                        Span="1" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                          <Grid>
+
+                            <Grid Margin="30, 70, 30, 0" IsVisible="{Binding HoursVisible}">
+                                <BoxView HeightRequest="300" CornerRadius="40" BackgroundColor="#E7404A" HorizontalOptions="Fill"/>
+                                <!--<StackLayout Margin="0,30,0,0">
+                                    <Grid
+                                </StackLayout>-->
+                                <Grid Margin="0,80,0,30" HorizontalOptions="Center" RowSpacing="2.5" ColumnSpacing="30">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/> <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/> <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/> <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Monday" Grid.Column="0" Grid.Row="0" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="Closed" Grid.Column="1" Grid.Row="0" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+
+                                    <Label Text="Tuesday" Grid.Column="0" Grid.Row="1" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="1" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+
+                                    <Label Text="Wednesday" Grid.Column="0" Grid.Row="2" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="2" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+
+                                    <Label Text="Thursday" Grid.Column="0" Grid.Row="3" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="3" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+
+                                    <Label Text="Friday" Grid.Column="0" Grid.Row="4" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="4" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+
+                                    <Label Text="Saturday" Grid.Column="0" Grid.Row="5" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="Closed" Grid.Column="1" Grid.Row="5" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+
+                                    <Label Text="Sunday" Grid.Column="0" Grid.Row="6" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="6" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+
+                                </Grid>
+                            </Grid>
+
+                            <Frame HeightRequest="90" VerticalOptions="Start" Margin="20,10" CornerRadius="22" Padding="10">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="2*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ImageButton HeightRequest="65" WidthRequest="65" BackgroundColor="LightGray" CornerRadius="32"
+                                                 HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
+
+                                    <Label Text="{Binding name}" Grid.Column="1" Grid.Row="0" FontSize="14" TextColor="Black" FontAttributes="Bold"
+                                           HorizontalOptions="Start"/>
+
+                                    <Label Text="Delivery. Pick-Up. Limited to 5 items." Grid.Column="1" Grid.Row="1" FontSize="11" TextColor="Black"
+                                           HorizontalOptions="Start"/>
+
+                                    <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,5">
+                                        <Image VerticalOptions="Fill" HorizontalOptions="Start" Margin="3,0"/>
+                                        <Image VerticalOptions="Fill" HorizontalOptions="Start" Margin="3,0"/>
+                                        <Image VerticalOptions="Fill" HorizontalOptions="Start" Margin="3,0"/>
+                                        <Image VerticalOptions="Fill" HorizontalOptions="Start" Margin="3,0"/>
+                                    </StackLayout>
+
+                                    <Grid Grid.Row="2" Grid.Column="1" ColumnSpacing="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="fruits.png" Grid.Column="0" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="vegetables.png" Grid.Column="1" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="meals.png" Grid.Column="2" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="desserts.png" Grid.Column="3" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="beverages.png" Grid.Column="4" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="dairy.png" Grid.Column="5" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="snacks.png" Grid.Column="6" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="cannedFoods.png" Grid.Column="7" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+
+                                    </Grid>
+
+                                    <Label Text="1.5 Miles" Grid.Column="2" Grid.Row="0" FontSize="14" HorizontalOptions="End" TextColor="Black"/>
+
+                                    <ImageButton Source="clock.png" VerticalOptions="Fill" HorizontalOptions="End" Grid.Row="2" Grid.Column="2" Clicked="clickedShowHours"/>
+
+                                </Grid>
+                            </Frame>
+
+                            
+
+                          </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <BoxView x:Name="endingBuffer" HeightRequest="50"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

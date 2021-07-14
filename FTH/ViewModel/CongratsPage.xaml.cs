@@ -39,7 +39,11 @@ namespace FTH.ViewModel
             }
         }
 
-        
+        async void clickedFilter(System.Object sender, System.EventArgs e)
+        {
+            //await Navigation.PushAsync(new NavigationPage(new Filter()));
+            Application.Current.MainPage = new NavigationPage(new Filter());
+        }
 
         //async void clickedMenu(System.Object sender, System.EventArgs e)
         //{

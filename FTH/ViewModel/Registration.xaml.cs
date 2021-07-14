@@ -76,6 +76,11 @@ namespace FTH.ViewModel
             Application.Current.MainPage = new MainPage();
         }
 
+        void browseClicked(System.Object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new FoodBanksMap();
+        }
+
         void idTypeClicked(System.Object sender, System.EventArgs e)
         {
             if (idList.IsVisible == true)
