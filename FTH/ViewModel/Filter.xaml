@@ -4,11 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
     x:Class="FTH.ViewModel.Filter">
     <ContentPage.Content>
-        <ScrollView>
+        <!--<ScrollView x:Name="scroller">-->
+          <Grid x:Name="mainGrid">
             <StackLayout x:Name="mainStack">
-                <BoxView x:Name="headingBuffer" HeightRequest="20"/>
 
-                <Grid Margin="20, 0, 20, 10" HeightRequest="30">
+              <StackLayout x:Name="topStack">
+                <!--<BoxView x:Name="headingBuffer" HeightRequest="20"/>-->
+                  <BoxView x:Name="headingBuffer" HeightRequest="70"/>
+
+                <Grid Margin="20, 0, 20, 10" MinimumHeightRequest="30">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
@@ -33,18 +37,18 @@
                         <Button Text="Pick-Up" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
                         </Frame>
 
-                        <Frame x:Name="pickDateFrame"  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Frame x:Name="pickDateFrame"  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" WidthRequest="90" Padding="10,0" CornerRadius="20">
                             <Button x:Name="pickDateButton" Clicked="clickedShowDates" BackgroundColor="Transparent" Text="Pick a date" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
                         </Frame>
 
-                        <Frame  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
-                        <Button Text="Type of Food" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/> 
+                        <Frame x:Name="pickTypeFrame" HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button x:Name="pickTypeButton" Clicked="clickedShowTypes" Text="Type of Food" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/> 
                         </Frame>
 
                     </StackLayout>
                 </ScrollView>
 
-                <CollectionView x:Name="dateCarousel" IsVisible="False" Margin="0, -10" HeightRequest="150" ItemsSource="{Binding availableDates}" HorizontalOptions="Fill">
+                <CollectionView x:Name="dateCarousel" IsVisible="False" Margin="0, 15" HeightRequest="170" ItemsSource="{Binding availableDates}" HorizontalOptions="Fill">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Horizontal"  SnapPointsType="None" HorizontalItemSpacing="0"/>
                     </CollectionView.ItemsLayout>
@@ -53,7 +57,7 @@
                             <Grid HeightRequest="150" WidthRequest="65" HorizontalOptions="Fill" VerticalOptions="Fill">
                                 <Image Source="{Binding BackgroundImg}" HorizontalOptions="Fill" VerticalOptions="Fill"/>
 
-                                <StackLayout VerticalOptions="Center">
+                                <StackLayout VerticalOptions="Center" Margin="0,1,0,5">
                                     <Label Text="{Binding dotw}" FontAttributes="Bold" FontSize="18" TextColor="{Binding TextColor}" HorizontalTextAlignment="Center"/>
                                     <Label Text="{Binding day}" FontAttributes="Bold" FontSize="18" TextColor="{Binding TextColor}" HorizontalTextAlignment="Center"/>
                                     <Label Text="{Binding month}" FontSize="15" TextColor="{Binding TextColor}" HorizontalTextAlignment="Center"/>
@@ -70,9 +74,54 @@
                 <Button HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Clicked="clickedClearDates"/>
                 </Grid>
 
-                <Label Text="Food Banks" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" HorizontalTextAlignment="Start" Margin="20,40,20,20"/>
+                <Grid x:Name="TypesGrid" Margin="20,0" RowSpacing="0" ColumnSpacing="0" IsVisible="false">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="150"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
-                <CollectionView x:Name="foodBankColl" HeightRequest="600" BackgroundColor="White">
+                    <ImageButton Source="fruitsUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Clicked="clickedChooseType"/>
+
+                    <ImageButton Source="vegetablesUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="0" Grid.Column="1" Clicked="clickedChooseType"/>
+
+                    <ImageButton Source="mealsUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="0" Grid.Column="2" Clicked="clickedChooseType"/>
+
+                    <ImageButton Source="dessertsUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="0" Grid.Column="3" Clicked="clickedChooseType"/>
+
+                    <ImageButton Source="beveragesUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Clicked="clickedChooseType"/>
+
+                    <ImageButton Source="dairyUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Clicked="clickedChooseType"/>
+
+                    <ImageButton Source="snacksUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="1" Grid.Column="2" Clicked="clickedChooseType"/>
+
+                    <ImageButton Source="cannedFoodsUnfilled.png" HorizontalOptions="Fill" BackgroundColor="Transparent"
+                                 VerticalOptions="Center" Grid.Row="1" Grid.Column="3" Clicked="clickedChooseType"/>
+
+                </Grid>
+
+
+                <Grid x:Name="clearTypesGrid" IsVisible="False" HeightRequest="70">
+                <Label FontAttributes="Bold" Text="Clear Selection" TextDecorations="Underline" VerticalOptions="StartAndExpand" HorizontalOptions="Center" FontSize="15" TextColor="#E7404A"/>
+                <Button HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Clicked="clickedClearTypes"/>
+                </Grid>
+
+                <Label Text="Food Banks" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" HorizontalTextAlignment="Start" Margin="20,40,20,20"/>
+              </StackLayout>
+
+                <CollectionView x:Name="foodBankColl" VerticalOptions="End" BackgroundColor="White">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                         Orientation="Vertical"
@@ -189,9 +238,10 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <BoxView x:Name="endingBuffer" HeightRequest="50"/>
+                <!--<BoxView x:Name="endingBuffer" HeightRequest="50"/>-->
 
             </StackLayout>
-        </ScrollView>
+          </Grid>
+        <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

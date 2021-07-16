@@ -14,10 +14,12 @@ namespace FTH.ViewModel
         Date1 selectedDate;
         //allowing multiple date selections
         //List<Date1> selectedDates;
+        List<ImageButton> selectedTypes;
         public ObservableCollection<FoodBanks> Banks = new ObservableCollection<FoodBanks>();
 
         public Filter()
         {
+            selectedTypes = new List<ImageButton>();
             availableDates = new List<Date1>();
             //allowing multiple date selections
             //selectedDates = new List<Date1>();
@@ -33,7 +35,12 @@ namespace FTH.ViewModel
             getDates();
             getFoodBanks();
             Debug.WriteLine("availableDates size: " + availableDates.Count);
-            
+
+            Debug.WriteLine("main grid height: " + mainGrid.HeightRequest);
+            //Debug.WriteLine("topstack height: " +;
+            Debug.WriteLine("foodbankcoll height: " + foodBankColl.HeightRequest);
+            //foodBankColl.HeightRequest = height - 500;
+            Debug.WriteLine("foodbankcoll height after: " + foodBankColl.HeightRequest);
         }
 
         void getFoodBanks()
@@ -91,7 +98,7 @@ namespace FTH.ViewModel
                 selectedDate = dateChosen;
                 dateChosen.BackgroundImg = "dateSelected.png";
                 dateChosen.TextColor = Color.White;
-
+                pickDateButton.Text = dateChosen.month + " " + dateChosen.day;
                 //allowing multiple date selections
                 //dateChosen.BackgroundImg = "dateSelected.png";
                 //dateChosen.TextColor = Color.White;
@@ -105,7 +112,7 @@ namespace FTH.ViewModel
                 selectedDate = null;
                 pickDateFrame.BackgroundColor = Color.White;
                 pickDateButton.TextColor = Color.FromHex("#E7404A");
-
+                pickDateButton.Text = "Pick a date";
                 //allowing multiple date selections
                 dateChosen.BackgroundImg = "dateUnselected.png";
                 dateChosen.TextColor = Color.Black;
@@ -128,6 +135,12 @@ namespace FTH.ViewModel
             }
             else
             {
+                if (TypesGrid.IsVisible == true)
+                {
+                    TypesGrid.IsVisible = false;
+                    clearTypesGrid.IsVisible = false;
+                }
+
                 dateCarousel.IsVisible = true;
                 clearDatesGrid.IsVisible = true;
             }
@@ -137,7 +150,7 @@ namespace FTH.ViewModel
         {
             selectedDate.BackgroundImg = "dateUnselected.png";
             selectedDate.TextColor = Color.Black;
-
+            pickDateButton.Text = "Pick a date";
             //allowing multiple date selections
             //foreach (Date1 date in selectedDates)
             //{
@@ -148,6 +161,72 @@ namespace FTH.ViewModel
             pickDateFrame.BackgroundColor = Color.White;
             pickDateButton.TextColor = Color.FromHex("#E7404A");
         }
+
+        void clickedShowTypes(System.Object sender, System.EventArgs e)
+        {
+            if (TypesGrid.IsVisible == true)
+            {
+                TypesGrid.IsVisible = false;
+                clearTypesGrid.IsVisible = false;
+            }
+            else
+            {
+                if (dateCarousel.IsVisible == true)
+                {
+                    dateCarousel.IsVisible = false;
+                    clearDatesGrid.IsVisible = false;
+                }
+
+                TypesGrid.IsVisible = true;
+                clearTypesGrid.IsVisible = true;
+            }
+        }
+
+        void clickedChooseType(System.Object sender, System.EventArgs e)
+        {
+            ImageButton imgButton = (ImageButton)sender;
+            Debug.WriteLine("source of imgbutton: " + imgButton.Source.ToString());
+            //if the item is unfilled
+            if (imgButton.Source.ToString().IndexOf("Unfilled") != -1)
+            {
+                string source = imgButton.Source.ToString().Substring(6);
+                source = source.Substring(0, source.IndexOf("Unfilled")) + "Filled.png";
+                //Debug.WriteLine("source to change to: $" + source + "$");
+                imgButton.Source = source;
+                selectedTypes.Add(imgButton);
+
+                pickTypeFrame.BackgroundColor = Color.FromHex("#E7404A");
+                pickTypeButton.TextColor = Color.White;
+            }
+            else
+            {
+                string source = imgButton.Source.ToString().Substring(6);
+                source = source.Substring(0, source.IndexOf("Filled")) + "Unfilled.png";
+                imgButton.Source = source;
+                selectedTypes.Remove(imgButton);
+
+                if (selectedTypes.Count == 0)
+                {
+                    pickTypeFrame.BackgroundColor = Color.White;
+                    pickTypeButton.TextColor = Color.FromHex("#E7404A");
+                }
+            }
+        }
+
+        void clickedClearTypes(System.Object sender, System.EventArgs e)
+        {
+            foreach (ImageButton imgButton in selectedTypes)
+            {
+                string source = imgButton.Source.ToString().Substring(6);
+                source = source.Substring(0, source.IndexOf("Filled")) + "Unfilled.png";
+                imgButton.Source = source;
+            }
+            selectedTypes.Clear();
+            pickTypeFrame.BackgroundColor = Color.White;
+            pickTypeButton.TextColor = Color.FromHex("#E7404A");
+        }
+
+        
 
         void clickedShowHours(System.Object sender, System.EventArgs e)
         {

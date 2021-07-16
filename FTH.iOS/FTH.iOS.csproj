@@ -205,6 +205,22 @@
     <BundleResource Include="Resources\fruits.png" />
     <BundleResource Include="Resources\meals.png" />
     <BundleResource Include="Resources\vegetables.png" />
+    <BundleResource Include="Resources\beveragesFilled.png" />
+    <BundleResource Include="Resources\beveragesUnfilled.png" />
+    <BundleResource Include="Resources\cannedFoodsFilled.png" />
+    <BundleResource Include="Resources\cannedFoodsUnfilled.png" />
+    <BundleResource Include="Resources\dairyFilled.png" />
+    <BundleResource Include="Resources\dairyUnfilled.png" />
+    <BundleResource Include="Resources\dessertsFilled.png" />
+    <BundleResource Include="Resources\dessertsUnfilled.png" />
+    <BundleResource Include="Resources\fruitsFilled.png" />
+    <BundleResource Include="Resources\fruitsUnfilled.png" />
+    <BundleResource Include="Resources\mealsFilled.png" />
+    <BundleResource Include="Resources\mealsUnfilled.png" />
+    <BundleResource Include="Resources\snacksFilled.png" />
+    <BundleResource Include="Resources\snacksUnfilled.png" />
+    <BundleResource Include="Resources\vegetablesFilled.png" />
+    <BundleResource Include="Resources\vegetablesUnfilled.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />
