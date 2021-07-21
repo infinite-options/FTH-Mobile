@@ -93,7 +93,7 @@ namespace FTH.ViewModel
 
         async void clickedPfp(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new UserProfile(first, last, email));
+            //await Navigation.PushAsync(new UserProfile(first, last, email));
         }
     }
 }

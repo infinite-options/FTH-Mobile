@@ -749,7 +749,7 @@ namespace FTH.ViewModel
             Console.WriteLine("CHECKOUT JSON OBJECT BEING SENT: " + newPaymentJSONString);
             Console.WriteLine("clickedDone Func ENDED!");
 
-            await Navigation.PushAsync(new UserProfile(cust_firstName, cust_lastName, cust_email), false);
+            //await Navigation.PushAsync(new UserProfile(cust_firstName, cust_lastName, cust_email), false);
         }
 
         async void ValidateAddressClick(object sender, System.EventArgs e)

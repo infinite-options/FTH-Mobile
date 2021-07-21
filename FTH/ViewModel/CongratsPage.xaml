@@ -6,8 +6,10 @@
     <ContentPage.Content>
         <ScrollView>
             <Grid>
-                <StackLayout>
-                    <BoxView HeightRequest="70" BackgroundColor="Transparent"/>
+                <!--<BoxView HeightRequest="70" BackgroundColor="Transparent"/>-->
+
+                <StackLayout Margin="0,70,0,0">
+                    
 
                     <Grid Margin="20, 0, 20, 10" HeightRequest="30">
                         <Grid.ColumnDefinitions>
@@ -15,7 +17,8 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <ImageButton Grid.Column="1" Source="menu.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="50"/>
+                        <ImageButton x:Name="menu" Grid.Column="1" Source="menu.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="50" Clicked="menuClicked"/>
+                        <BoxView x:Name="whiteCover" IsVisible="false" BackgroundColor="White" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Grid.ColumnSpan="2"/>
 
                     </Grid>
 
@@ -24,9 +27,83 @@
 
                     <Image HeightRequest="350" BackgroundColor="Transparent" Margin="10,0" Source="highFive.png" HorizontalOptions="Fill" VerticalOptions="Start"/>
 
-                    <ImageButton x:Name="browseButton" Source="browseButton.png" Margin="60,20,60,0" Clicked="clickedFilter"/>
+                    <ImageButton x:Name="browseButton" Source="startOrderButton.png" Margin="60,20,60,0" Clicked="clickedFilter"/>
                 
                 </StackLayout>
+
+                <!--logged in menu-->
+            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 70, 20, 10" HeightRequest="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                    <!--<ImageButton Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="25" Clicked="backClicked"/>-->
+                    <ImageButton Margin="0,0,15,0" CornerRadius="0" x:Name="openedMenu" Grid.Column="1" Source="openedMenu.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" Clicked="openedMenuClicked"/>
+
+                    <StackLayout BackgroundColor="#FABFC3" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="End" Margin="0,0,-20,0" Padding="10">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Label Grid.Column="1" Text="My Profile" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="profileClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Label Grid.Column="1" Text="Order Food" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Label Grid.Column="1" Text="Food Banks Map" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Label Grid.Column="1" Text="FAQs" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Label Grid.Column="1" Text="Logout" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="loginClicked"/>
+                        </Grid>
+
+                    </StackLayout>
+
+            </Grid>
 
             </Grid>
         </ScrollView>

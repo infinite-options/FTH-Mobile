@@ -36,351 +36,107 @@ namespace FTH.ViewModel
         bool socialMediaLogin = false;
         Address addr;
 
-        public UserProfile(string firstName, string lastName, string email)
+        public UserProfile()
         {
-            try
-            {
-                cust_firstName = firstName;
-                cust_lastName = lastName;
-                cust_email = email;
-                var width = DeviceDisplay.MainDisplayInfo.Width;
-                var height = DeviceDisplay.MainDisplayInfo.Height;
-                addr = new Address();
-                InitializeComponent();
-                BindingContext = this;
-                NavigationPage.SetHasBackButton(this, false);
-                NavigationPage.SetHasNavigationBar(this, false);
-                checkPlatform(height, width);
-                getInfo();
+            var width = DeviceDisplay.MainDisplayInfo.Width;
+            var height = DeviceDisplay.MainDisplayInfo.Height;
+            //addr = new Address();
+            InitializeComponent();
+            //BindingContext = this;
+            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
+            //checkPlatform(height, width);
+            //getInfo();
 
-            }
-            catch (Exception ex)
-            {
-                Generic gen = new Generic();
-                gen.parseException(ex.ToString());
-            }
         }
 
         public void checkPlatform(double height, double width)
         {
             if (Device.RuntimePlatform == Device.iOS)
             {
-                //open menu adjustments
-                orangeBox2.HeightRequest = height / 2;
-                orangeBox2.Margin = new Thickness(0, -height / 2.2, 0, 0);
-                orangeBox2.CornerRadius = height / 40;
-                heading2.WidthRequest = 140;
-                menu2.Margin = new Thickness(25, 0, 0, 30);
-                menu.WidthRequest = 40;
-                menu2.WidthRequest = 40;
-                //menu2.Margin = new Thickness(25, 0, 0, 30);
-                heading.WidthRequest = 140;
-                //heading adjustments
-
-                orangeBox.HeightRequest = height / 2;
-                orangeBox.Margin = new Thickness(0, -height / 2.2, 0, 0);
-                orangeBox.CornerRadius = height / 40;
-                //heading.FontSize = width / 32;
-                //heading.Margin = new Thickness(0, 0, 0, 30);
-                pfp.HeightRequest = 40;
-                pfp.WidthRequest = 40;
-                pfp.CornerRadius = 20;
-                //pfp.Margin = new Thickness(0, 0, 23, 27);
-                innerGrid.Margin = new Thickness(0, 0, 23, 27);
-
-
-                string userInitials = "";
-                if (Preferences.Get("profilePicLink", "") == "")
-                {
-                    if (cust_firstName != "" && cust_firstName != null)
-                    {
-                        userInitials += cust_firstName.Substring(0, 1);
-                    }
-                    if (cust_lastName != "" && cust_lastName != null)
-                    {
-                        userInitials += cust_lastName.Substring(0, 1);
-                    }
-                    initials.Text = userInitials.ToUpper();
-                    initials.FontSize = width / 38;
-                }
-                else pfp.Source = Preferences.Get("profilePicLink", "");
-
-                menu.Margin = new Thickness(25, 0, 0, 30);
-                menu.WidthRequest = 40;
-                //menu.Margin = new Thickness(25, 0, 0, 30);
-
-                mainPfp.HeightRequest = 167;
-                mainPfp.WidthRequest = 167;
-                mainPfp.CornerRadius = (int)(167 / 2);
-
-                if (Preferences.Get("profilePicLink", "") == "")
-                {
-                    mainInitials.Text = userInitials.ToUpper();
-                    //mainInitials.Margin = new Thickness(0, 0, 32, 33);
-                    mainInitials.FontSize = width / 14;
-                }
-                else mainPfp.Source = Preferences.Get("profilePicLink", "");
-
-                //customerInfo.FontSize = width / 38;
-                //customerInfo.Margin = new Thickness(width / 50, 0);
-
-
-
-
-                //FNameEntry.FontSize = width / 45;
-                //LNameEntry.FontSize = width / 45;
-                //emailEntry.FontSize = width / 45;
-                //confirmEmailEntry.FontSize = width / 45;
-                //AddressEntry.FontSize = width / 45;
-                //AptEntry.FontSize = width / 45;
-                //CityEntry.FontSize = width / 45;
-                //StateEntry.FontSize = width / 45;
-                //ZipEntry.FontSize = width / 45;
-                //PhoneEntry.FontSize = width / 45;
-
-
-
-                //password.CornerRadius = 21;
-                //password.Margin = new Thickness(width / 50, 0.5);
-                //confirmPassword.CornerRadius = 21;
-                //confirmPassword.Margin = new Thickness(width / 50, 0.5);
-
-                //passwordEntry.FontSize = width / 45;
-                //confirmPasswordEntry.FontSize = width / 45;
+                
 
             }
             else //android
             {
-                androidBuffer.IsVisible = true;
-                //open menu adjustments
-                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-                orangeBox2.HeightRequest = height / 2;
-                orangeBox2.Margin = new Thickness(0, -height / 2.2, 0, 0);
-                orangeBox2.CornerRadius = height / 40;
-                heading2.WidthRequest = 140;
-                menu2.Margin = new Thickness(25, 0, 0, 30);
-                menu.WidthRequest = 40;
-                menu2.WidthRequest = 40;
-                //menu2.Margin = new Thickness(25, 0, 0, 30);
-                heading.WidthRequest = 140;
-                //heading adjustments
-
-                orangeBox.HeightRequest = height / 2;
-                orangeBox.Margin = new Thickness(0, -height / 2.2, 0, 0);
-                orangeBox.CornerRadius = height / 40;
-                //heading.FontSize = width / 32;
-                //heading.Margin = new Thickness(0, 0, 0, 30);
-                pfp.HeightRequest = 40;
-                pfp.WidthRequest = 40;
-                pfp.CornerRadius = 20;
-                //pfp.Margin = new Thickness(0, 0, 23, 27);
-                innerGrid.Margin = new Thickness(0, 0, 23, 27);
-
-                initials.FontSize = 20;
-                string userInitials = "";
-                if (Preferences.Get("profilePicLink", "") == "")
-                {
-                    if (cust_firstName != "" && cust_firstName != null)
-                    {
-                        userInitials += cust_firstName.Substring(0, 1);
-                    }
-                    if (cust_lastName != "" && cust_lastName != null)
-                    {
-                        userInitials += cust_lastName.Substring(0, 1);
-                    }
-                    initials.Text = userInitials.ToUpper();
-                    initials.FontSize = 20;
-                }
-                else pfp.Source = Preferences.Get("profilePicLink", "");
-
-                menu.Margin = new Thickness(25, 0, 0, 30);
-                menu.WidthRequest = 40;
-                //menu.Margin = new Thickness(25, 0, 0, 30);
-
-                mainPfp.HeightRequest = 167;
-                mainPfp.WidthRequest = 167;
-                mainPfp.CornerRadius = (int)(167 / 2);
-
-                if (Preferences.Get("profilePicLink", "") == "")
-                {
-                    mainInitials.Text = userInitials.ToUpper();
-                    //mainInitials.Margin = new Thickness(0, 0, 32, 33);
-                    mainInitials.FontSize = 70;
-                }
-                else mainPfp.Source = Preferences.Get("profilePicLink", "");
+                
             }
         }
 
-        async void getInfo()
-        {
-            try
-            {
-                var request = new HttpRequestMessage();
-                Console.WriteLine("user_id: " + (string)Application.Current.Properties["user_id"]);
-                string url = "https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/Profile/" + (string)Application.Current.Properties["user_id"];
-                //string url = "https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/meals_selected?customer_uid=" + (string)Application.Current.Properties["user_id"];
-                //string url = "https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/meals_selected?customer_uid=" + "100-000256";
-                request.RequestUri = new Uri(url);
-                //request.RequestUri = new Uri("https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/get_delivery_info/400-000453");
-                request.Method = HttpMethod.Get;
-                var client = new HttpClient();
-                HttpResponseMessage response = await client.SendAsync(request);
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    HttpContent content = response.Content;
-                    Console.WriteLine("content: " + content);
-                    var userString = await content.ReadAsStringAsync();
-                    info_obj = JObject.Parse(userString);
-                    this.customerProfileInfo.Clear();
-
-                    Console.WriteLine("user social media: " + (info_obj["result"])[0]["user_social_media"].ToString());
-
-                    if ((info_obj["result"])[0]["user_social_media"].ToString() != "NULL")
-                    {
-                        emailEntry.Text = (info_obj["result"])[0]["customer_email"].ToString();
-
-                        Console.WriteLine("social media login");
-                        if ((info_obj["result"])[0]["user_social_media"].ToString() == "GOOGLE")
-                            platformSignedIn.Source = "profileGoogle.png";
-                        else if ((info_obj["result"])[0]["user_social_media"].ToString() == "APPLE")
-                            platformSignedIn.Source = "profileApple.png";
-                        else platformSignedIn.Source = "profileFb.png";
-
-                        platformSignedIn.IsVisible = true;
-                        //passwordHeading.IsVisible = false;
-                        //divider6.IsVisible = false;
-                        passwordGrid.IsVisible = false;
-                        confirmPasswordGrid.IsVisible = false;
-                        //Email.IsVisible = false;
-                        //confirmEmail.IsVisible = false;
-                        saveChanges.IsVisible = false;
-                        socialMediaLogin = true;
-                    }
-                    else
-                    {
-                        passwordGrid.IsVisible = true;
-                        confirmPasswordGrid.IsVisible = true;
-                        platformSignedIn.IsVisible = false;
-                        saveChanges.IsVisible = true;
-                        emailEntry.Text = (info_obj["result"])[0]["customer_email"].ToString();
-                        socialMediaLogin = false;
-                    }
-
-                    FNameEntry.Text = (info_obj["result"])[0]["customer_first_name"].ToString();
-                    LNameEntry.Text = (info_obj["result"])[0]["customer_last_name"].ToString();
-                    emailEntry.Text = (info_obj["result"])[0]["customer_email"].ToString();
-                    //AddressEntry.Text = (info_obj["result"])[0]["customer_address"].ToString();
-                    //AptEntry.Text = (info_obj["result"])[0]["customer_unit"].ToString();
-
-                    //if (AptEntry.Text == "NULL")
-                    //    AptEntry.Text = "";
-
-                    //CityEntry.Text = (info_obj["result"])[0]["customer_city"].ToString();
-                    //StateEntry.Text = (info_obj["result"])[0]["customer_state"].ToString();
-                    //ZipEntry.Text = (info_obj["result"])[0]["customer_zip"].ToString();
-                    //PhoneEntry.Text = (info_obj["result"])[0]["customer_phone_num"].ToString();
-
-                    //addressList.IsVisible = false;
-                    //UnitCityState.IsVisible = true;
-                    //ZipPhone.IsVisible = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Generic gen = new Generic();
-                gen.parseException(ex.ToString());
-            }
-        }
-
-
-        async void clickedPfp(System.Object sender, System.EventArgs e)
-        {
-            await Navigation.PopAsync(false);
-        }
-
-        //async void clickedMenu(System.Object sender, System.EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new Menu(cust_firstName, cust_lastName, cust_email));
-        //}
-
-        //async void clickedSave(System.Object sender, System.EventArgs e)
+        //async void getInfo()
         //{
         //    try
         //    {
-        //        if (isAddessValidated != true)
+        //        var request = new HttpRequestMessage();
+        //        Console.WriteLine("user_id: " + (string)Application.Current.Properties["user_id"]);
+        //        string url = "https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/Profile/" + (string)Application.Current.Properties["user_id"];
+        //        //string url = "https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/meals_selected?customer_uid=" + (string)Application.Current.Properties["user_id"];
+        //        //string url = "https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/meals_selected?customer_uid=" + "100-000256";
+        //        request.RequestUri = new Uri(url);
+        //        //request.RequestUri = new Uri("https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/get_delivery_info/400-000453");
+        //        request.Method = HttpMethod.Get;
+        //        var client = new HttpClient();
+        //        HttpResponseMessage response = await client.SendAsync(request);
+
+        //        if (response.StatusCode == System.Net.HttpStatusCode.OK)
         //        {
-        //            await DisplayAlert("Error", "please validate your address first", "OK");
-        //            return;
-        //        }
+        //            HttpContent content = response.Content;
+        //            Console.WriteLine("content: " + content);
+        //            var userString = await content.ReadAsStringAsync();
+        //            info_obj = JObject.Parse(userString);
+        //            this.customerProfileInfo.Clear();
 
-        //        if (FNameEntry.Text == null)
-        //        {
-        //            await DisplayAlert("Error", "Please enter your first name", "OK");
-        //            return;
-        //        }
+        //            Console.WriteLine("user social media: " + (info_obj["result"])[0]["user_social_media"].ToString());
 
-        //        if (LNameEntry.Text == null)
-        //        {
-        //            await DisplayAlert("Error", "Please enter your last name", "OK");
-        //            return;
-        //        }
-
-
-        //        //if (PhoneEntry.Text == null)
-        //        //{
-        //        //    await DisplayAlert("Error", "Please enter your phone number", "OK");
-        //        //    return;
-        //        //}
-
-        //        if (socialMediaLogin == false)
-        //        {
-        //            if (emailEntry.Text == null)
+        //            if ((info_obj["result"])[0]["user_social_media"].ToString() != "NULL")
         //            {
-        //                await DisplayAlert("Error", "Please enter your email address", "OK");
-        //                return;
+        //                emailEntry.Text = (info_obj["result"])[0]["customer_email"].ToString();
+
+        //                Console.WriteLine("social media login");
+        //                if ((info_obj["result"])[0]["user_social_media"].ToString() == "GOOGLE")
+        //                    platformSignedIn.Source = "profileGoogle.png";
+        //                else if ((info_obj["result"])[0]["user_social_media"].ToString() == "APPLE")
+        //                    platformSignedIn.Source = "profileApple.png";
+        //                else platformSignedIn.Source = "profileFb.png";
+
+        //                platformSignedIn.IsVisible = true;
+        //                //passwordHeading.IsVisible = false;
+        //                //divider6.IsVisible = false;
+        //                passwordGrid.IsVisible = false;
+        //                confirmPasswordGrid.IsVisible = false;
+        //                //Email.IsVisible = false;
+        //                //confirmEmail.IsVisible = false;
+        //                saveChanges.IsVisible = false;
+        //                socialMediaLogin = true;
+        //            }
+        //            else
+        //            {
+        //                passwordGrid.IsVisible = true;
+        //                confirmPasswordGrid.IsVisible = true;
+        //                platformSignedIn.IsVisible = false;
+        //                saveChanges.IsVisible = true;
+        //                emailEntry.Text = (info_obj["result"])[0]["customer_email"].ToString();
+        //                socialMediaLogin = false;
         //            }
 
-        //            //if (confirmEmailEntry.Text == null)
-        //            //{
-        //            //    await DisplayAlert("Error", "Please re-enter your email address", "OK");
-        //            //    return;
-        //            //}
-        //            //else if (confirmEmailEntry.Text.Trim() != emailEntry.Text)
-        //            //{
-        //            //    await DisplayAlert("Error", "emails don't match", "OK");
-        //            //    return;
-        //            //}
+        //            FNameEntry.Text = (info_obj["result"])[0]["customer_first_name"].ToString();
+        //            LNameEntry.Text = (info_obj["result"])[0]["customer_last_name"].ToString();
+        //            emailEntry.Text = (info_obj["result"])[0]["customer_email"].ToString();
+        //            //AddressEntry.Text = (info_obj["result"])[0]["customer_address"].ToString();
+        //            //AptEntry.Text = (info_obj["result"])[0]["customer_unit"].ToString();
+
+        //            //if (AptEntry.Text == "NULL")
+        //            //    AptEntry.Text = "";
+
+        //            //CityEntry.Text = (info_obj["result"])[0]["customer_city"].ToString();
+        //            //StateEntry.Text = (info_obj["result"])[0]["customer_state"].ToString();
+        //            //ZipEntry.Text = (info_obj["result"])[0]["customer_zip"].ToString();
+        //            //PhoneEntry.Text = (info_obj["result"])[0]["customer_phone_num"].ToString();
+
+        //            //addressList.IsVisible = false;
+        //            //UnitCityState.IsVisible = true;
+        //            //ZipPhone.IsVisible = true;
         //        }
-
-
-        //        ProfileInfo profileUpdate = new ProfileInfo();
-
-        //        //uid, first_name, last_name, phone, email, address, unit, city, state, zip, noti
-        //        profileUpdate.uid = (info_obj["result"])[0]["customer_uid"].ToString();
-        //        profileUpdate.first_name = FNameEntry.Text;
-        //        profileUpdate.last_name = LNameEntry.Text;
-        //        profileUpdate.phone = PhoneEntry.Text;
-        //        profileUpdate.email = emailEntry.Text;
-        //        profileUpdate.address = AddressEntry.Text;
-        //        profileUpdate.unit = AptEntry.Text;
-        //        profileUpdate.city = CityEntry.Text;
-        //        profileUpdate.state = StateEntry.Text;
-        //        profileUpdate.zip = ZipEntry.Text;
-        //        profileUpdate.noti = "false";
-
-
-        //        var newPaymentJSONString = JsonConvert.SerializeObject(profileUpdate);
-        //        // Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
-        //        var content2 = new StringContent(newPaymentJSONString, Encoding.UTF8, "application/json");
-        //        Console.WriteLine("Content: " + content2);
-        //        var client = new HttpClient();
-        //        var response = client.PostAsync("https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/UpdateProfile", content2);
-        //        Console.WriteLine("RESPONSE TO CHECKOUT   " + response.Result);
-        //        Console.WriteLine("CHECKOUT JSON OBJECT BEING SENT: " + newPaymentJSONString);
-        //        Console.WriteLine("clickedSave Func ENDED!");
-        //        DisplayAlert("Success", "information updated!", "close");
-        //        //await Navigation.PushAsync(new UserProfile(), false);
         //    }
         //    catch (Exception ex)
         //    {
@@ -389,60 +145,68 @@ namespace FTH.ViewModel
         //    }
         //}
 
-        async void clickedSavePassword(System.Object sender, System.EventArgs e)
+
+        async void clickedPfp(System.Object sender, System.EventArgs e)
         {
-            try
-            {
-                PasswordInfo passwordUpdate = new PasswordInfo();
-
-                //customer_uid, old_password, new_password
-                passwordUpdate.customer_uid = (info_obj["result"])[0]["customer_uid"].ToString();
-
-                SHA512 sHA512 = new SHA512Managed();
-                byte[] data = sHA512.ComputeHash(Encoding.UTF8.GetBytes(passwordEntry.Text + (info_obj["result"])[0]["password_salt"].ToString())); // take the password and account salt to generate hash
-                string hashedPassword = BitConverter.ToString(data).Replace("-", string.Empty).ToLower(); // convert hash to hex
-                                                                                                          //passwordUpdate.old_password = hashedPassword;
-
-                if (passwordEntry.Text == null)
-                {
-                    await DisplayAlert("Error", "Please enter your new password", "OK");
-                    return;
-                }
-                else if (confirmPasswordEntry.Text == null)
-                {
-                    await DisplayAlert("Error", "Please re-enter your new password", "OK");
-                    return;
-                }
-                else if (passwordEntry.Text == confirmPasswordEntry.Text)
-                {
-                    //passwordUpdate.old_password = Preferences.Get("hashed_password", "");
-                    passwordUpdate.old_password = Preferences.Get("user_password", "");
-                    //passwordUpdate.new_password = hashedPassword;
-                    passwordUpdate.new_password = passwordEntry.Text;
-                    var newPaymentJSONString = JsonConvert.SerializeObject(passwordUpdate);
-                    // Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
-                    var content2 = new StringContent(newPaymentJSONString, Encoding.UTF8, "application/json");
-                    Console.WriteLine("Content: " + content2);
-                    var client = new HttpClient();
-                    var response = client.PostAsync("https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/change_password", content2);
-                    DisplayAlert("Success", "password updated!", "close");
-                    Console.WriteLine("RESPONSE TO CHECKOUT   " + response.Result);
-                    Console.WriteLine("CHECKOUT JSON OBJECT BEING SENT: " + newPaymentJSONString);
-                    Console.WriteLine("clickedSave Func ENDED!");
-                }
-                else DisplayAlert("Error", "passwords don't match", "close");
-
-
-
-
-                //await Navigation.PushAsync(new UserProfile(), false);
-            }
-            catch (Exception ex)
-            {
-                Generic gen = new Generic();
-                gen.parseException(ex.ToString());
-            }
+            await Navigation.PopAsync(false);
         }
+
+      
+
+        //async void clickedSavePassword(System.Object sender, System.EventArgs e)
+        //{
+        //    try
+        //    {
+        //        PasswordInfo passwordUpdate = new PasswordInfo();
+
+        //        //customer_uid, old_password, new_password
+        //        passwordUpdate.customer_uid = (info_obj["result"])[0]["customer_uid"].ToString();
+
+        //        SHA512 sHA512 = new SHA512Managed();
+        //        byte[] data = sHA512.ComputeHash(Encoding.UTF8.GetBytes(passwordEntry.Text + (info_obj["result"])[0]["password_salt"].ToString())); // take the password and account salt to generate hash
+        //        string hashedPassword = BitConverter.ToString(data).Replace("-", string.Empty).ToLower(); // convert hash to hex
+        //                                                                                                  //passwordUpdate.old_password = hashedPassword;
+
+        //        if (passwordEntry.Text == null)
+        //        {
+        //            await DisplayAlert("Error", "Please enter your new password", "OK");
+        //            return;
+        //        }
+        //        else if (confirmPasswordEntry.Text == null)
+        //        {
+        //            await DisplayAlert("Error", "Please re-enter your new password", "OK");
+        //            return;
+        //        }
+        //        else if (passwordEntry.Text == confirmPasswordEntry.Text)
+        //        {
+        //            //passwordUpdate.old_password = Preferences.Get("hashed_password", "");
+        //            passwordUpdate.old_password = Preferences.Get("user_password", "");
+        //            //passwordUpdate.new_password = hashedPassword;
+        //            passwordUpdate.new_password = passwordEntry.Text;
+        //            var newPaymentJSONString = JsonConvert.SerializeObject(passwordUpdate);
+        //            // Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
+        //            var content2 = new StringContent(newPaymentJSONString, Encoding.UTF8, "application/json");
+        //            Console.WriteLine("Content: " + content2);
+        //            var client = new HttpClient();
+        //            var response = client.PostAsync("https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/change_password", content2);
+        //            DisplayAlert("Success", "password updated!", "close");
+        //            Console.WriteLine("RESPONSE TO CHECKOUT   " + response.Result);
+        //            Console.WriteLine("CHECKOUT JSON OBJECT BEING SENT: " + newPaymentJSONString);
+        //            Console.WriteLine("clickedSave Func ENDED!");
+        //        }
+        //        else DisplayAlert("Error", "passwords don't match", "close");
+
+
+
+
+        //        //await Navigation.PushAsync(new UserProfile(), false);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Generic gen = new Generic();
+        //        gen.parseException(ex.ToString());
+        //    }
+        //}
 
 
         //async void ValidateAddressClick(object sender, System.EventArgs e)
@@ -827,15 +591,7 @@ namespace FTH.ViewModel
         //}
 
         //start of menu functions
-        void clickedOpenMenu(object sender, EventArgs e)
-        {
-            openedMenu.IsVisible = true;
-        }
-
-        void clickedCloseMenu(object sender, EventArgs e)
-        {
-            openedMenu.IsVisible = false;
-        }
+        
 
         //async void clickedLanding(System.Object sender, System.EventArgs e)
         //{
@@ -849,17 +605,7 @@ namespace FTH.ViewModel
             //Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
         }
 
-        async void clickedSelect(System.Object sender, System.EventArgs e)
-        {
-            if (Preferences.Get("canChooseSelect", false) == false)
-                DisplayAlert("Error", "please purchase a meal plan first", "OK");
-            else
-            {
-                Zones[] zones = new Zones[] { };
-                await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
-                //Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-            }
-        }
+        
 
         async void clickedSubscription(System.Object sender, System.EventArgs e)
         {
@@ -873,42 +619,6 @@ namespace FTH.ViewModel
             //Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
         }
 
-        void xButtonClicked(System.Object sender, System.EventArgs e)
-        {
-            fade.IsVisible = false;
-            baaPopUpGrid.IsVisible = false;
-        }
-
-        void clickedBecomeAmb(System.Object sender, System.EventArgs e)
-        {
-            fade.IsVisible = true;
-            baaPopUpGrid.IsVisible = true;
-        }
-
-        void clickedCreateAmb(System.Object sender, System.EventArgs e)
-        {
-            try
-            {
-                if (AmbEmailEntry.Text != null && AmbEmailEntry.Text != "")
-                {
-                    createAmb newAmb = new createAmb();
-                    newAmb.code = AmbEmailEntry.Text.Trim();
-                    var createAmbSerializedObj = JsonConvert.SerializeObject(newAmb);
-                    var content = new StringContent(createAmbSerializedObj, Encoding.UTF8, "application/json");
-                    var client = new HttpClient();
-                    var response = client.PostAsync("https://ht56vci4v9.execute-api.us-west-1.amazonaws.com/dev/api/v2/brandAmbassador/create_ambassador", content);
-                    Console.WriteLine("RESPONSE TO CREATE_AMBASSADOR   " + response.Result);
-                    Console.WriteLine("CREATE JSON OBJECT BEING SENT: " + createAmbSerializedObj);
-                    fade.IsVisible = false;
-                    baaPopUpGrid.IsVisible = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                Generic gen = new Generic();
-                gen.parseException(ex.ToString());
-            }
-        }
 
         void clickedLogout(System.Object sender, System.EventArgs e)
         {
@@ -918,6 +628,40 @@ namespace FTH.ViewModel
             //Application.Current.Properties.Remove("platform");
             Application.Current.MainPage = new MainPage();
         }
+        //end of menu functions
+
+        //menu functions
+        void profileClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new NavigationPage(new UserProfile());
+            Navigation.PushAsync(new UserProfile());
+        }
+
+        void menuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = true;
+            //whiteCover.IsVisible = true;
+            menu.IsVisible = false;
+        }
+
+        void openedMenuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = false;
+            //whiteCover.IsVisible = false;
+            menu.IsVisible = true;
+        }
+
+        void browseClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new FoodBanksMap());
+        }
+
+        void logoutClicked(System.Object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new LoginPage();
+        }
+
         //end of menu functions
     }
 }

@@ -677,7 +677,7 @@ namespace FTH.ViewModel
 
         async void clickedPfp(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new UserProfile(cust_firstName, cust_lastName, cust_email), false);
+            //await Navigation.PushAsync(new UserProfile(cust_firstName, cust_lastName, cust_email), false);
         }
 
         //start of menu functions

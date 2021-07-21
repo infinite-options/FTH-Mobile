@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net;
+using System.Xml.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace FTH.ViewModel
 {
@@ -50,10 +53,10 @@ namespace FTH.ViewModel
             idList.ItemsSource = idTypes;
         }
 
-        async void registerClicked(System.Object sender, System.EventArgs e)
+        async void registrationClicked(System.Object sender, System.EventArgs e)
         {
             if (FNameEntry.Text == null || LNameEntry.Text == null || phoneEntry.Text == null || affilEntry.Text == null ||
-                idTypeButton.Text == "ID Type ᐯ" || idNumEntry.Text == null || addressEntry.Text == null || cityEntry.Text == null || zipEntry.Text == null)
+                idTypeButton.Text == "ID Type ᐯ" || idNumEntry.Text == null || addressEntry.Text == null || cityEntry.Text == null || stateEntry.Text == null || zipEntry.Text == null)
             {
                 await DisplayAlert("Oops", "Fill all of the fields before continuing.", "OK");
                 return;
@@ -63,12 +66,104 @@ namespace FTH.ViewModel
                 var result = await DisplayAlert("Sorry!", "You are unable to register. Would you still like to see food banks in your area?", "Yes", "No");
                 if (result)
                 {
-                    Application.Current.MainPage = new FoodBanksMap();
+                    await Navigation.PushAsync(new FoodBanksMap());
                     return;
                 }
                 else return;
             }
-            else Application.Current.MainPage = new CongratsPage();
+            else
+            {
+                var aptText = aptEntry.Text;
+                if (aptText == null)
+                    aptText = "";
+
+                // Setting request for USPS API
+                XDocument requestDoc = new XDocument(
+                    new XElement("AddressValidateRequest",
+                    new XAttribute("USERID", "400INFIN1745"),
+                    new XElement("Revision", "1"),
+                    new XElement("Address",
+                    new XAttribute("ID", "0"),
+                    new XElement("Address1", addressEntry.Text.ToString().Trim()),
+                    new XElement("Address2", aptText),
+                    new XElement("City", cityEntry.Text.ToString().Trim()),
+                    new XElement("State", stateEntry.Text.ToString().Trim()),
+                    new XElement("Zip5", zipEntry.Text.ToString().Trim()),
+                    new XElement("Zip4", "")
+                         )
+                     )
+                 );
+                var url = "https://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML=" + requestDoc;
+                Console.WriteLine(url);
+                var client2 = new WebClient();
+                var response2 = client2.DownloadString(url);
+
+                var xdoc = XDocument.Parse(response2.ToString());
+                Console.WriteLine("xdoc begin");
+                Console.WriteLine(xdoc);
+
+
+                string latitude = "0";
+                string longitude = "0";
+                foreach (XElement element in xdoc.Descendants("Address"))
+                {
+                    if (GetXMLElement(element, "Error").Equals(""))
+                    {
+                        //  && GetXMLElement(element, "Zip5").Equals(ZipEntry.Text.Trim()) && GetXMLElement(element, "City").Equals(CityEntry.Text.ToUpper().Trim())
+                        if (GetXMLElement(element, "DPVConfirmation").Equals("Y") ||
+                            GetXMLElement(element, "DPVConfirmation").Equals("S")) // Best case
+                        {
+                            // Get longitude and latitide because we can make a deliver here. Move on to next page.
+                            // Console.WriteLine("The address you entered is valid and deliverable by USPS. We are going to get its latitude & longitude");
+                            //GetAddressLatitudeLongitude();
+                            Geocoder geoCoder = new Geocoder();
+
+                            //IEnumerable<Position> approximateLocations = await geoCoder.GetPositionsForAddressAsync(AddressEntry.Text.Trim() + "," + CityEntry.Text.Trim() + "," + StateEntry.Text.Trim());
+                            //Position position = approximateLocations.FirstOrDefault();
+
+                            //latitude = $"{position.Latitude}";
+                            //longitude = $"{position.Longitude}";
+
+                            //map.MapType = MapType.Street;
+                            //var mapSpan = new MapSpan(position, 0.001, 0.001);
+
+                            //Pin address = new Pin();
+                            //address.Label = "Delivery Address";
+                            //address.Type = PinType.SearchResult;
+                            //address.Position = position;
+
+                            //map.MoveToRegion(mapSpan);
+                            //map.Pins.Add(address);
+                        }
+                        else if (GetXMLElement(element, "DPVConfirmation").Equals("D"))
+                        {
+                            await DisplayAlert("Missing Info", "Please enter your unit/apartment number into the appropriate field.", "OK");
+                            return;
+                        }
+                        else
+                        {
+                            await DisplayAlert("Invalid Address", "The address you entered couldn't be confirmed. Please enter another one.", "OK");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Invalid Address", "The address you entered couldn't be confirmed. Please enter another one.", "OK");
+                        return;
+                    }
+                }
+            }
+            await Navigation.PushAsync(new CreatePassword()); //Application.Current.MainPage = new CreatePassword();
+        }
+
+        public static string GetXMLElement(XElement element, string name)
+        {
+            var el = element.Element(name);
+            if (el != null)
+            {
+                return el.Value;
+            }
+            return "";
         }
 
         void backClicked(System.Object sender, System.EventArgs e)
@@ -76,10 +171,7 @@ namespace FTH.ViewModel
             Application.Current.MainPage = new MainPage();
         }
 
-        void browseClicked(System.Object sender, System.EventArgs e)
-        {
-            Application.Current.MainPage = new FoodBanksMap();
-        }
+        
 
         void idTypeClicked(System.Object sender, System.EventArgs e)
         {
@@ -99,5 +191,38 @@ namespace FTH.ViewModel
             idTypeFrame.HeightRequest = 32;
             idNum.HeightRequest = 32;
         }
+
+        //menu functions
+        void registerClicked(System.Object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new Registration());
+        }
+
+        void menuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = true;
+            //whiteCover.IsVisible = true;
+            menu.IsVisible = false;
+        }
+
+        void openedMenuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = false;
+            //whiteCover.IsVisible = false;
+            menu.IsVisible = true;
+        }
+
+        void browseClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new FoodBanksMap());
+        }
+
+        void loginClicked(System.Object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new LoginPage();
+        }
+
+        //end of menu functions
     }
 }

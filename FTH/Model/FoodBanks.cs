@@ -33,4 +33,12 @@ namespace FTH.Model
             }
         }
     }
+
+    public class MappedFoodBanks
+    {
+        public string name { get; set; }
+        public string distance { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
+    }
 }

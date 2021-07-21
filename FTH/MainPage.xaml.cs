@@ -1865,7 +1865,7 @@ namespace FTH
 
         void registerClicked(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new Registration();
+            Application.Current.MainPage = new NavigationPage(new Registration());
         }
         //end of menu functions
 

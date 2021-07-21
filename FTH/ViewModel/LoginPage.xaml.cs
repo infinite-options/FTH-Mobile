@@ -24,5 +24,45 @@ namespace FTH.ViewModel
         {
             Application.Current.MainPage = new MainPage();
         }
+
+        //menu functions
+        void registerClicked(System.Object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new Registration());
+        }
+
+        void menuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = true;
+            //whiteCover.IsVisible = true;
+            menu.IsVisible = false;
+        }
+
+        void openedMenuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = false;
+            //whiteCover.IsVisible = false;
+            menu.IsVisible = true;
+        }
+
+        void browseClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new FoodBanksMap());
+        }
+
+        void loginClicked(System.Object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new LoginPage();
+        }
+
+        //end of menu functions
+
+        void clickedSeePassword(System.Object sender, System.EventArgs e)
+        {
+            if (passEntry.IsPassword == true)
+                passEntry.IsPassword = false;
+            else passEntry.IsPassword = true;
+        }
     }
 }

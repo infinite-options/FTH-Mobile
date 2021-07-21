@@ -715,7 +715,7 @@ namespace FTH.ViewModel
 
         async void clickedPfp(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new UserProfile(cust_firstName, cust_lastName, cust_email));
+            //await Navigation.PushAsync(new UserProfile(cust_firstName, cust_lastName, cust_email));
             //Application.Current.MainPage = new UserProfile();
         }
 

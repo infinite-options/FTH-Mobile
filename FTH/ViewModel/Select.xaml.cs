@@ -512,7 +512,7 @@ namespace FTH.ViewModel
 
         async void clickedPfp(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new UserProfile(first, last, email), false);
+            //await Navigation.PushAsync(new UserProfile(first, last, email), false);
         }
 
         //async void clickedMenu(System.Object sender, System.EventArgs e)

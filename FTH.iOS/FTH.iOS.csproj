@@ -221,6 +221,31 @@
     <BundleResource Include="Resources\snacksUnfilled.png" />
     <BundleResource Include="Resources\vegetablesFilled.png" />
     <BundleResource Include="Resources\vegetablesUnfilled.png" />
+    <BundleResource Include="Resources\back.png" />
+    <BundleResource Include="Resources\eye.png" />
+    <BundleResource Include="Resources\continueButton.png" />
+    <BundleResource Include="Resources\emptyCircle.png" />
+    <BundleResource Include="Resources\startOrderButton.png" />
+    <BundleResource Include="Resources\rightArrow.png" />
+    <BundleResource Include="Resources\tallOval.png" />
+    <BundleResource Include="Resources\apple.png" />
+    <BundleResource Include="Resources\facebook.png" />
+    <BundleResource Include="Resources\google.png" />
+    <BundleResource Include="Resources\openedMenu.png" />
+    <BundleResource Include="Resources\backgroundBlob.png" />
+    <BundleResource Include="Resources\badge.png" />
+    <BundleResource Include="Resources\home.png" />
+    <BundleResource Include="Resources\phone.png" />
+    <BundleResource Include="Resources\work.png" />
+    <BundleResource Include="Resources\profileCircle.png" />
+    <BundleResource Include="Resources\editProfileButton.png" />
+    <BundleResource Include="Resources\menuFAQ.png" />
+    <BundleResource Include="Resources\menuGrid.png" />
+    <BundleResource Include="Resources\menuLogin.png" />
+    <BundleResource Include="Resources\menuLogout.png" />
+    <BundleResource Include="Resources\menuProfile.png" />
+    <BundleResource Include="Resources\menuSearch.png" />
+    <BundleResource Include="Resources\menuUtensils.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />
