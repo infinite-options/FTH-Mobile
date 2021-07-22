@@ -50,6 +50,7 @@
     <Folder Include="Model\Login\Constants\" />
     <Folder Include="Model\Login\LoginClasses\Apple\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,4 +73,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Constants\" />
+  </ItemGroup>
 </Project>

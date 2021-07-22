@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FTH.ViewModel.OrderConfirmationPage"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,30,0,0">
+                <StackLayout Grid.Column="0">
+                    <ImageButton IsVisible="False" HeightRequest="23" WidthRequest="56"  Margin="20,0,0,0" HorizontalOptions="Start" Source="backButton"></ImageButton>
+                </StackLayout>
+                <StackLayout  Grid.Column="1">
+                    <ImageButton  HeightRequest="18" WidthRequest="27" Padding="1" Margin="0,0,20,0" Source="menu" Clicked="NavigateBackToCheckoutPage" HorizontalOptions="End"></ImageButton>
+                </StackLayout>
+            </Grid>
+            <!--<Grid Grid.Row="1" IsVisible="False">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="20,0,0,0">
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Frame x:Name="userFrame" HasShadow="False" IsClippedToBounds="True" BorderColor="#E7404A" WidthRequest="118" HeightRequest="118" CornerRadius="59" Padding="0">
+                        <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFill"/>
+                    </Frame>
+                    </StackLayout>
+                    <StackLayout VerticalOptions="CenterAndExpand">
+                    <Label x:Name="foodBankName" TextColor="Black" FontSize="20" FontAttributes="Bold"></Label>
+                    <Label x:Name="totalCartItems" TextColor="Black" FontSize="15" ></Label>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>-->
+            <StackLayout Grid.Row="1">
+                <StackLayout VerticalOptions="CenterAndExpand">
+                    <StackLayout HorizontalOptions="Center">
+                        <Label Text="Order Confirmed!" FontSize="40" FontAttributes="Bold" TextColor="#E7404A"></Label>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout Margin="20,0,20,0" HorizontalOptions="CenterAndExpand">
+                            <Label FontSize="19" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span x:Name="foodBankName" TextColor="Black"/>
+                                        <Span x:Name="deliveryTime"  TextColor="#E7404A"/>
+                                        <Span Text="to " TextColor="Black"/>
+                                        <Span x:Name="deliveryAddress" TextColor="#E7404A"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <Image Source="confirmationIcon"></Image>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

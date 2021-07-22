@@ -1218,7 +1218,7 @@ namespace FTH.ViewModel
                         Console.WriteLine("clickedDone Func ENDED!");
 
                         Zones[] zones = new Zones[] { };
-                        await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email));
+                        //await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email));
                         //old nav
                         //await Navigation.PushAsync(new UserProfile(cust_firstName, cust_lastName, cust_email));
                         //Application.Current.MainPage = new DeliveryBilling();
@@ -1328,7 +1328,7 @@ namespace FTH.ViewModel
                         //reset the previously selected meals
 
                         Zones[] zones = new Zones[] { };
-                        await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email));
+                        //await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email));
                     }
             }
             }
@@ -1421,7 +1421,7 @@ namespace FTH.ViewModel
             else
             {
                 Zones[] zones = new Zones[] { };
-                await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
+                //await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
                 //Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
             }
         }

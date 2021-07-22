@@ -775,7 +775,7 @@ namespace FTH.ViewModel
             else
             {
                 Zones[] zones = new Zones[] { };
-                await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
+                //await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
                 //Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
             }
         }
@@ -841,7 +841,7 @@ namespace FTH.ViewModel
 
         void clickedExplore(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new ExploreMeals());
+            //Application.Current.MainPage = new NavigationPage(new ExploreMeals());
         }
 
         //async Task CheckVersion()

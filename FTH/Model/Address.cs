@@ -83,7 +83,7 @@ namespace FTH.Model
             }
         }
 
-        private async Task<string> getZipcode(string placeId)
+        public async Task<string> getZipcode(string placeId)
         {
             try
             {
@@ -136,6 +136,15 @@ namespace FTH.Model
         //        TaskScheduler.FromCurrentSynchronizationContext());
         //}
 
+        public void addressSelectedFillEntries(AddressAutocomplete selectedAddress, Entry address1, Entry address2, Entry city, Entry state, Entry zipcode)
+        {
+            address1.Text = selectedAddress.Street;
+            address2.Text = selectedAddress.Unit;
+            city.Text = selectedAddress.City;
+            state.Text = selectedAddress.State;
+            zipcode.Text = selectedAddress.ZipCode;
+        }
+
         public void addressEntryFocused(ListView addressList, Grid[] grids)
         {
             //addressList.IsVisible = true;
@@ -144,11 +153,7 @@ namespace FTH.Model
             }
         }
 
-        public void addressEntryFocused(ListView addressList)
-        {
-            //addressList.IsVisible = true;
-        }
-
+      
         public void addressEntryUnfocused(ListView addressList, Grid[] grids)
         {
             addressList.IsVisible = false;
@@ -197,6 +202,99 @@ namespace FTH.Model
                 Generic gen = new Generic();
                 gen.parseException(ex.ToString());
             }
+        }
+
+        public void addressEntryFocused(ListView addressList)
+        {
+            addressList.IsVisible = true;
+            //foreach (Grid g in grids)
+            //{
+            //    g.IsVisible = false;
+            //}
+        }
+
+        public void addressEntryFocused(ListView addressList, Frame frame)
+        {
+            addressList.IsVisible = true;
+            frame.IsVisible = true;
+            //foreach (Grid g in grids)
+            //{
+            //    g.IsVisible = false;
+            //}
+        }
+
+        public void addressEntryUnfocused(ListView addressList, Frame frame)
+        {
+            addressList.IsVisible = false;
+            frame.IsVisible = false;
+            //foreach (Grid g in grids)
+            //{
+            //    g.IsVisible = true;
+            //}
+        }
+
+        
+
+        public AddressAutocomplete addressSelected(ListView addressList, Entry entry, Frame frame)
+        {
+            AddressAutocomplete selectedAddress = new AddressAutocomplete();
+            addressList.IsVisible = false;
+            frame.IsVisible = false;
+            entry.Text = ((AddressAutocomplete)addressList.SelectedItem).Street + ", " + ((AddressAutocomplete)addressList.SelectedItem).City + ", " + ((AddressAutocomplete)addressList.SelectedItem).State + ", " + ((AddressAutocomplete)addressList.SelectedItem).ZipCode;
+            //entry.Text = ((AddressAutocomplete)addressList.SelectedItem).Street;
+            selectedAddress.Street = ((AddressAutocomplete)addressList.SelectedItem).Street;
+            selectedAddress.City = ((AddressAutocomplete)addressList.SelectedItem).City;
+            selectedAddress.State = ((AddressAutocomplete)addressList.SelectedItem).State;
+            selectedAddress.ZipCode = ((AddressAutocomplete)addressList.SelectedItem).ZipCode;
+            selectedAddress.PredictionID = ((AddressAutocomplete)addressList.SelectedItem).PredictionID;
+            return selectedAddress;
+        }
+
+        public AddressAutocomplete addressSelected(ListView addressList, Frame frame)
+        {
+            AddressAutocomplete selectedAddress = new AddressAutocomplete();
+            addressList.IsVisible = false;
+            frame.IsVisible = false;
+            //entry.Text = ((AddressAutocomplete)addressList.SelectedItem).Street + ", " + ((AddressAutocomplete)addressList.SelectedItem).City + ", " + ((AddressAutocomplete)addressList.SelectedItem).State + ", " + ((AddressAutocomplete)addressList.SelectedItem).ZipCode;
+            //entry.Text = ((AddressAutocomplete)addressList.SelectedItem).Street;
+            selectedAddress.Street = ((AddressAutocomplete)addressList.SelectedItem).Street;
+            selectedAddress.City = ((AddressAutocomplete)addressList.SelectedItem).City;
+            selectedAddress.State = ((AddressAutocomplete)addressList.SelectedItem).State;
+            selectedAddress.ZipCode = ((AddressAutocomplete)addressList.SelectedItem).ZipCode;
+            selectedAddress.PredictionID = ((AddressAutocomplete)addressList.SelectedItem).PredictionID;
+            return selectedAddress;
+        }
+
+        public AddressAutocomplete addressSelected(ListView addressList, Entry address, Frame frame, Entry unit, Grid grid, Entry city, Entry state, Entry zipcode)
+        {
+            AddressAutocomplete selectedAddress = new AddressAutocomplete();
+
+            addressList.IsVisible = false;
+            frame.IsVisible = false;
+            unit.IsVisible = true;
+            grid.IsVisible = true;
+
+            address.Text = ((AddressAutocomplete)addressList.SelectedItem).Street;
+            selectedAddress.Address = ((AddressAutocomplete)addressList.SelectedItem).Address;
+            selectedAddress.Street = ((AddressAutocomplete)addressList.SelectedItem).Street;
+            selectedAddress.City = ((AddressAutocomplete)addressList.SelectedItem).City;
+            selectedAddress.State = ((AddressAutocomplete)addressList.SelectedItem).State;
+            selectedAddress.ZipCode = ((AddressAutocomplete)addressList.SelectedItem).ZipCode;
+            selectedAddress.PredictionID = ((AddressAutocomplete)addressList.SelectedItem).PredictionID;
+
+            city.Text = ((AddressAutocomplete)addressList.SelectedItem).City;
+            state.Text = ((AddressAutocomplete)addressList.SelectedItem).State;
+            zipcode.Text = ((AddressAutocomplete)addressList.SelectedItem).ZipCode;
+
+            return selectedAddress;
+        }
+
+        public void resetAddressEntries(Entry unit, Entry city, Entry state, Entry zipcode)
+        {
+            unit.Text = null;
+            city.Text = null;
+            state.Text = null;
+            zipcode.Text = null;
         }
 
         protected void OnPropertyChanged(string propertyName)

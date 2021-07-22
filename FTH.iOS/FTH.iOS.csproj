@@ -246,6 +246,14 @@
     <BundleResource Include="Resources\menuProfile.png" />
     <BundleResource Include="Resources\menuSearch.png" />
     <BundleResource Include="Resources\menuUtensils.png" />
+    <BundleResource Include="Resources\businessImage.png" />
+    <BundleResource Include="Resources\clockIcon.png" />
+    <BundleResource Include="Resources\closeIcon.png" />
+    <BundleResource Include="Resources\confirmationIcon.png" />
+    <BundleResource Include="Resources\deliveryTruckIcon.png" />
+    <BundleResource Include="Resources\editIcon.png" />
+    <BundleResource Include="Resources\itemImage.png" />
+    <BundleResource Include="Resources\personIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />

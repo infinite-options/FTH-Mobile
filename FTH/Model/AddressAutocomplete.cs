@@ -11,6 +11,8 @@ namespace FTH.Model
 
         public string Street { get; set; }
 
+        public string Unit { get; set; }
+
         public string City { get; set; }
 
         public string State { get; set; }
@@ -20,6 +22,8 @@ namespace FTH.Model
         public double Longitude { get; set; }
 
         public double Latitude { get; set; }
+
+        public bool isValidated { get; set; }
     }
 
     public class PlacesMatchedSubstring

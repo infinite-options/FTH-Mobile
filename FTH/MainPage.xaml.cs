@@ -849,7 +849,7 @@ namespace FTH
                                         Preferences.Set("canChooseSelect", true);
                                         Zones[] zones = new Zones[] { };
                                         await Application.Current.SavePropertiesAsync();
-                                        Application.Current.MainPage = new NavigationPage(new Select(zones, (info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
+                                        //Application.Current.MainPage = new NavigationPage(new Select(zones, (info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
                                     }
                                 }
 
@@ -1327,7 +1327,7 @@ namespace FTH
                                         //navToSelect((info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString());
                                         Zones[] zones = new Zones[] { };
                                         await Application.Current.SavePropertiesAsync();
-                                        Application.Current.MainPage = new NavigationPage(new Select(zones, (info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
+                                        //Application.Current.MainPage = new NavigationPage(new Select(zones, (info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
                                         //Application.Current.MainPage = new NavigationPage(new CongratsPage());
                                         //Application.Current.MainPage = new NavigationPage(new SubscriptionPage((info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
                                         //Application.Current.MainPage = new NavigationPage(new SubscriptionPage((info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
@@ -1516,7 +1516,7 @@ namespace FTH
                 {
                     //await DisplayAlert("success", "going to select page", "OK");
                     Zones[] zones = new Zones[] { };
-                    Application.Current.MainPage = new NavigationPage(new Select(zones, (info_obj3["result"])[0]["customer_first_name"].ToString(), (info_obj3["result"])[0]["customer_last_name"].ToString(), (info_obj3["result"])[0]["customer_email"].ToString()));
+                    //Application.Current.MainPage = new NavigationPage(new Select(zones, (info_obj3["result"])[0]["customer_first_name"].ToString(), (info_obj3["result"])[0]["customer_last_name"].ToString(), (info_obj3["result"])[0]["customer_email"].ToString()));
                 }
                 else
                 {
@@ -1544,7 +1544,7 @@ namespace FTH
         {
             Debug.WriteLine("reached navToSelect");
             Zones[] zones = new Zones[] { };
-            Application.Current.MainPage = new NavigationPage(new Select(zones, first, last, email));
+            //Application.Current.MainPage = new NavigationPage(new Select(zones, first, last, email));
         }
 
         public void navToLoading()
@@ -1563,7 +1563,7 @@ namespace FTH
         {
             if ((string)Application.Current.Properties["platform"] == "GUEST")
             {
-                Application.Current.MainPage = new NavigationPage(new ExploreMeals());
+                //Application.Current.MainPage = new NavigationPage(new ExploreMeals());
             }
             else
             {
@@ -1572,7 +1572,7 @@ namespace FTH
                 else
                 {
                     Zones[] zones = new Zones[] { };
-                    await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
+                    //await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
                 }
             }
         }
@@ -1829,7 +1829,7 @@ namespace FTH
             else
             {
                 Zones[] zones = new Zones[] { };
-                await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
+                //await Navigation.PushAsync(new Select(zones, cust_firstName, cust_lastName, cust_email), false);
                 //Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
             }
         }
