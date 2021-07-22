@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
 using System.Xml.Linq;
+using FTH.Model;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -21,6 +22,7 @@ namespace FTH.ViewModel
     {
         ObservableCollection<idType> idTypes = new ObservableCollection<idType>();
         double origHeight;
+        Address addr;
 
         public Registration()
         {
@@ -30,7 +32,7 @@ namespace FTH.ViewModel
             var height = DeviceDisplay.MainDisplayInfo.Height;
             Console.WriteLine("Width = " + width.ToString());
             Console.WriteLine("Height = " + height.ToString());
-
+            addr = new Address();
             InitializeComponent();
             origHeight = idTypeFrame.Height;
             
@@ -56,7 +58,7 @@ namespace FTH.ViewModel
         async void registrationClicked(System.Object sender, System.EventArgs e)
         {
             if (FNameEntry.Text == null || LNameEntry.Text == null || phoneEntry.Text == null || affilEntry.Text == null ||
-                idTypeButton.Text == "ID Type ᐯ" || idNumEntry.Text == null || addressEntry.Text == null || cityEntry.Text == null || stateEntry.Text == null || zipEntry.Text == null)
+                idTypeButton.Text == "ID Type ᐯ" || idNumEntry.Text == null || AddressEntry.Text == null || CityEntry.Text == null || StateEntry.Text == null || ZipEntry.Text == null)
             {
                 await DisplayAlert("Oops", "Fill all of the fields before continuing.", "OK");
                 return;
@@ -73,7 +75,7 @@ namespace FTH.ViewModel
             }
             else
             {
-                var aptText = aptEntry.Text;
+                var aptText = AptEntry.Text;
                 if (aptText == null)
                     aptText = "";
 
@@ -84,11 +86,11 @@ namespace FTH.ViewModel
                     new XElement("Revision", "1"),
                     new XElement("Address",
                     new XAttribute("ID", "0"),
-                    new XElement("Address1", addressEntry.Text.ToString().Trim()),
+                    new XElement("Address1", AddressEntry.Text.ToString().Trim()),
                     new XElement("Address2", aptText),
-                    new XElement("City", cityEntry.Text.ToString().Trim()),
-                    new XElement("State", stateEntry.Text.ToString().Trim()),
-                    new XElement("Zip5", zipEntry.Text.ToString().Trim()),
+                    new XElement("City", CityEntry.Text.ToString().Trim()),
+                    new XElement("State", StateEntry.Text.ToString().Trim()),
+                    new XElement("Zip5", ZipEntry.Text.ToString().Trim()),
                     new XElement("Zip4", "")
                          )
                      )
@@ -171,7 +173,65 @@ namespace FTH.ViewModel
             Application.Current.MainPage = new MainPage();
         }
 
-        
+        //address autocomplete start
+        // Auto-complete
+        private ObservableCollection<AddressAutocomplete> _addresses;
+        public ObservableCollection<AddressAutocomplete> Addresses
+        {
+            get => _addresses ?? (_addresses = new ObservableCollection<AddressAutocomplete>());
+            set
+            {
+                if (_addresses != value)
+                {
+                    _addresses = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _addressText;
+        public string AddressText
+        {
+            get => _addressText;
+            set
+            {
+                if (_addressText != value)
+                {
+                    _addressText = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private async void OnAddressChanged(object sender, TextChangedEventArgs eventArgs)
+        {
+            addressList.IsVisible = true;
+            UnitCity.IsVisible = false;
+            StateZip.IsVisible = false;
+            //UnitCityState.IsVisible = false;
+            //ZipPhone.IsVisible = false;
+            addressList.ItemsSource = await addr.GetPlacesPredictionsAsync(AddressEntry.Text);
+            //addr.OnAddressChanged(addressList, Addresses, _addressText);
+        }
+
+        private void addressEntryFocused(object sender, EventArgs eventArgs)
+        {
+            //addr.addressEntryFocused(addressList, new Grid[] { UnitCityState, ZipPhone });
+        }
+
+        private void addressEntryUnfocused(object sender, EventArgs eventArgs)
+        {
+            addr.addressEntryUnfocused(addressList, new Grid[] { UnitCity, StateZip });
+        }
+
+        private void addressSelected(System.Object sender, System.EventArgs e)
+        {
+            addr.addressSelected(addressList, new Grid[] { UnitCity, StateZip }, AddressEntry, CityEntry, StateEntry, ZipEntry);
+            addressList.IsVisible = false;
+            UnitCity.IsVisible = true;
+            StateZip.IsVisible = true;
+        }
+        //address autocomplete end
 
         void idTypeClicked(System.Object sender, System.EventArgs e)
         {

@@ -96,7 +96,7 @@
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Image HeightRequest="40" Source="menuProfile.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="My Profile" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
                             <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="profileClicked"/>
                         </Grid>
@@ -107,7 +107,7 @@
                                 <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Image HeightRequest="40" Source="menuUtensils.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="Order Food" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
                             <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
                         </Grid>
@@ -118,7 +118,7 @@
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Image HeightRequest="40" Source="menuSearch.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="Food Banks Map" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand"/>
                             <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
                         </Grid>
@@ -129,7 +129,7 @@
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Image HeightRequest="40" Source="menuFAQ.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="FAQs" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
                             <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill"/>
                         </Grid>
@@ -140,7 +140,7 @@
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image HeightRequest="40" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="LightGray"/>
+                            <Image HeightRequest="40" Source="menuLogout.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="Logout" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
                             <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="logoutClicked"/>
                         </Grid>
