@@ -47,8 +47,8 @@ namespace FTH.ViewModel
 
         void browseClicked(System.Object sender, System.EventArgs e)
         {
-            //Application.Current.MainPage = new FoodBanksMap();
-            Navigation.PushAsync(new FoodBanksMap());
+            Application.Current.MainPage = new FoodBanksMap();
+            //Navigation.PushAsync(new FoodBanksMap());
         }
 
         void loginClicked(System.Object sender, System.EventArgs e)

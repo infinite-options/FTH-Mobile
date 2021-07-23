@@ -254,6 +254,7 @@
     <BundleResource Include="Resources\editIcon.png" />
     <BundleResource Include="Resources\itemImage.png" />
     <BundleResource Include="Resources\personIcon.png" />
+    <BundleResource Include="Resources\deleteIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />
@@ -261,5 +262,8 @@
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
 </Project>

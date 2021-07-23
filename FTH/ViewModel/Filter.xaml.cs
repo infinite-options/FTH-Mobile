@@ -237,6 +237,11 @@ namespace FTH.ViewModel
             else fbChosen.HoursVisible = true;
         }
 
+        void clickedFoodBank(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new FoodBackStore());
+        }
+
         //menu functions
         void profileClicked(System.Object sender, System.EventArgs e)
         {

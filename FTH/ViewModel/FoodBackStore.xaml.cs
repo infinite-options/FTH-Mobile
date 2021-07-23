@@ -231,5 +231,43 @@ namespace FTH.ViewModel
         {
             Navigation.PushAsync(new CartPage(), false);
         }
+
+        void backClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new MainPage();
+            Navigation.PopAsync();
+        }
+
+        //menu functions
+        void profileClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new NavigationPage(new UserProfile());
+            Navigation.PushAsync(new UserProfile());
+        }
+
+        void menuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = true;
+            menu.IsVisible = false;
+        }
+
+        void openedMenuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = false;
+            menu.IsVisible = true;
+        }
+
+        void browseClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new FoodBanksMap());
+        }
+
+        void loginClicked(System.Object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage = new LoginPage();
+        }
+
+        //end of menu functions
     }
 }

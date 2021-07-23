@@ -69,99 +69,99 @@ namespace FTH
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
 
             //TEST
-            MainPage = new NavigationPage(new FoodBackStore());
+            //MainPage = new NavigationPage(new FoodBackStore());
 
-            // User id and time_stamp are retrieved from local phone memory (written by Login View Model, Signup, Social Signup and MainPage.xaml.cs)
-            //if (Application.Current.Properties.ContainsKey("user_id"))
-            //{
-            //    System.Diagnostics.Debug.WriteLine("UserID is:" + (string)Application.Current.Properties["user_id"]);
-            //    if (Application.Current.Properties.ContainsKey("time_stamp"))
+            //User id and time_stamp are retrieved from local phone memory(written by Login View Model, Signup, Social Signup and MainPage.xaml.cs)
+            if (Application.Current.Properties.ContainsKey("user_id"))
+            {
+                System.Diagnostics.Debug.WriteLine("UserID is:" + (string)Application.Current.Properties["user_id"]);
+                if (Application.Current.Properties.ContainsKey("time_stamp"))
 
-            //    {
-            //        System.Diagnostics.Debug.WriteLine("Time Stamp is:" + (DateTime)Application.Current.Properties["time_stamp"]);
-            //        DateTime today = DateTime.Now;
-            //        DateTime expTime = (DateTime)Application.Current.Properties["time_stamp"];
-            //        Console.WriteLine("today" + today.ToString());
-            //        Console.WriteLine("expTime" + expTime.ToString());
-
-
-            //        if (today <= expTime)
-            //        {
-            //            MainPage client = new MainPage();
-            //            MainPage = client;
-            //            client.navToLoading();
-
-            //            client.getProfileInfo();
-
-            //            //getProfileInfo();
-
-            //            // MainPage = new CarlosHomePage();
-            //            Console.WriteLine("entered time check");
-            //            //MainPage = new NavigationPage(new SubscriptionPage("first", "last", "email"));
-            //            //MainPage = new NavigationPage(new SubscriptionPage((info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
+                {
+                    System.Diagnostics.Debug.WriteLine("Time Stamp is:" + (DateTime)Application.Current.Properties["time_stamp"]);
+                    DateTime today = DateTime.Now;
+                    DateTime expTime = (DateTime)Application.Current.Properties["time_stamp"];
+                    Console.WriteLine("today" + today.ToString());
+                    Console.WriteLine("expTime" + expTime.ToString());
 
 
-            //            // Push Pop Navigation examples
-            //            // MainPage = new NavigationPage(new MainPage());          // Initializes stack and pushes the first stack element
-            //            // MainPage.Navigation.PushAsync(new SubscriptionPage());  // Pushes new element on top of stack
-            //            // MainPage.Navigation.PushAsync(new Select());            // Pushes another element on top of stack
-            //            // MainPage.Navigation.PopAsync();                         // Pops the last element from the stack
+                    if (today <= expTime)
+                    {
+                        MainPage client = new MainPage();
+                        MainPage = client;
+                        client.navToLoading();
 
-            //        }
-            //        else
-            //        {
-            //            Application.Current.Properties["platform"] = "GUEST";
-            //            Application.Current.Properties["user_id"] = "000-00000";
-            //            Preferences.Set("user_latitude", "0.0");
-            //            Preferences.Set("user_longitude", "0.0");
+                        client.getProfileInfo();
 
-            //            MainPage client = new MainPage();
-            //            MainPage = client;
+                        //getProfileInfo();
 
-            //            if (Application.Current.Properties.ContainsKey("platform"))
-            //            {
-            //                System.Diagnostics.Debug.WriteLine("platform is:" + (string)Application.Current.Properties["platform"]);
-            //                string socialPlatform = (string)Application.Current.Properties["platform"];
+                        // MainPage = new CarlosHomePage();
+                        Console.WriteLine("entered time check");
+                        //MainPage = new NavigationPage(new SubscriptionPage("first", "last", "email"));
+                        //MainPage = new NavigationPage(new SubscriptionPage((info_obj2["result"])[0]["customer_first_name"].ToString(), (info_obj2["result"])[0]["customer_last_name"].ToString(), (info_obj2["result"])[0]["customer_email"].ToString()));
 
-            //                if (socialPlatform.Equals("FACEBOOK"))
-            //                {
-            //                    client.facebookLoginButtonClicked(new object(), new EventArgs());
-            //                    // Goes to MainPage.xaml.cs
-            //                }
-            //                else if (socialPlatform.Equals("GOOGLE"))
-            //                {
-            //                    client.googleLoginButtonClicked(new object(), new EventArgs());
-            //                }
-            //                else if (socialPlatform.Equals("APPLE"))
-            //                {
-            //                    client.appleLoginButtonClicked(new object(), new EventArgs());
-            //                }
-            //                else
-            //                {
-            //                    MainPage = new MainPage();
-            //                }
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Application.Current.Properties["platform"] = "GUEST";
-            //        Application.Current.Properties["user_id"] = "000-00000";
-            //        Preferences.Set("user_latitude", "0.0");
-            //        Preferences.Set("user_longitude", "0.0");
 
-            //        MainPage = new MainPage();
-            //    }
-            //}
-            //else
-            //{
-            //    Application.Current.Properties["platform"] = "GUEST";
-            //    Application.Current.Properties["user_id"] = "000-00000";
-            //    Preferences.Set("user_latitude", "0.0");
-            //    Preferences.Set("user_longitude", "0.0");
+                        // Push Pop Navigation examples
+                        // MainPage = new NavigationPage(new MainPage());          // Initializes stack and pushes the first stack element
+                        // MainPage.Navigation.PushAsync(new SubscriptionPage());  // Pushes new element on top of stack
+                        // MainPage.Navigation.PushAsync(new Select());            // Pushes another element on top of stack
+                        // MainPage.Navigation.PopAsync();                         // Pops the last element from the stack
 
-            //    MainPage = new MainPage();
-            //}
+                    }
+                    else
+                    {
+                        Application.Current.Properties["platform"] = "GUEST";
+                        Application.Current.Properties["user_id"] = "000-00000";
+                        Preferences.Set("user_latitude", "0.0");
+                        Preferences.Set("user_longitude", "0.0");
+
+                        MainPage client = new MainPage();
+                        MainPage = client;
+
+                        if (Application.Current.Properties.ContainsKey("platform"))
+                        {
+                            System.Diagnostics.Debug.WriteLine("platform is:" + (string)Application.Current.Properties["platform"]);
+                            string socialPlatform = (string)Application.Current.Properties["platform"];
+
+                            if (socialPlatform.Equals("FACEBOOK"))
+                            {
+                                client.facebookLoginButtonClicked(new object(), new EventArgs());
+                                // Goes to MainPage.xaml.cs
+                            }
+                            else if (socialPlatform.Equals("GOOGLE"))
+                            {
+                                client.googleLoginButtonClicked(new object(), new EventArgs());
+                            }
+                            else if (socialPlatform.Equals("APPLE"))
+                            {
+                                client.appleLoginButtonClicked(new object(), new EventArgs());
+                            }
+                            else
+                            {
+                                MainPage = new MainPage();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Application.Current.Properties["platform"] = "GUEST";
+                    Application.Current.Properties["user_id"] = "000-00000";
+                    Preferences.Set("user_latitude", "0.0");
+                    Preferences.Set("user_longitude", "0.0");
+
+                    MainPage = new MainPage();
+                }
+            }
+            else
+            {
+                Application.Current.Properties["platform"] = "GUEST";
+                Application.Current.Properties["user_id"] = "000-00000";
+                Preferences.Set("user_latitude", "0.0");
+                Preferences.Set("user_longitude", "0.0");
+
+                MainPage = new MainPage();
+            }
 
         }
 
