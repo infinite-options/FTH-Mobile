@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FTH.ViewModel.ClientIntakeForm">
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout>
+                <BoxView x:Name="headingBuffer" HeightRequest="20"/>
+            <Grid>
+            <StackLayout x:Name="mainStack">
+
+                <Grid x:Name="headerGrid" Margin="20, 0, 20, 10" HeightRequest="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" HeightRequest="25" Clicked="backClicked"/>
+                    <ImageButton x:Name="menu" Grid.Column="1" Source="menu.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="50" Clicked="menuClicked"/>
+                    <BoxView x:Name="whiteCover" IsVisible="false" BackgroundColor="White" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Grid.ColumnSpan="2"/>
+                </Grid>
+
+                <Label FontSize="30" HorizontalOptions="Center" Text="Client Intake Form" FontAttributes="Bold" Margin="0, 10,0,10"/>
+
+                <Label FontSize="20" HorizontalOptions="Start" Text="Client Info:" FontAttributes="Bold" Margin="25, 10,0,3"/>
+
+                <Frame x:Name="firstName" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="FNameEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Client Name*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="lastName" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="LNameEntry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Last 4 Digits of Social Security*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="phoneNum" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="phoneEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Date of Birth*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Grid x:Name="St" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="16*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame x:Name="street" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="AddressEntry" Text="{Binding AddressText}" FontSize="17" TextColor="Black" TextChanged="OnAddressChanged"
+                           Focused="addressEntryFocused" Unfocused="addressEntryUnfocused" Placeholder="Current Address*" PlaceholderColor="Black"/>
+                    </Frame>
+
+                  
+                </Grid>
+
+                <ListView x:Name="addressList" ItemsSource="{Binding Addresses}" IsVisible="false" Margin="20, 0, 20, 20" ItemSelected="addressSelected" HeightRequest="180">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Address}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                </ListView>
+
+                <Grid x:Name="UnitCity" HorizontalOptions="Center" VerticalOptions="Center"  ColumnSpacing="4" Margin="20,0.5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                   <Frame x:Name="unit" Grid.Row="0" Grid.Column="0" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                        <Entry x:Name="AptEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Unit" PlaceholderColor="Black"
+                               />
+                   </Frame>
+
+
+                   <Frame x:Name="city" Grid.Row="0" Grid.Column="1" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                        <Entry x:Name="CityEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="City*" PlaceholderColor="Black"
+                               />
+                   </Frame>
+
+                </Grid>
+
+
+                <Grid x:Name="StateZip" HorizontalOptions="Center" VerticalOptions="Center"  ColumnSpacing="4" Margin="20,0.5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame x:Name="state" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="0" Grid.Row="0">
+                        <Entry x:Name="StateEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="State*" PlaceholderColor="Black"
+                               />
+                   </Frame>
+
+                   <Frame x:Name="zipCode" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="1">
+                        <Entry x:Name="ZipEntry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Zip Code*" PlaceholderColor="Black"
+                               />
+                   </Frame>
+
+                </Grid>
+
+                <Frame x:Name="county" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="countyEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="County*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="phoneHome" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="phoneHomeEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Phone (home)" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="phoneCell" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="phoneCellEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Phone (cell)*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Label FontSize="20" HorizontalOptions="Start" Text="Household Info:" FontAttributes="Bold" Margin="25, 25,0,5"/>
+
+                <Label FontSize="17" HorizontalOptions="Start" Text="List names, ages and relationships of household family members" Margin="25,0,25,5"/>
+
+                 <CollectionView x:Name="membersCollView" Margin="0, 15,0,0" HeightRequest="170" HorizontalOptions="Fill">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="20" SnapPointsType="None"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label TextColor="#E7404A" Text="{Binding MemberTitle}" HorizontalOptions="Start" Margin="25,0,0,5" FontSize="16"/>
+
+                                <Frame x:Name="name2" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                                    <Entry x:Name="name2Entry" Text="{Binding MemberName}" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Name*" PlaceholderColor="Black"
+                                           />
+                                </Frame>
+
+                                <Grid x:Name="AgeRelation" HorizontalOptions="Center" VerticalOptions="Center"  ColumnSpacing="4" Margin="20,0.5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Frame x:Name="age" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="0" Grid.Row="0">
+                                        <Entry x:Name="ageEntry" Text="{Binding MemberAge}" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Age*" PlaceholderColor="Black"
+                                               />
+                                   </Frame>
+
+                                   <Frame x:Name="relationship" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="1">
+                                        <Entry x:Name="relationEntry" Text="{Binding MemberRelationship}" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Relationship*" PlaceholderColor="Black"
+                                               />
+                                   </Frame>
+
+                                </Grid>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button TextColor="#E7404A" Text="Add a member +" WidthRequest="200" HeightRequest="50" HorizontalOptions="Start" Margin="0,0,0,25" FontSize="16" Clicked="addMemberClicked"/>
+
+                <Label LineBreakMode="WordWrap" Margin="25,0,25,10" HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Total number of household members " TextColor="#E7404A" FontSize="16"/>
+                            <Span Text="under" TextDecorations="Underline" TextColor="#E7404A" FontSize="16"/>
+                            <Span Text=" age 18" TextColor="#E7404A" FontSize="16"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Frame x:Name="under18" Padding="20,10" Margin="20,0.5, 100, 15" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="under18Entry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Number*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Label LineBreakMode="WordWrap" Margin="25,0,25,10" HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Total number of household members " TextColor="#E7404A" FontSize="16"/>
+                            <Span Text="over" TextDecorations="Underline" TextColor="#E7404A" FontSize="16"/>
+                            <Span Text=" age 18" TextColor="#E7404A" FontSize="16"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Frame x:Name="over18" Padding="20,10" Margin="20,0.5, 100, 15" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="over18Entry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Number*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Label LineBreakMode="WordWrap" Margin="25,0,25,10" HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Total number of household members " TextColor="#E7404A" FontSize="16"/>
+                            <Span Text="over" TextDecorations="Underline" TextColor="#E7404A" FontSize="16"/>
+                            <Span Text=" age 65" TextColor="#E7404A" FontSize="16"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Frame x:Name="over65" Padding="20,10" Margin="20,0.5, 100, 15" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="over65Entry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Number*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Label TextColor="#E7404A" Text="Housing status (check one):" HorizontalOptions="Start" Margin="25,0,0,10" FontSize="16"/>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="1"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Stably Housed" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="2"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Literally homeless" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20,0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="3"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Unstably housed / imminently losing housing" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <!--next checkbox section-->
+                <Label TextColor="#E7404A" Text="What best describes your living situation last night (check one):" HorizontalOptions="Start" Margin="25,0,25,10" FontSize="16"/>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="4"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Rental by client (no subsidy)" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="5"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Rental by client with Section 8" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="6"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Rental by client with subsidy" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="7"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Staying with family/friends" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="8"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Emergency Shelter" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="9"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Place not meant for human habitation (street, park, etc.)" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="10"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Hotel/motel (no voucher)" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="11"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Transitional housing /Safe Haven" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20,0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                    <Frame x:Name="other" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
+                        <Entry x:Name="otherEntry" Keyboard="Text" FontSize="16" TextColor="Black" PlaceholderColor="Black"/>
+                    </Frame>
+                </Grid>
+
+                <Frame x:Name="signature" Padding="20,10" Margin="20,40,20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="signatureEntry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Client Signature (electronic)*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="date" Padding="20,10" Margin="20,0.5, 100, 15" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="dateEntry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Date*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <ImageButton x:Name="submitButton" Source="submitFormButton.png" Margin="60,20,60,0" Clicked="submitButton_Clicked" VerticalOptions="Center" />
+
+                <Label Text="Browse food banks without completing checkout" Margin="25,60,25,0"
+                       FontSize="14" TextColor="Black" HorizontalTextAlignment="Center"/>
+
+                <ImageButton x:Name="browseButton" Source="browseButton.png" Clicked="browseClicked" Margin="60,0,60,10" VerticalOptions="Center" HeightRequest="65"/>
+
+                <BoxView HeightRequest="90"/>
+            </StackLayout>
+
+            <!--logged in menu-->
+            <Grid x:Name="openMenuGrid" IsVisible="false" Grid.Row="0" Grid.RowSpan="3"
+                  Margin="20, 0, 20, 10" HeightRequest="50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                    <!--<ImageButton Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="25" Clicked="backClicked"/>-->
+                    <!--<ImageButton CornerRadius="0" x:Name="openedMenu" Grid.Column="1" Source="openedMenu.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="40" WidthRequest="30" Clicked="openedMenuClicked"/>-->
+                    <ImageButton Margin="0,0,15,0" CornerRadius="0" x:Name="openedMenu" Grid.Column="1" Source="openedMenu.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" Clicked="openedMenuClicked"/>
+
+                    <StackLayout BackgroundColor="#FABFC3" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="End" Margin="0,0,-20,0" Padding="10">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="25" Source="menuProfile.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="My Profile" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="profileClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="25" Source="menuUtensils.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="Order Food" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="25" Source="menuSearch.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="Food Banks Map" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="25" Source="menuFAQ.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="FAQs" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="25" Source="menuLogout.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="Logout" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="loginClicked"/>
+                        </Grid>
+
+                    </StackLayout>
+
+            </Grid>
+
+            </Grid>
+           </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

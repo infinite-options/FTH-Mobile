@@ -255,6 +255,7 @@
     <BundleResource Include="Resources\itemImage.png" />
     <BundleResource Include="Resources\personIcon.png" />
     <BundleResource Include="Resources\deleteIcon.png" />
+    <BundleResource Include="Resources\submitFormButton.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />
