@@ -146,7 +146,32 @@ namespace FTH.ViewModel
                 Debug.WriteLine("relationship: " + houseMem.MemberRelationship);
             }
 
-            Navigation.PushAsync(new CheckoutPage());
+            if (AddressEntry.Text == null || CityEntry.Text == null || StateEntry.Text == null || ZipEntry.Text == null)
+            {
+                DisplayAlert("Oops", "Fill all of the fields before continuing.", "OK");
+                return;
+            }
+
+            string unit;
+            if (AptEntry.Text == null)
+                unit = "";
+            else unit = AptEntry.Text;
+
+            AddressValidation addValid = new AddressValidation();
+            var addressValidationCode = addValid.ValidateAddressString(AddressEntry.Text, unit, CityEntry.Text, StateEntry.Text, ZipEntry.Text);
+            if (addressValidationCode == null)
+            {
+                DisplayAlert("Invalid Address", "The address you entered couldn't be confirmed. Please enter another one.", "OK");
+                return;
+            }
+            else if (addressValidationCode == "D")
+            {
+                DisplayAlert("Missing Info", "Please enter your unit/apartment number into the appropriate field.", "OK");
+                return;
+            }
+
+            //Navigation.PushAsync(new CheckoutPage());
+            Navigation.PushAsync(new WestValleyForm());
         }
 
         void addMemberClicked(System.Object sender, System.EventArgs e)

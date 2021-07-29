@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Xml.Linq;
 using FTH.Model;
@@ -23,6 +24,7 @@ namespace FTH.ViewModel
         ObservableCollection<idType> idTypes = new ObservableCollection<idType>();
         double origHeight;
         Address addr;
+        Dictionary<string, string> signUpInfo;
 
         public Registration()
         {
@@ -33,6 +35,7 @@ namespace FTH.ViewModel
             Console.WriteLine("Width = " + width.ToString());
             Console.WriteLine("Height = " + height.ToString());
             addr = new Address();
+            signUpInfo = new Dictionary<string, string>();
             InitializeComponent();
             origHeight = idTypeFrame.Height;
             
@@ -53,6 +56,9 @@ namespace FTH.ViewModel
                 type = "Real ID"
             });
             idList.ItemsSource = idTypes;
+
+            Debug.WriteLine("open menu height: " + openGridStack.HeightRequest.ToString());
+            //menuBackground.HeightRequest = openGridStack.HeightRequest;
         }
 
         async void registrationClicked(System.Object sender, System.EventArgs e)
@@ -120,11 +126,14 @@ namespace FTH.ViewModel
                             //GetAddressLatitudeLongitude();
                             Geocoder geoCoder = new Geocoder();
 
-                            //IEnumerable<Position> approximateLocations = await geoCoder.GetPositionsForAddressAsync(AddressEntry.Text.Trim() + "," + CityEntry.Text.Trim() + "," + StateEntry.Text.Trim());
-                            //Position position = approximateLocations.FirstOrDefault();
+                            IEnumerable<Position> approximateLocations = await geoCoder.GetPositionsForAddressAsync(AddressEntry.Text.Trim() + "," + CityEntry.Text.Trim() + "," + StateEntry.Text.Trim());
+                            Position position = approximateLocations.FirstOrDefault();
 
-                            //latitude = $"{position.Latitude}";
-                            //longitude = $"{position.Longitude}";
+                            latitude = $"{position.Latitude}";
+                            longitude = $"{position.Longitude}";
+
+                            signUpInfo.Add("latitude", latitude);
+                            signUpInfo.Add("longitude", longitude);
 
                             //map.MapType = MapType.Street;
                             //var mapSpan = new MapSpan(position, 0.001, 0.001);
@@ -154,8 +163,22 @@ namespace FTH.ViewModel
                         return;
                     }
                 }
+
+                signUpInfo.Add("first_name", FNameEntry.Text.Trim());
+                signUpInfo.Add("last_name", LNameEntry.Text.Trim());
+                signUpInfo.Add("phone", phoneEntry.Text.Trim());
+                signUpInfo.Add("affiliation", affilEntry.Text.Trim());
+                signUpInfo.Add("id_type", idTypeButton.Text.Trim());
+                signUpInfo.Add("id_num", idNumEntry.Text.Trim());
+                signUpInfo.Add("address", AddressEntry.Text.Trim());
+                if (AptEntry.Text == null)
+                    signUpInfo.Add("unit", "");
+                else signUpInfo.Add("unit", AptEntry.Text.Trim());
+                signUpInfo.Add("city", CityEntry.Text.Trim());
+                signUpInfo.Add("state", StateEntry.Text.Trim());
+                signUpInfo.Add("zip", ZipEntry.Text.Trim());
             }
-            await Navigation.PushAsync(new CreatePassword()); //Application.Current.MainPage = new CreatePassword();
+            await Navigation.PushAsync(new CreatePassword(signUpInfo)); //Application.Current.MainPage = new CreatePassword();
         }
 
         public static string GetXMLElement(XElement element, string name)

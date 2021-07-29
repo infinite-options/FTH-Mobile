@@ -1,0 +1,1182 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FTH.ViewModel.WestValleyForm">
+    <ContentPage.Content>
+
+        <ScrollView x:Name="scroller">
+            <StackLayout>
+                <BoxView x:Name="headingBuffer" HeightRequest="20"/>
+            <Grid>
+            <StackLayout x:Name="mainStack">
+
+                <Grid x:Name="headerGrid" Margin="20, 0, 20, 10" HeightRequest="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" HeightRequest="25" Clicked="backClicked"/>
+                    <ImageButton x:Name="menu" Grid.Column="1" Source="menu.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" WidthRequest="50" Clicked="menuClicked"/>
+                    <BoxView x:Name="whiteCover" IsVisible="false" BackgroundColor="White" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Grid.ColumnSpan="2"/>
+                </Grid>
+
+                <Label FontSize="30" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="West Valley Community Services Form:" FontAttributes="Bold" Margin="0, 10,0,10"/>
+
+                <Label x:Name="pageNum" FontSize="16" HorizontalOptions="End" Text="Page 1 of 4" Margin="0, 10,25,10"/>
+
+              <StackLayout x:Name="firstPage">
+                <Label FontSize="20" HorizontalOptions="Start" Text="Living Situation:" FontAttributes="Bold" Margin="25, 10,0,3"/>
+
+                <Label FontSize="17" HorizontalOptions="Start" Text="Please answer the following if you are homeless:" Margin="25,0,25,5"/>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" Text="Last permanent zipcode:" HorizontalOptions="Start">
+                </Label>
+
+                <Frame x:Name="zipCode" Padding="20,10" Margin="20,0.5, 100, 15" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="zipCodeEntry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Zip Code" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" Text="What city did you sleep in last night?" HorizontalOptions="Start">
+                </Label>
+
+                <Frame x:Name="city" Padding="20,10" Margin="20,0.5, 100, 15" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="cityEntry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="City" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Extent of homelessness (check one):"/>
+
+                <!--1st checkbox region 1-5-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="1"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="One week or less" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="2"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="More than a week but less than a month" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="3"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="1-3 months" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="4"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="More than 3 months but less than a year" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="5"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="More than a year" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label FontSize="20" HorizontalOptions="Start" Text="Adult Client Info:" FontAttributes="Bold" Margin="25, 10,0,15"/>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Gender:" />
+
+                <!--2nd checkbox region 6-11-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="6"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Female" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="7"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Male" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="8"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Transgender F-M" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="9"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Transgender M-F" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20,0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="10"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                    <Frame x:Name="other" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
+                        <Entry x:Name="otherEntry" Keyboard="Text" FontSize="16" TextColor="Black" PlaceholderColor="Black"/>
+                    </Frame>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="11"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Marital Status:"/>
+
+                <!--3rd checkbox region 12-17-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Single" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="13"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Married" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="14"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Separated" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="15"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Divorced" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="16"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Domestic Partner" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="17"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Widowed" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Education:"/>
+
+                <!--4rd checkbox region 18-22-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="18"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Some School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="19"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="GED" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="20"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="AA degree" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="21"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="College degree" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="22"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Graduate degree" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Highest Grade Level:"/>
+
+                <!--5rd checkbox region 23-28-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="23"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Elementary School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="24"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Middle School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="25"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="High School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="26"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Junior College" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="27"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Undergraduate School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,20" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="28"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Graduate School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <ImageButton x:Name="continueButton" Source="continueButton.png" Clicked="continueClicked" Margin="60,10,60,30" VerticalOptions="Center" />
+              </StackLayout>
+
+              <StackLayout x:Name="secondPage" IsVisible="false">
+                  <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Are you of Hispanic origin?"/>
+
+                <!--6 checkbox region 29-31-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="29"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="30"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="31"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Primary Ethnicity:"/>
+
+                <!--7 checkbox region 32-42-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="32"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="American Indian/Alaskan Native" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="33"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="American Indian/Alaskan Native and White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="34"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Asian" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="35"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Asian and White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="36"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Black / African American" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="37"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Black / African and White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="38"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Native Hawaiian/ Pacific Islander" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="39"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="American Indian/ Alaskan Native and Black/ African American" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="40"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="41"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="42"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Other Multi-Racial" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Are you a veteran?"/>
+
+                <!--8 checkbox region 43-44-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="43"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="44"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Disability of long duration?"/>
+
+                <!--9 checkbox region 45-47-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="45"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="46"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="47"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="If you have a disability of long duration, please describe your disability:"/>
+
+                <!--10 checkbox region 48-55-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="48"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Alcohol abuse" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="49"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Drug abuse" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="50"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Mental health problems" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="51"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Development disability" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="52"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Physical disability" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="53"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Chronic health condition" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="54"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="HIV/AIDS" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20,0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="55"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                    <Frame x:Name="otherDisability" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
+                        <Entry x:Name="otherDisabilityEntry" Keyboard="Text" FontSize="16" TextColor="Black" PlaceholderColor="Black"/>
+                    </Frame>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Primary Language:"/>
+
+                <!--11 checkbox region 56-61-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="56"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="English" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="57"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Chinese" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="58"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Russian" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="59"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Spanish" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="60"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Vietnamese" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20,0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="61"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                    <Frame x:Name="otherLang" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
+                        <Entry x:Name="otherLangEntry" Keyboard="Text" FontSize="16" TextColor="Black" PlaceholderColor="Black"/>
+                    </Frame>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="English Fluency:"/>
+
+                <!--11 checkbox region 62-64-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="62"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Fluent" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="63"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Semi-fluent" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,20" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="64"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Not fluent" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <ImageButton x:Name="continueButton2" Source="continueButton.png" Clicked="continueClicked" Margin="60,10,60,30" VerticalOptions="Center" />
+
+              </StackLayout>
+
+              <StackLayout x:Name="thirdPage" IsVisible="false">
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Employment Status:"/>
+
+                <!--12 checkbox region 65-72-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="65"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Full time, 35+ hrs/wk" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="66"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Part time, less than 35 hrs/wk" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="67"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Retired" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="68"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Unemployed, seeking work" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="69"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Disable, not in labor force" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="70"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Full time homemaker" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="71"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Student" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="72"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Medical Insurance:"/>
+
+                <!--13 checkbox region 73-78-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="73"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Medi-Cal" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="74"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Medicare" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="75"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Medicaide" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="76"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Uninsured" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="77"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Private Insurance" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="78"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Work Insurance" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Special Nutrition (WIC):"/>
+
+                <!--14th checkbox region 79-80-->
+                <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="79"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="80"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label TextColor="#E7404A" Margin="25,0,25,10" FontSize="16" HorizontalOptions="Start" Text="CalFresh:"/>
+
+                <!--15th checkbox region 81-82-->
+                <Grid HeightRequest="40" Margin="20,0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="81"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Yes, Monthly Amount: $" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                    <Frame x:Name="amt" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
+                        <Entry x:Name="amtEntry" Keyboard="Text" FontSize="16" TextColor="Black" PlaceholderColor="Black"/>
+                    </Frame>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="20, 0,20,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="82"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label FontSize="20" HorizontalOptions="Start" Text="Emergency Contact Info:" FontAttributes="Bold" Margin="25, 10,0,5"/>
+
+                <Frame x:Name="emergencyName" Padding="20,10" Margin="20,5,20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="emergencyNameEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Full Name" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="emergencyNum" Padding="20,10" Margin="20,0.5,20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="emergencyNumEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Phone Number" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Frame x:Name="emergencyRelation" Padding="20,10" Margin="20,0.5,20,10" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="emergencyRelationEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Relationship" PlaceholderColor="Black"
+                           />
+                </Frame>
+
+                <Label TextColor="#E7404A" Margin="35,0,25,10" FontSize="16" HorizontalOptions="Start" Text="Also a client?"/>
+
+                <!--15th checkbox region 83-84-->
+                <Grid HeightRequest="40" Margin="35, 0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="83"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Grid HeightRequest="40" Margin="35, 0,35,15" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="84"/>
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                </Grid>
+
+                <Label FontSize="20" HorizontalOptions="Start" Text="Household Composition:" FontAttributes="Bold" Margin="25, 0,0,3"/>
+
+                <Label FontSize="17" HorizontalOptions="Start" Text="List all individuals who will be living in your home, listing head of household first." Margin="25,0,25,5"/>
+
+                <CollectionView x:Name="membersCollView" Margin="0, 15,0,0" HeightRequest="300" HorizontalOptions="Fill">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="20" SnapPointsType="None"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label TextColor="#E7404A" Text="{Binding MemberTitle}" HorizontalOptions="Start" Margin="25,0,0,5" FontSize="16"/>
+
+                                <Frame x:Name="name2" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                                    <Entry x:Name="name2Entry" Text="{Binding MemberName}" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Full Name" PlaceholderColor="Black"
+                                           />
+                                </Frame>
+
+                                <Frame x:Name="ssn" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                                    <Entry x:Name="ssnEntry" Text="{Binding MemberSSN}" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Social Security Number (last 4 only)" PlaceholderColor="Black"
+                                           />
+                                </Frame>
+
+                                <Frame x:Name="relationship" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                                        <Entry x:Name="relationEntry" Text="{Binding MemberRelationship}" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Relationship to head of household" PlaceholderColor="Black"
+                                               />
+                                   </Frame>
+
+                                <Grid x:Name="dobAge" HorizontalOptions="Center" VerticalOptions="Center"  ColumnSpacing="4" Margin="20,0.5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Frame x:Name="dob" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="0" Grid.Row="0">
+                                        <Entry x:Name="dobEntry" Text="{Binding MemberDOB}" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="DOB" PlaceholderColor="Black"
+                                               />
+                                   </Frame>
+
+                                   <Frame x:Name="age" Padding="20,10" BackgroundColor="White" HasShadow="False"
+                                          BorderColor="Black" CornerRadius="25" HeightRequest="32" Grid.Column="1">
+                                        <Entry x:Name="ageEntry" Text="{Binding MemberAge}" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Age" PlaceholderColor="Black"
+                                               />
+                                   </Frame>
+
+                                </Grid>
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button TextColor="#E7404A" Text="Add a member +" WidthRequest="180" HeightRequest="50" HorizontalOptions="Start" Margin="0,0,0,25" FontSize="16" Clicked="addMemberClicked"/>
+
+                <ImageButton x:Name="continueButton3" Source="continueButton.png" Clicked="continueClicked" Margin="60,10,60,30" VerticalOptions="Center" />
+
+              </StackLayout>
+
+              <StackLayout x:Name="fourthPage" IsVisible="false">
+                  <Label FontSize="20" HorizontalOptions="Start" Text="Agreement:" FontAttributes="Bold" Margin="20, 10,0,3"/>
+
+                  <Label Margin="20,10,20,7" FontSize="16"
+                         Text="West Valley Community Services is committed to treating you with dignity and respect. It is our goal to provide equal treatment to all seeking our services. We ask that you treat our staff and volunteers in the same manner. We reserve the right to refuse service to anyone unable to comply. Please read and sign the following:"/>
+
+                  <Label Margin="20,7" FontSize="16" Text="I understand that West Valley Community Services may ask for verification of the information I provide and that this information will allow the program staff to assist me in an effective way. I understand that if I am unwilling to provide the necessary paperwork and/or am unable to verify my need, WVCS may not be able to provide me with assistance."/>
+
+                  <Label Margin="20,7" FontSize="16" Text="I understand that if I sign up for Special Programs and do not follow through with my commitment to the said Special Program, I will be disqualified for one year from all special programs."/>
+
+                  <Label Margin="20,7" FontSize="16" Text="All information I provide is true and accurate."/>
+
+                  <Label Margin="20,7" FontSize="16" Text="All information between WVCS and me is held strictly confidential unless:&#x0a;1. I authorize the release of information with a signature;&#x0a;2. WVCS is ordered by court to release information;&#x0a;3. I present a danger to myself or others;&#x0a;4. Child &amp; adult abuse/neglect are suspected;"/>
+
+                  <Label Margin="20,7,20,30" FontSize="16" Text="In the latter two cases, WVCS staff is required by law to inform potential victims and legal authorities so that protective measures can be taken."/>
+
+                  <Frame x:Name="adultName" Padding="20,10" Margin="20,10,20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="adultNameEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Print Name of Adult*" PlaceholderColor="Black"
+                            />
+                  </Frame>
+
+                  <Frame x:Name="signature" Padding="20,10" Margin="20,0.5,20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="signatureEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Signature of Adult (electronic)*" PlaceholderColor="Black"
+                            />
+                  </Frame>
+
+                  <Frame x:Name="date" Padding="20,10" Margin="20,0.5,100,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="dateEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Date*" PlaceholderColor="Black"
+                            />
+                  </Frame>
+
+                  <ImageButton x:Name="submitButton" Source="submitFormButton.png" Clicked="submitClicked" Margin="60,20,60,30" VerticalOptions="Center" />
+
+              </StackLayout>
+                 
+
+
+
+            </StackLayout>
+
+            <!--logged in menu-->
+            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 70, 20, 10" HeightRequest="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                    <!--<ImageButton Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="25" Clicked="backClicked"/>-->
+                    <ImageButton Margin="0,0,15,0" CornerRadius="0" x:Name="openedMenu" Grid.Column="1" Source="openedMenu.png" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="25" Clicked="openedMenuClicked"/>
+
+                    <Image x:Name="menuBackground" Source="loggedinMenuBackground.png" HeightRequest="305" VerticalOptions="Start" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="End"/>
+                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="Start" HorizontalOptions="End" Margin="0,0,30,0" Padding="0,25">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="32" Source="menuProfileRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="My Profile" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="profileClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="29"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="29" Source="menuUtensilsRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="Order Food" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="32" Source="menuSearchRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="Food Banks Map" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="StartAndExpand"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="29"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="29" Source="menuFAQRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="FAQs" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                        </Grid>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="28"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="28" Source="menuLogoutRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                            <Label Grid.Column="1" Text="Logout" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="Start"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="loginClicked"/>
+                        </Grid>
+
+                    </StackLayout>
+
+            </Grid>
+
+            </Grid>
+           </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

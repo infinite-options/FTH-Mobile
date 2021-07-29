@@ -924,31 +924,31 @@ namespace FTH.ViewModel
                                     Debug.WriteLine("RDSData: " + RDSData.ToString());
 
                                     // Local Variables in Xamarin that can be used throughout the App
-                                    Xamarin.Forms.Application.Current.Properties["user_id"] = RDSData.result.customer_uid;
+                                    //Xamarin.Forms.Application.Current.Properties["user_id"] = RDSData.result.customer_uid;
 
-                                    Debug.WriteLine("starting saving new preference strings");
-                                    savedFirstName = "firstName" + RDSData.result.customer_uid;
-                                    savedLastName = "lastName" + RDSData.result.customer_uid;
-                                    savedEmail = "email" + RDSData.result.customer_uid;
-                                    savedAdd = "address" + RDSData.result.customer_uid;
-                                    savedApt = "apt" + RDSData.result.customer_uid;
-                                    savedCity = "city" + RDSData.result.customer_uid;
-                                    savedState = "state" + RDSData.result.customer_uid;
-                                    savedZip = "zip" + RDSData.result.customer_uid;
-                                    savedPhone = "phone" + RDSData.result.customer_uid;
-                                    savedInstr = "instructions" + RDSData.result.customer_uid;
-                                    billingEmail = "billing_email" + RDSData.result.customer_uid;
-                                    billingName = "billing_name" + RDSData.result.customer_uid;
-                                    billingNum = "billing_num" + RDSData.result.customer_uid;
-                                    billingMonth = "billing_month" + RDSData.result.customer_uid;
-                                    billingYear = "billing_year" + RDSData.result.customer_uid;
-                                    billingCVV = "billing_cvv" + RDSData.result.customer_uid;
-                                    billingAddress = "billing_address" + RDSData.result.customer_uid;
-                                    billingUnit = "billing_unit" + RDSData.result.customer_uid;
-                                    billingCity = "billing_city" + RDSData.result.customer_uid;
-                                    billingState = "billing_state" + RDSData.result.customer_uid;
-                                    billingZip = "billing_zip" + RDSData.result.customer_uid;
-                                    purchaseDescription = "purchase_descr" + RDSData.result.customer_uid;
+                                    //Debug.WriteLine("starting saving new preference strings");
+                                    //savedFirstName = "firstName" + RDSData.result.customer_uid;
+                                    //savedLastName = "lastName" + RDSData.result.customer_uid;
+                                    //savedEmail = "email" + RDSData.result.customer_uid;
+                                    //savedAdd = "address" + RDSData.result.customer_uid;
+                                    //savedApt = "apt" + RDSData.result.customer_uid;
+                                    //savedCity = "city" + RDSData.result.customer_uid;
+                                    //savedState = "state" + RDSData.result.customer_uid;
+                                    //savedZip = "zip" + RDSData.result.customer_uid;
+                                    //savedPhone = "phone" + RDSData.result.customer_uid;
+                                    //savedInstr = "instructions" + RDSData.result.customer_uid;
+                                    //billingEmail = "billing_email" + RDSData.result.customer_uid;
+                                    //billingName = "billing_name" + RDSData.result.customer_uid;
+                                    //billingNum = "billing_num" + RDSData.result.customer_uid;
+                                    //billingMonth = "billing_month" + RDSData.result.customer_uid;
+                                    //billingYear = "billing_year" + RDSData.result.customer_uid;
+                                    //billingCVV = "billing_cvv" + RDSData.result.customer_uid;
+                                    //billingAddress = "billing_address" + RDSData.result.customer_uid;
+                                    //billingUnit = "billing_unit" + RDSData.result.customer_uid;
+                                    //billingCity = "billing_city" + RDSData.result.customer_uid;
+                                    //billingState = "billing_state" + RDSData.result.customer_uid;
+                                    //billingZip = "billing_zip" + RDSData.result.customer_uid;
+                                    //purchaseDescription = "purchase_descr" + RDSData.result.customer_uid;
                                     Debug.WriteLine("end saving new preference strings");
 
 
@@ -1265,31 +1265,31 @@ namespace FTH.ViewModel
                     else
                     {
                         // Local Variables in Xamarin that can be used throughout the App
-                        Xamarin.Forms.Application.Current.Properties["user_id"] = RDSData.result.customer_uid;
+                        //Xamarin.Forms.Application.Current.Properties["user_id"] = RDSData.result.customer_uid;
 
-                        Debug.WriteLine("starting saving new preference strings");
-                        savedFirstName = "firstName" + RDSData.result.customer_uid;
-                        savedLastName = "lastName" + RDSData.result.customer_uid;
-                        savedEmail = "email" + RDSData.result.customer_uid;
-                        savedAdd = "address" + RDSData.result.customer_uid;
-                        savedApt = "apt" + RDSData.result.customer_uid;
-                        savedCity = "city" + RDSData.result.customer_uid;
-                        savedState = "state" + RDSData.result.customer_uid;
-                        savedZip = "zip" + RDSData.result.customer_uid;
-                        savedPhone = "phone" + RDSData.result.customer_uid;
-                        savedInstr = "instructions" + RDSData.result.customer_uid;
-                        billingEmail = "billing_email" + RDSData.result.customer_uid;
-                        billingName = "billing_name" + RDSData.result.customer_uid;
-                        billingNum = "billing_num" + RDSData.result.customer_uid;
-                        billingMonth = "billing_month" + RDSData.result.customer_uid;
-                        billingYear = "billing_year" + RDSData.result.customer_uid;
-                        billingCVV = "billing_cvv" + RDSData.result.customer_uid;
-                        billingAddress = "billing_address" + RDSData.result.customer_uid;
-                        billingUnit = "billing_unit" + RDSData.result.customer_uid;
-                        billingCity = "billing_city" + RDSData.result.customer_uid;
-                        billingState = "billing_state" + RDSData.result.customer_uid;
-                        billingZip = "billing_zip" + RDSData.result.customer_uid;
-                        purchaseDescription = "purchase_descr" + RDSData.result.customer_uid;
+                        //Debug.WriteLine("starting saving new preference strings");
+                        //savedFirstName = "firstName" + RDSData.result.customer_uid;
+                        //savedLastName = "lastName" + RDSData.result.customer_uid;
+                        //savedEmail = "email" + RDSData.result.customer_uid;
+                        //savedAdd = "address" + RDSData.result.customer_uid;
+                        //savedApt = "apt" + RDSData.result.customer_uid;
+                        //savedCity = "city" + RDSData.result.customer_uid;
+                        //savedState = "state" + RDSData.result.customer_uid;
+                        //savedZip = "zip" + RDSData.result.customer_uid;
+                        //savedPhone = "phone" + RDSData.result.customer_uid;
+                        //savedInstr = "instructions" + RDSData.result.customer_uid;
+                        //billingEmail = "billing_email" + RDSData.result.customer_uid;
+                        //billingName = "billing_name" + RDSData.result.customer_uid;
+                        //billingNum = "billing_num" + RDSData.result.customer_uid;
+                        //billingMonth = "billing_month" + RDSData.result.customer_uid;
+                        //billingYear = "billing_year" + RDSData.result.customer_uid;
+                        //billingCVV = "billing_cvv" + RDSData.result.customer_uid;
+                        //billingAddress = "billing_address" + RDSData.result.customer_uid;
+                        //billingUnit = "billing_unit" + RDSData.result.customer_uid;
+                        //billingCity = "billing_city" + RDSData.result.customer_uid;
+                        //billingState = "billing_state" + RDSData.result.customer_uid;
+                        //billingZip = "billing_zip" + RDSData.result.customer_uid;
+                        //purchaseDescription = "purchase_descr" + RDSData.result.customer_uid;
                         Debug.WriteLine("end saving new preference strings");
 
 

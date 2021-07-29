@@ -269,7 +269,7 @@ namespace FTH
                     else
                     {
                         // Local Variables in Xamarin that can be used throughout the App
-                        Application.Current.Properties["user_id"] = RDSData.result.customer_uid;
+                        //Application.Current.Properties["user_id"] = RDSData.result.customer_uid;
                         Application.Current.Properties["time_stamp"] = expDate;
                         Application.Current.Properties["platform"] = "DIRECT";
                         System.Diagnostics.Debug.WriteLine("UserID is:" + (string)Application.Current.Properties["user_id"]);

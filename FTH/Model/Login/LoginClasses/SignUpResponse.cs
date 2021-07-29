@@ -23,7 +23,7 @@ namespace FTH.Model.Login.LoginClasses
         public string message { get; set; }
         public int code { get; set; }
         //public string sql { get; set; }
-        public Result2 result { get; set; }
+        public Result2[] result { get; set; }
     }
 
     public class Result2

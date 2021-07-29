@@ -256,6 +256,15 @@
     <BundleResource Include="Resources\personIcon.png" />
     <BundleResource Include="Resources\deleteIcon.png" />
     <BundleResource Include="Resources\submitFormButton.png" />
+    <BundleResource Include="Resources\guestMenuBackground.png" />
+    <BundleResource Include="Resources\loggedinMenuBackground.png" />
+    <BundleResource Include="Resources\menuFAQRed.png" />
+    <BundleResource Include="Resources\menuGridRed.png" />
+    <BundleResource Include="Resources\menuLoginRed.png" />
+    <BundleResource Include="Resources\menuLogoutRed.png" />
+    <BundleResource Include="Resources\menuProfileRed.png" />
+    <BundleResource Include="Resources\menuSearchRed.png" />
+    <BundleResource Include="Resources\menuUtensilsRed.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />

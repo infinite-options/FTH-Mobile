@@ -84,6 +84,17 @@ namespace FTH.ViewModel
 
                 await DisplayAlert("USPS Code", message, "OK");
 
+                if (message == null)
+                {
+                    await DisplayAlert("Invalid Address", "The address you entered couldn't be confirmed. Please enter another one.", "OK");
+                    return;
+                }
+                else if (message == "D")
+                {
+                    await DisplayAlert("Missing Info", "Please enter your unit/apartment number into the appropriate field.", "OK");
+                    return;
+                }
+
                 addressToValidate.isValidated = true;
 
                 var storePage = Application.Current.MainPage.Navigation.NavigationStack[0];
