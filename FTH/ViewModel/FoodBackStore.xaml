@@ -55,7 +55,7 @@
                     </CollectionView>
                 </StackLayout>
                 <StackLayout>
-                    <CollectionView x:Name="itemsList" Margin="20,0,20,0" ItemsUpdatingScrollMode="KeepScrollOffset">
+                    <CollectionView x:Name="itemsList" Margin="20,0,20,20" ItemsUpdatingScrollMode="KeepScrollOffset">
                         <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>               
                         </CollectionView.ItemsLayout>
@@ -103,7 +103,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                </StackLayout>
-               <StackLayout  HeightRequest="150" Margin="20,-40,20,0">
+               <StackLayout  HeightRequest="150" Margin="20,-40,20,20">
                    <StackLayout VerticalOptions="CenterAndExpand">
                    <Frame HasShadow="False" Padding="0" CornerRadius="20" VerticalOptions="CenterAndExpand" HeightRequest="40" BackgroundColor="#E7404A">
                        <Grid>

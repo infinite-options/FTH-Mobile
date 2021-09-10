@@ -36,6 +36,12 @@
                            />
                 </Frame>
 
+                <Frame x:Name="email" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                          BorderColor="Black" CornerRadius="25" HeightRequest="32">
+                    <Entry x:Name="emailEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Email*" PlaceholderColor="Black"
+                           />
+                </Frame>
+
                 <Frame x:Name="phoneNum" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="25" HeightRequest="32">
                     <Entry x:Name="phoneEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Phone Number*" PlaceholderColor="Black"

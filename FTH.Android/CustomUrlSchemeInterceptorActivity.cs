@@ -19,7 +19,7 @@ namespace FTH.Droid
     [IntentFilter(
     new[] { Intent.ActionView },
     Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
-    DataSchemes = new[] { "com.googleusercontent.apps.799054437694-5qaill0n61e2j3h1ui5hl84uih16qadg" },
+    DataSchemes = new[] { "com.googleusercontent.apps.1031017519051-gblgmcjhh0ldauciffd9njkngbeqj049" },
     DataPath = "/oauth2redirect")]
 
     public class CustomUrlSchemeInterceptorActivity : Activity

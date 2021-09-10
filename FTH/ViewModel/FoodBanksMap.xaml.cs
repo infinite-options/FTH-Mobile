@@ -113,14 +113,16 @@ namespace FTH.ViewModel
 
         void backClicked(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new Registration());
+            Dictionary<string, string> holder = new Dictionary<string, string>();
+            Application.Current.MainPage = new NavigationPage(new Registration("DIRECT", holder));
             //Navigation.PopAsync();
         }
 
         //guest menu functions
         void registerClicked(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new Registration());
+            Dictionary<string, string> holder = new Dictionary<string, string>();
+            Application.Current.MainPage = new NavigationPage(new Registration("DIRECT", holder));
         }
 
         void menuClicked(System.Object sender, System.EventArgs e)

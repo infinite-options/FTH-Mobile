@@ -43,7 +43,7 @@
                     </Grid>
                 </Frame>
 
-                <ImageButton x:Name="loginButton" Source="loginButton.png" Margin="60,30,60,20" VerticalOptions="Center" HeightRequest="65"/>
+                <ImageButton x:Name="loginButton" Source="loginButton.png" Margin="60,30,60,20" VerticalOptions="Center" HeightRequest="65" Clicked="clickedLogin"/>
 
                 <Label Text="Or sign in with" Margin="50,0,50,0"
                        FontSize="15" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
@@ -55,9 +55,9 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <ImageButton Source="google.png" HeightRequest="50" HorizontalOptions="Center"/>
-                    <ImageButton Grid.Column="1" Source="apple.png" HeightRequest="50" HorizontalOptions="Center"/>
-                    <ImageButton Grid.Column="2" Source="facebook.png" HeightRequest="50" HorizontalOptions="Center"/>
+                    <ImageButton Source="google.png" HeightRequest="50" HorizontalOptions="Center" Clicked="googleLoginButtonClicked"/>
+                    <ImageButton Grid.Column="1" Source="apple.png" HeightRequest="50" HorizontalOptions="Center" Clicked="appleLoginButtonClicked"/>
+                    <ImageButton Grid.Column="2" Source="facebook.png" HeightRequest="50" HorizontalOptions="Center" Clicked="facebookLoginButtonClicked"/>
 
                 </Grid>
 

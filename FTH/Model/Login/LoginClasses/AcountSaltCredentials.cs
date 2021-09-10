@@ -7,13 +7,13 @@ namespace FTH.LogInClasses
     {
         public string password_algorithm { get; set; }
         public string password_salt { get; set; }
+        public string user_social_media { get; set; }
     }
 
     public class AcountSaltCredentials
     {
         public string message { get; set; }
         public int code { get; set; }
-        public IList<AccountSalt> result { get; set; }
-        public string sql { get; set; }
+        public AccountSalt[] result { get; set; }
     }
 }

@@ -473,7 +473,7 @@ namespace FTH
                 string hashedPassword = BitConverter.ToString(data).Replace("-", string.Empty).ToLower(); // convert hash to hex
 
                 LogInPost loginPostContent = new LogInPost();
-                loginPostContent.email = userEmail;
+                //loginPostContent.email = userEmail;
                 loginPostContent.password = hashedPassword;
                 loginPostContent.social_id = "";
                 loginPostContent.signup_platform = "";
@@ -1865,7 +1865,8 @@ namespace FTH
 
         void registerClicked(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new Registration());
+            Dictionary<string, string> holder = new Dictionary<string, string>();
+            Application.Current.MainPage = new NavigationPage(new Registration("DIRECT", holder));
         }
         //end of menu functions
 

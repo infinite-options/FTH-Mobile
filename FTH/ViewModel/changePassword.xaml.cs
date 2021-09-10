@@ -303,7 +303,7 @@ namespace FTH.ViewModel
                 System.Diagnostics.Debug.WriteLine(userEmail);
 
                 SaltPost saltPost = new SaltPost();
-                saltPost.email = userEmail;
+                //saltPost.email = userEmail;
 
                 var saltPostSerilizedObject = JsonConvert.SerializeObject(saltPost);
                 var saltPostContent = new StringContent(saltPostSerilizedObject, Encoding.UTF8, "application/json");
@@ -362,7 +362,7 @@ namespace FTH.ViewModel
                 string hashedPassword = BitConverter.ToString(data).Replace("-", string.Empty).ToLower(); // convert hash to hex
 
                 LogInPost loginPostContent = new LogInPost();
-                loginPostContent.email = userEmail;
+                //loginPostContent.email = userEmail;
                 loginPostContent.password = hashedPassword;
                 loginPostContent.social_id = "";
                 loginPostContent.signup_platform = "";

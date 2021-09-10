@@ -19,6 +19,8 @@ namespace FTH.ViewModel
 
         public Filter()
         {
+            Debug.WriteLine("user id: " + Application.Current.Properties["user_id"]);
+
             selectedTypes = new List<ImageButton>();
             availableDates = new List<Date1>();
             //allowing multiple date selections

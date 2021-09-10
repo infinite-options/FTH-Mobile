@@ -5,8 +5,11 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using FTH.Constants;
+using FTH.Model;
 using FTH.Model.Login.LoginClasses;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Xamarin.Auth;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -45,6 +48,63 @@ namespace FTH.ViewModel
             {
                 await DisplayAlert("Oops", "Your passwords don't match", "OK");
                 return;
+            }
+            else
+            {
+                SignUpPost signUpObj = new SignUpPost();
+                signUpObj.email = signUpInput["email"];
+                signUpObj.first_name = signUpInput["first_name"];
+                signUpObj.last_name = signUpInput["last_name"];
+                signUpObj.phone_number = signUpInput["phone"];
+                signUpObj.id_type = signUpInput["id_type"];
+                signUpObj.id_number = signUpInput["id_num"];
+                signUpObj.address = signUpInput["address"];
+                signUpObj.unit = signUpInput["unit"];
+                signUpObj.city = signUpInput["city"];
+                signUpObj.state = signUpInput["state"];
+                signUpObj.zip_code = signUpInput["zip"];
+                signUpObj.latitude = signUpInput["latitude"];
+                signUpObj.longitude = signUpInput["longitude"];
+                signUpObj.referral_source = "MOBILE";
+                signUpObj.role = "CUSTOMER";
+                signUpObj.social = "NULL";
+                signUpObj.password = passEntry.Text.Trim();
+                signUpObj.mobile_access_token = "FALSE";
+                signUpObj.mobile_refresh_token = "FALSE";
+                signUpObj.user_access_token = "FALSE";
+                signUpObj.user_refresh_token = "FALSE";
+                signUpObj.social_id = "NULL";
+                signUpObj.cust_id = "";
+
+                var directSignUpSerializedObject = JsonConvert.SerializeObject(signUpObj);
+                var content = new StringContent(directSignUpSerializedObject, Encoding.UTF8, "application/json");
+                System.Diagnostics.Debug.WriteLine("serialized sign up obj: " +  directSignUpSerializedObject);
+
+                var signUpClient = new HttpClient();
+                var RDSResponse = await signUpClient.PostAsync(Constant.SignUpUrl, content);
+                Debug.WriteLine("RDSResponse for direct signup: " + RDSResponse.ToString());
+                var RDSMessage = await RDSResponse.Content.ReadAsStringAsync();
+                Debug.WriteLine("RDSMessage: " + RDSMessage.ToString());
+
+                if (!RDSMessage.Contains("Email address has already been taken"))
+                {
+                    var result = await RDSResponse.Content.ReadAsStringAsync();
+
+                    DirectSignUpResponse data = new DirectSignUpResponse();
+                    data = JsonConvert.DeserializeObject<DirectSignUpResponse>(result);
+
+                    Application.Current.Properties["user_id"] = data.result.customer_uid;
+                    Debug.WriteLine("new user's customer uid: " + data.result.customer_uid);
+                    Application.Current.Properties["platform"] = "DIRECT";
+                    Application.Current.MainPage = new CongratsPage();
+                }
+                else
+                {
+                    DisplayAlert("Oops", "This email address is already taken by an existing account.", "OK");
+                }
+
+
+                
             }
             /*
             SignUpPost newSignUp = new SignUpPost();
@@ -183,8 +243,254 @@ namespace FTH.ViewModel
                 //}
             }
             */
-            Application.Current.MainPage = new CongratsPage();
+            
 
+        }
+
+        // GOOGLE LOGIN CLICK
+        public async void googleLoginButtonClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("googleLoginButtonClicked entered");
+
+                string clientId = string.Empty;
+                string redirectUri = string.Empty;
+
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.iOS:
+                        clientId = Constant.GoogleiOSClientID;
+                        redirectUri = Constant.GoogleRedirectUrliOS;
+                        break;
+
+                    case Device.Android:
+                        clientId = Constant.GoogleAndroidClientID;
+                        redirectUri = Constant.GoogleRedirectUrlAndroid;
+                        break;
+                }
+
+                Console.WriteLine("after switch entered");
+
+                var authenticator = new OAuth2Authenticator(clientId, string.Empty, Constant.GoogleScope, new Uri(Constant.GoogleAuthorizeUrl), new Uri(redirectUri), new Uri(Constant.GoogleAccessTokenUrl), null, true);
+                var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+
+                Console.WriteLine("after vars entered");
+
+                authenticator.Completed += GoogleAuthenticatorCompleted;
+                authenticator.Error += GoogleAuthenticatorError;
+
+                Console.WriteLine("after completed/error entered");
+
+                AuthenticationState.Authenticator = authenticator;
+
+                Console.WriteLine("before Login entered");
+                presenter.Login(authenticator);
+                Console.WriteLine("after Login entered");
+            }
+            catch (Exception ex)
+            {
+                Generic gen = new Generic();
+                gen.parseException(ex.ToString());
+            }
+        }
+
+        private async void GoogleAuthenticatorCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("googleAuthenticatorCompleted entered");
+                //Application.Current.MainPage = new Landing("", "", "");
+
+                var authenticator = sender as OAuth2Authenticator;
+
+                if (authenticator != null)
+                {
+                    authenticator.Completed -= GoogleAuthenticatorCompleted;
+                    authenticator.Error -= GoogleAuthenticatorError;
+                }
+
+                Console.WriteLine("Authenticator authenticated:" + e.IsAuthenticated);
+
+                if (e.IsAuthenticated)
+                {
+                    GoogleUserProfileAsync(e.Account.Properties["access_token"], e.Account.Properties["refresh_token"], e);
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Google was not able to autheticate your account", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Generic gen = new Generic();
+                gen.parseException(ex.ToString());
+            }
+        }
+
+        public async void GoogleUserProfileAsync(string accessToken, string refreshToken, AuthenticatorCompletedEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("googleUserProfileAsync entered");
+
+                //testing with loading page
+                //Application.Current.MainPage = new Loading();
+
+                var client = new HttpClient();
+                var socialLogInPost = new SocialLogInPost();
+                //generic url
+                var request = new OAuth2Request("GET", new Uri(Constant.GoogleUserInfoUrl), null, e.Account);
+                var GoogleResponse = await request.GetResponseAsync();
+                Debug.WriteLine("google response: " + GoogleResponse);
+                var userData = GoogleResponse.GetResponseText();
+                Debug.WriteLine("user Data: " + userData);
+                //Application.Current.MainPage = new NavigationPage(new Loading());
+
+                System.Diagnostics.Debug.WriteLine(userData);
+                GoogleResponse googleData = JsonConvert.DeserializeObject<GoogleResponse>(userData);
+                Debug.WriteLine("googleData: " + googleData);
+                socialLogInPost.email = googleData.email;
+                socialLogInPost.password = "";
+                socialLogInPost.social_id = googleData.id;
+                socialLogInPost.signup_platform = "GOOGLE";
+
+                var socialLogInPostSerialized = JsonConvert.SerializeObject(socialLogInPost);
+                var postContent = new StringContent(socialLogInPostSerialized, Encoding.UTF8, "application/json");
+
+                System.Diagnostics.Debug.WriteLine(socialLogInPostSerialized);
+
+                var RDSResponse = await client.PostAsync(Constant.SocialLogInUrl, postContent);
+                var responseContent = await RDSResponse.Content.ReadAsStringAsync();
+
+                System.Diagnostics.Debug.WriteLine(responseContent);
+                System.Diagnostics.Debug.WriteLine(RDSResponse.IsSuccessStatusCode);
+
+                if (RDSResponse.IsSuccessStatusCode)
+                {
+                    if (responseContent != null)
+                    {
+                        var data5 = JsonConvert.DeserializeObject<SuccessfulSocialLogIn>(responseContent);
+                        //if (responseContent.Contains(Constant.EmailNotFound))
+                        if (data5.code.ToString() == Constant.EmailNotFound)
+                        {
+                                // HERE YOU NEED TO SUBSTITUTE MY SOCIAL SIGN UP PAGE WITH FTH SOCIAL SIGN UP
+                                // NOTE THAT THIS SOCIAL SIGN UP PAGE NEEDS A CONSTRUCTOR LIKE THE FOLLOWING ONE
+                                // SocialSignUp(string socialId, string firstName, string lastName, string emailAddress, string accessToken, string refreshToken, string platform)
+
+                                SignUpPost signUpObj = new SignUpPost();
+                                signUpObj.email = googleData.email;
+                                signUpObj.first_name = googleData.given_name;
+                                signUpObj.last_name = googleData.family_name;
+                                signUpObj.phone_number = signUpInput["phone"];
+                                signUpObj.id_type = signUpInput["id_type"];
+                                signUpObj.id_number = signUpInput["id_num"];
+                                signUpObj.address = signUpInput["address"];
+                                signUpObj.unit = signUpInput["unit"];
+                                signUpObj.city = signUpInput["city"];
+                                signUpObj.state = signUpInput["state"];
+                                signUpObj.zip_code = signUpInput["zip"];
+                                signUpObj.latitude = signUpInput["latitude"];
+                                signUpObj.longitude = signUpInput["longitude"];
+                                signUpObj.referral_source = "MOBILE";
+                                signUpObj.role = "CUSTOMER";
+                                signUpObj.social = "GOOGLE";
+                                signUpObj.password = "";
+                                signUpObj.mobile_access_token = accessToken;
+                                signUpObj.mobile_refresh_token = refreshToken;
+                                signUpObj.user_access_token = "FALSE";
+                                signUpObj.user_refresh_token = "FALSE";
+                                signUpObj.social_id = googleData.id;
+                                signUpObj.cust_id = "";
+
+                                var directSignUpSerializedObject = JsonConvert.SerializeObject(signUpObj);
+                                var content = new StringContent(directSignUpSerializedObject, Encoding.UTF8, "application/json");
+                                System.Diagnostics.Debug.WriteLine("serialized sign up obj: " + directSignUpSerializedObject);
+
+                                var signUpClient = new HttpClient();
+                                var RDSResponse2 = await signUpClient.PostAsync(Constant.SignUpUrl, content);
+                                Debug.WriteLine("RDSResponse for direct signup: " + RDSResponse2.ToString());
+                                var RDSMessage = await RDSResponse2.Content.ReadAsStringAsync();
+                                Debug.WriteLine("RDSMessage: " + RDSMessage.ToString());
+
+                                if (!RDSMessage.Contains("Email address has already been taken"))
+                                {
+                                    var result = await RDSResponse2.Content.ReadAsStringAsync();
+
+                                    DirectSignUpResponse data = new DirectSignUpResponse();
+                                    data = JsonConvert.DeserializeObject<DirectSignUpResponse>(result);
+
+                                    Application.Current.Properties["user_id"] = data.result.customer_uid;
+                                    Debug.WriteLine("new user's customer uid: " + data.result.customer_uid);
+                                    Application.Current.Properties["platform"] = "GOOGLE";
+                                    Application.Current.MainPage = new CongratsPage();
+                                }
+                                else
+                                {
+                                    DisplayAlert("Oops", "This email address is already taken by an existing account.", "OK");
+                                }
+                                //Application.Current.MainPage = new CarlosSocialSignUp(googleData.id, googleData.given_name, googleData.family_name, googleData.email, accessToken, refreshToken, "GOOGLE");
+                                //Application.Current.MainPage = new Registration("GOOGLE", info);
+                        }
+                        //else if (responseContent.Contains(Constant.AutheticatedSuccesful))
+                        else if (data5.code.ToString() == Constant.AutheticatedSuccesful)
+                        {
+                            await DisplayAlert("Oops", "This email is already taken by an existing account.", "OK");
+                        }
+                        //else if (responseContent.Contains(Constant.ErrorPlatform))
+                        else if (data5.code.ToString() == Constant.ErrorPlatform)
+                        {
+                            Debug.WriteLine("google login: check if the user's email is already used elsewhere");
+                            //testing with loading page
+                            Application.Current.MainPage = new MainPage();
+
+                            var RDSCode = JsonConvert.DeserializeObject<RDSLogInMessage>(responseContent);
+                            await Application.Current.MainPage.DisplayAlert("Message", RDSCode.message, "OK");
+                        }
+                        //else if (responseContent.Contains(Constant.ErrorUserDirectLogIn))
+                        else if (data5.code.ToString() == Constant.ErrorUserDirectLogIn)
+                        {
+
+                            var data = JsonConvert.DeserializeObject<SuccessfulSocialLogIn>(responseContent);
+                            Debug.WriteLine("responseContent direct login: " + responseContent.ToString());
+                            //testing with loading page
+                            //await Navigation.PopAsync();
+                            Application.Current.MainPage = new MainPage();
+                            //Navigation.RemovePage(this.Navigation.NavigationStack[0]);
+
+                            await Application.Current.MainPage.DisplayAlert("Oops!", "You have an existing Serving Now account. Please use direct login", "OK");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Generic gen = new Generic();
+                gen.parseException(ex.ToString());
+            }
+        }
+
+        private async void GoogleAuthenticatorError(object sender, AuthenticatorErrorEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("googleAuthenticatorError entered");
+
+                var authenticator = sender as OAuth2Authenticator;
+
+                if (authenticator != null)
+                {
+                    authenticator.Completed -= GoogleAuthenticatorCompleted;
+                    authenticator.Error -= GoogleAuthenticatorError;
+                }
+
+                await DisplayAlert("Authentication error: ", e.Message, "OK");
+            }
+            catch (Exception ex)
+            {
+                Generic gen = new Generic();
+                gen.parseException(ex.ToString());
+            }
         }
 
         void clickedSeePassword(System.Object sender, System.EventArgs e)
@@ -209,7 +515,8 @@ namespace FTH.ViewModel
         //menu functions
         void registerClicked(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new Registration());
+            Dictionary<string, string> holder = new Dictionary<string, string>();
+            Application.Current.MainPage = new NavigationPage(new Registration("DIRECT", holder));
         }
 
         void menuClicked(System.Object sender, System.EventArgs e)

@@ -100,8 +100,8 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <StackLayout HeightRequest="50">
-                    <Button Margin="50,0,50,0" Clicked="NavigateToCheckoutPage" CornerRadius="20" Text="Continue to checkout" TextColor="White" FontAttributes="Bold" FontSize="18" BackgroundColor="#E7404A"></Button>
+                <StackLayout HeightRequest="50" Margin="0,0,0,20">
+                    <Button Margin="50,0,50,0" Clicked="NavigateToCheckoutPage" CornerRadius="22" Text="Continue to checkout" TextColor="White" FontAttributes="Bold" FontSize="18" BackgroundColor="#E7404A"></Button>
                 </StackLayout>
             </StackLayout>
 

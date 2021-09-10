@@ -3,6 +3,6 @@ namespace FTH.Model.Login.LoginClasses
 {
     public class SaltPost
     {
-        public string email { get; set; }
+        public string phone { get; set; }
     }
 }

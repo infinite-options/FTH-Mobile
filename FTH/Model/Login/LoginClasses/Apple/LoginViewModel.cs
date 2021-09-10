@@ -108,14 +108,14 @@ namespace FTH.Model.Login.LoginClasses.Apple
 
                         var socialLogInPostSerialized = JsonConvert.SerializeObject(getAppleEmail);
 
-                        Debug.WriteLine(socialLogInPostSerialized);
+                        Debug.WriteLine("socialLoginpostserialized: " + socialLogInPostSerialized);
                         Debug.WriteLine("email:" + account.Email);
                         Debug.WriteLine("userid:" + account.UserId);
                         var postContent = new StringContent(socialLogInPostSerialized, Encoding.UTF8, "application/json");
                         var RDSResponse = await client.PostAsync(Constant.AppleEmailUrl, postContent);
                         var responseContent = await RDSResponse.Content.ReadAsStringAsync();
-
-                        Debug.WriteLine(responseContent);
+                        Debug.WriteLine("RDSResponse: " + RDSResponse.ToString());
+                        Debug.WriteLine("responseContent:" + responseContent);
                         if (RDSResponse.IsSuccessStatusCode)
                         {
                             var data = JsonConvert.DeserializeObject<AppleUser>(responseContent);

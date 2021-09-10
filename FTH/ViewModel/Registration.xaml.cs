@@ -4,8 +4,13 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Xml.Linq;
+using FTH.Constants;
 using FTH.Model;
+using FTH.Model.Login.LoginClasses;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -18,16 +23,19 @@ namespace FTH.ViewModel
 
     }
 
-
     public partial class Registration : ContentPage
     {
         ObservableCollection<idType> idTypes = new ObservableCollection<idType>();
         double origHeight;
         Address addr;
         Dictionary<string, string> signUpInfo;
+        string platform;
+        Dictionary<string, string> extraInfo;
 
-        public Registration()
+        public Registration(string p, Dictionary<string, string> info)
         {
+            platform = p;
+            extraInfo = info;
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
             var width = DeviceDisplay.MainDisplayInfo.Width;
@@ -45,7 +53,7 @@ namespace FTH.ViewModel
             });
             idTypes.Add(new idType
             {
-                type = "Driver's License"
+                type = "Driver License"
             });
             idTypes.Add(new idType
             {
@@ -57,13 +65,21 @@ namespace FTH.ViewModel
             });
             idList.ItemsSource = idTypes;
 
+            if (p == "GOOGLE")
+            {
+                registerButton.Source = "registerButton.png";
+                FNameEntry.Text = info["first_name"];
+                LNameEntry.Text = info["last_name"];
+                emailEntry.Text = info["email"];
+            }
+
             Debug.WriteLine("open menu height: " + openGridStack.HeightRequest.ToString());
             //menuBackground.HeightRequest = openGridStack.HeightRequest;
         }
 
         async void registrationClicked(System.Object sender, System.EventArgs e)
         {
-            if (FNameEntry.Text == null || LNameEntry.Text == null || phoneEntry.Text == null || affilEntry.Text == null ||
+            if (FNameEntry.Text == null || LNameEntry.Text == null || emailEntry.Text == null || phoneEntry.Text == null || affilEntry.Text == null ||
                 idTypeButton.Text == "ID Type ᐯ" || idNumEntry.Text == null || AddressEntry.Text == null || CityEntry.Text == null || StateEntry.Text == null || ZipEntry.Text == null)
             {
                 await DisplayAlert("Oops", "Fill all of the fields before continuing.", "OK");
@@ -164,8 +180,14 @@ namespace FTH.ViewModel
                     }
                 }
 
+                
+            }
+
+            if (platform == "DIRECT")
+            {
                 signUpInfo.Add("first_name", FNameEntry.Text.Trim());
                 signUpInfo.Add("last_name", LNameEntry.Text.Trim());
+                signUpInfo.Add("email", emailEntry.Text.Trim());
                 signUpInfo.Add("phone", phoneEntry.Text.Trim());
                 signUpInfo.Add("affiliation", affilEntry.Text.Trim());
                 signUpInfo.Add("id_type", idTypeButton.Text.Trim());
@@ -177,8 +199,64 @@ namespace FTH.ViewModel
                 signUpInfo.Add("city", CityEntry.Text.Trim());
                 signUpInfo.Add("state", StateEntry.Text.Trim());
                 signUpInfo.Add("zip", ZipEntry.Text.Trim());
+                await Navigation.PushAsync(new CreatePassword(signUpInfo)); //Application.Current.MainPage = new CreatePassword();
             }
-            await Navigation.PushAsync(new CreatePassword(signUpInfo)); //Application.Current.MainPage = new CreatePassword();
+            else if (platform == "GOOGLE")
+            {
+                SignUpPost signUpObj = new SignUpPost();
+                signUpObj.email = extraInfo["email"];
+                signUpObj.first_name = extraInfo["first_name"];
+                signUpObj.last_name = extraInfo["last_name"];
+                signUpObj.phone_number = phoneEntry.Text.Trim();
+                signUpObj.id_type = idTypeButton.Text.Trim();
+                signUpObj.id_number = idNumEntry.Text.Trim();
+                signUpObj.address = AddressEntry.Text.Trim();
+                if (AptEntry.Text == null)
+                    signUpObj.unit = "";
+                else signUpObj.unit = AptEntry.Text.Trim();
+                signUpObj.city = CityEntry.Text.Trim();
+                signUpObj.state = StateEntry.Text.Trim();
+                signUpObj.zip_code = ZipEntry.Text.Trim();
+                signUpObj.latitude = signUpInfo["latitude"];
+                signUpObj.longitude = signUpInfo["longitude"];
+                signUpObj.referral_source = "MOBILE";
+                signUpObj.role = "CUSTOMER";
+                signUpObj.social = "GOOGLE";
+                signUpObj.password = "";
+                signUpObj.mobile_access_token = extraInfo["access_token"];
+                signUpObj.mobile_refresh_token = extraInfo["refresh_token"];
+                signUpObj.user_access_token = "FALSE";
+                signUpObj.user_refresh_token = "FALSE";
+                signUpObj.social_id = extraInfo["id"];
+                signUpObj.cust_id = "";
+
+                var directSignUpSerializedObject = JsonConvert.SerializeObject(signUpObj);
+                var content = new StringContent(directSignUpSerializedObject, Encoding.UTF8, "application/json");
+                System.Diagnostics.Debug.WriteLine("serialized sign up obj: " + directSignUpSerializedObject);
+
+                var signUpClient = new HttpClient();
+                var RDSResponse = await signUpClient.PostAsync(Constant.SignUpUrl, content);
+                Debug.WriteLine("RDSResponse for direct signup: " + RDSResponse.ToString());
+                var RDSMessage = await RDSResponse.Content.ReadAsStringAsync();
+                Debug.WriteLine("RDSMessage: " + RDSMessage.ToString());
+
+                if (!RDSMessage.Contains("Email address has already been taken"))
+                {
+                    var result = await RDSResponse.Content.ReadAsStringAsync();
+
+                    DirectSignUpResponse data = new DirectSignUpResponse();
+                    data = JsonConvert.DeserializeObject<DirectSignUpResponse>(result);
+
+                    Application.Current.Properties["user_id"] = data.result.customer_uid;
+                    Debug.WriteLine("new user's customer uid: " + data.result.customer_uid);
+                    Application.Current.Properties["platform"] = "GOOGLE";
+                    Application.Current.MainPage = new CongratsPage();
+                }
+                else
+                {
+                    DisplayAlert("Oops", "This email address is already taken by an existing account.", "OK");
+                }
+            }
         }
 
         public static string GetXMLElement(XElement element, string name)
@@ -278,7 +356,8 @@ namespace FTH.ViewModel
         //menu functions
         void registerClicked(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new Registration());
+            Dictionary<string, string> holder = new Dictionary<string, string>();
+            Application.Current.MainPage = new NavigationPage(new Registration("DIRECT", holder));
         }
 
         void menuClicked(System.Object sender, System.EventArgs e)

@@ -19,13 +19,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>13.0</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.infiniteoptions.feedthehungry</string>
+	<string>com.infiniteoptions.servingnow</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
-	<string>Feed The Hungry</string>
+	<string>Serving Now</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIUserInterfaceStyle</key>
@@ -37,7 +37,7 @@
 			<string>Google Auth</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.799054437694-btjpb6hbp3r71psrvtfdr5qqb3hl5h67</string>
+				<string>com.googleusercontent.apps.1031017519051-k7n417db9q370icu70slrje8nithen7b</string>
 			</array>
 		</dict>
 	</array>
@@ -45,11 +45,11 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The user&apos;s location is used to determine where the meals will be delivered as well as the billing calculations.</string>
-	<key>CFBundleDisplayName</key>
-	<string>Feed The Hungry</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
 	<key>CFBundleVersion</key>
 	<string>26</string>
+	<key>CFBundleDisplayName</key>
+	<string>Serving Now</string>
 </dict>
 </plist>
