@@ -27,16 +27,16 @@
 
                 <ScrollView Orientation="Horizontal">
                     <StackLayout Orientation="Horizontal" HeightRequest="70">
-                        <Frame HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
-                        <Button Text="Open Now" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        <Frame x:Name="openNowFrame" HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button x:Name="openNowButton" Text="Open Now" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
                         </Frame>
 
-                        <Frame  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
-                        <Button Text="Delivery" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        <Frame x:Name="deliveryFrame" HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button x:Name="deliveryButton" Clicked="clickedDelivery" Text="Delivery" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
                         </Frame>
 
-                        <Frame  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
-                        <Button Text="Pick-Up" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        <Frame x:Name="pickupFrame" HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
+                        <Button x:Name="pickupButton" Text="Pick-Up" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
                         </Frame>
 
                         <Frame x:Name="pickDateFrame"  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" WidthRequest="90" Padding="10,0" CornerRadius="20">
@@ -151,30 +151,30 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Label Text="Monday" Grid.Column="0" Grid.Row="0" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
-                                    <Label Text="Closed" Grid.Column="1" Grid.Row="0" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding mondayHours}" Grid.Column="1" Grid.Row="0" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
 
                                     <Label Text="Tuesday" Grid.Column="0" Grid.Row="1" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
-                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="1" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding tuesdayHours}" Grid.Column="1" Grid.Row="1" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
 
                                     <Label Text="Wednesday" Grid.Column="0" Grid.Row="2" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
-                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="2" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding wednesdayHours}" Grid.Column="1" Grid.Row="2" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
 
                                     <Label Text="Thursday" Grid.Column="0" Grid.Row="3" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
-                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="3" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding thursdayHours}" Grid.Column="1" Grid.Row="3" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
 
                                     <Label Text="Friday" Grid.Column="0" Grid.Row="4" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
-                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="4" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding fridayHours}" Grid.Column="1" Grid.Row="4" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
 
                                     <Label Text="Saturday" Grid.Column="0" Grid.Row="5" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
-                                    <Label Text="Closed" Grid.Column="1" Grid.Row="5" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding saturdayHours}" Grid.Column="1" Grid.Row="5" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
 
                                     <Label Text="Sunday" Grid.Column="0" Grid.Row="6" TextColor="White" FontAttributes="Bold" FontSize="13" HorizontalOptions="Start"/>
-                                    <Label Text="10 AM - 4PM" Grid.Column="1" Grid.Row="6" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding sundayHours}" Grid.Column="1" Grid.Row="6" TextColor="White" FontSize="13" HorizontalOptions="Start"/>
 
                                 </Grid>
                             </Grid>
-
-                            <Frame HeightRequest="90" VerticalOptions="Start" Margin="20,10" CornerRadius="22" Padding="10">
+                              <!--heightrequest = 90-->
+                            <Frame IsVisible="{Binding TotalVisible}" HeightRequest="90" VerticalOptions="Start" Margin="20,10" CornerRadius="22" Padding="10">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="1*"/>
@@ -187,13 +187,13 @@
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <ImageButton HeightRequest="65" WidthRequest="65" BackgroundColor="LightGray" CornerRadius="32"
+                                    <ImageButton Source="{Binding bankImg}" HeightRequest="65" WidthRequest="65" BackgroundColor="LightGray" CornerRadius="32"
                                                  HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
 
                                     <Label Text="{Binding name}" Grid.Column="1" Grid.Row="0" FontSize="14" TextColor="Black" FontAttributes="Bold"
                                            HorizontalOptions="Start"/>
 
-                                    <Label Text="Delivery. Pick-Up. Limited to 5 items." Grid.Column="1" Grid.Row="1" FontSize="11" TextColor="Black"
+                                    <Label Text="{Binding desc}" Grid.Column="1" Grid.Row="1" FontSize="11" TextColor="Black"
                                            HorizontalOptions="Start"/>
 
                                     <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,5">
@@ -215,18 +215,18 @@
                                             <ColumnDefinition Width="1*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Image Source="fruits.png" Grid.Column="0" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
-                                        <Image Source="vegetables.png" Grid.Column="1" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
-                                        <Image Source="meals.png" Grid.Column="2" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
-                                        <Image Source="desserts.png" Grid.Column="3" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
-                                        <Image Source="beverages.png" Grid.Column="4" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
-                                        <Image Source="dairy.png" Grid.Column="5" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
-                                        <Image Source="snacks.png" Grid.Column="6" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
-                                        <Image Source="cannedFoods.png" Grid.Column="7" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="fruits.png" IsVisible="{Binding fruits}" Grid.Column="0" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="vegetables.png" IsVisible="{Binding vegetables}" Grid.Column="1" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="meals.png" IsVisible="{Binding meals}" Grid.Column="2" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="desserts.png" IsVisible="{Binding desserts}" Grid.Column="3" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="beverages.png" IsVisible="{Binding beverages}" Grid.Column="4" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="dairy.png" IsVisible="{Binding dairy}" Grid.Column="5" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="snacks.png" IsVisible="{Binding snacks}" Grid.Column="6" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
+                                        <Image Source="cannedFoods.png" IsVisible="{Binding cannedFoods}" Grid.Column="7" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand"/>
 
                                     </Grid>
 
-                                    <Label Text="1.5 Miles" Grid.Column="2" Grid.Row="0" FontSize="14" HorizontalOptions="End" TextColor="Black"/>
+                                    <Label Text="{Binding distance}" Grid.Column="2" Grid.Row="0" FontSize="14" HorizontalOptions="End" TextColor="Black"/>
 
                                     <Button BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="0"
                                             Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Clicked="clickedFoodBank"/>

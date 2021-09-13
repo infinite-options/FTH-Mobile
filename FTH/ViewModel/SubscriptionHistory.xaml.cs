@@ -273,6 +273,7 @@ namespace FTH.ViewModel
                         purchIdArray.Add((m["purchase_id"].ToString()));
                         JArray newobj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(m["items"].ToString());
 
+
                         foreach (JObject config in newobj)
                         {
                             PlanName newPlan = new PlanName();
