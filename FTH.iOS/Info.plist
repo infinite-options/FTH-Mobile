@@ -47,9 +47,9 @@
 	<string>The user&apos;s location is used to determine where the meals will be delivered as well as the billing calculations.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
-	<key>CFBundleVersion</key>
-	<string>26</string>
 	<key>CFBundleDisplayName</key>
 	<string>Serving Now</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
 </dict>
 </plist>

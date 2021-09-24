@@ -10,9 +10,11 @@ namespace FTH.ViewModel
     public partial class CartPage : ContentPage
     {
         public ObservableCollection<StoreItem> itemsSource = new ObservableCollection<StoreItem>();
+        int threshold;
 
-        public CartPage()
+        public CartPage(int storeThreshold)
         {
+            threshold = storeThreshold;
             InitializeComponent();
 
             SetFoodBank("Feeding Orange County", "5.3 miles away", "businessImage");
@@ -41,7 +43,8 @@ namespace FTH.ViewModel
 
         void NavigateToFoodBankStore(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new FoodBackStore());
+            //Application.Current.MainPage = new NavigationPage(new FoodBackStore());
+            Navigation.PopAsync();
         }
 
         void DeleteItem(System.Object sender, System.EventArgs e)

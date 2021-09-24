@@ -33,6 +33,7 @@ namespace FTH.Model
         public string business_zip { get; set; }
         public string can_cancel { get; set; }
         public string delivery { get; set; }
+        public string pick_up { get; set; }
         public string reusable { get; set; }
         public string business_image { get; set; }
         public string business_status { get; set; }

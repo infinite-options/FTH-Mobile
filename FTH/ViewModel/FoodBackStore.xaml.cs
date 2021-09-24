@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
 using FTH.Model;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace FTH.ViewModel
@@ -19,23 +22,30 @@ namespace FTH.ViewModel
         public Color filterTextColorNonselected = Color.FromHex("#E7404A");
 
         public static int totalQuantity = 0;
-        public static int threshold = 5;
+        public int threshold = 5;
+        public string bankName, bankDistance, bankImg, bankUid;
+        public int bankItemLimit;
 
-        public FoodBackStore()
+        public FoodBackStore(string fbName, string fbDistance, string fbImage, int itemLimit, string businessUid)
         {
+            bankName = fbName; bankDistance = fbDistance; bankImg = fbImage; bankUid = businessUid;
+            //threshold = itemLimit;
+            //for testing:
+            threshold = 100;
             InitializeComponent();
 
-            SetFoodBank("Feeding Orange County", "5.3 miles away", "businessImage");
+
+            SetFoodBank();
             SetFilters();
             SetItems();
             SetCartQuantity();
         }
 
-        void SetFoodBank(string name, string distance, string picture)
+        void SetFoodBank()
         {
-            foodBankName.Text = name;
-            foodBankDistance.Text = distance;
-            foodBankPicture.Source = picture;
+            foodBankName.Text = bankName;
+            foodBankDistance.Text = bankDistance;
+            foodBankPicture.Source = bankImg;
         }
 
         void SetFilters()
@@ -44,7 +54,7 @@ namespace FTH.ViewModel
             {
                 filterList.ItemsSource = filterSource;
 
-                var filterArray = new string[] { "Fruits", "Vegetables", "Meals", "Desserts" };
+                var filterArray = new string[] { "Fruits", "Vegetables", "Meals", "Desserts", "Beverages", "Dairy", "Snacks", "Canned Foods" };
 
                 foreach (var type in filterArray)
                 {
@@ -56,11 +66,11 @@ namespace FTH.ViewModel
                     });
                 }
 
-                if (filterSource.Count > 0)
-                {
-                    filterSource[0].filterColor = filterBackgroundColorSelected;
-                    filterSource[0].filterTextColor = filterTextColorSelected;
-                }
+                //if (filterSource.Count > 0)
+                //{
+                //    filterSource[0].filterColor = filterBackgroundColorSelected;
+                //    filterSource[0].filterTextColor = filterTextColorSelected;
+                //}
 
             }
             catch (Exception issue)
@@ -69,43 +79,104 @@ namespace FTH.ViewModel
             }
         }
 
-        void SetItems()
+        async void SetItems()
         {
-            itemsList.ItemsSource = itemSource;
-
-            var items = new Dictionary<string, string>();
-
-            items.Add("item1", "Fruits");
-            items.Add("item2", "Fruits");
-            items.Add("item3", "Fruits");
-            items.Add("item4", "Vegetables");
-            items.Add("item5", "Vegetables");
-            items.Add("item6", "Meals");
-            items.Add("item7", "Meals");
-            items.Add("item8", "Meals");
-            items.Add("item9", "Meals");
-            items.Add("item10", "Desserts");
-
-            foreach (string name in items.Keys)
+            try
             {
-                var item = new StoreItem()
-                {
-                    image = "itemImage",
-                    name = name,
-                    quantity = 0,
-                    type = items[name],
-                };
 
-                if (cart.Count != 0)
+
+                List<string> foodTypes = new List<string>();
+                List<string> bankIds = new List<string>();
+                bankIds.Add(bankUid);
+                GetItems getItemsObj = new GetItems();
+                getItemsObj.types = foodTypes;
+                getItemsObj.ids = bankIds;
+
+                var getItemsSerializedObject = JsonConvert.SerializeObject(getItemsObj);
+                var content = new StringContent(getItemsSerializedObject, Encoding.UTF8, "application/json");
+
+                System.Diagnostics.Debug.WriteLine("getItems obj: " + getItemsSerializedObject);
+
+                var getItemsClient = new HttpClient();
+                var RDSResponse = await getItemsClient.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/getItems", content);
+                var RDSMessage = await RDSResponse.Content.ReadAsStringAsync();
+                Debug.WriteLine("RDSResponse from getItems endpoint: " + RDSResponse.ToString());
+                Debug.WriteLine("RDSMessage from getItems endpoint: " + RDSMessage.ToString());
+                var data = JsonConvert.DeserializeObject<GetItemsResponse>(RDSMessage);
+                //BusinessInfo[] filler = new BusinessInfo[0];
+                if (data.result.Length == 0)
                 {
-                    if (cart.ContainsKey(item.name))
-                    {
-                        item.quantity = cart[item.name].quantity;
-                    }
+                    await DisplayAlert("Oops", "This food bank currently has no items available.", "OK");
+                    await Navigation.PopAsync();
+                    return;
                 }
 
-                itemSource.Add(item);
+                itemsList.ItemsSource = itemSource;
+
+                foreach (var business in data.result)
+                {
+                    var item = new StoreItem()
+                    {
+                        image = business.item_photo,
+                        name = business.item_name,
+                        quantity = 0,
+                        type = business.item_type,
+                        availableAmt = int.Parse(business.distribution_qty)
+                    };
+
+                    //if (cart.Count != 0)
+                    //{
+                    //    if (cart.ContainsKey(item.name))
+                    //    {
+                    //        item.quantity = cart[item.name].quantity;
+                    //    }
+                    //}
+
+                    itemSource.Add(item);
+                }
+
             }
+            catch
+            {
+                await DisplayAlert("Oops", "This food bank currently has no items available.", "OK");
+                await Navigation.PopAsync();
+            }
+
+            //itemsList.ItemsSource = itemSource;
+
+            //var items = new Dictionary<string, string>();
+
+            //items.Add("item1", "Fruits");
+            //items.Add("item2", "Fruits");
+            //items.Add("item3", "Fruits");
+            //items.Add("item4", "Vegetables");
+            //items.Add("item5", "Vegetables");
+            //items.Add("item6", "Meals");
+            //items.Add("item7", "Meals");
+            //items.Add("item8", "Meals");
+            //items.Add("item9", "Meals");
+            //items.Add("item10", "Desserts");
+
+            //foreach (string name in items.Keys)
+            //{
+            //    var item = new StoreItem()
+            //    {
+            //        image = "itemImage",
+            //        name = name,
+            //        quantity = 0,
+            //        type = items[name],
+            //    };
+
+            //    if (cart.Count != 0)
+            //    {
+            //        if (cart.ContainsKey(item.name))
+            //        {
+            //            item.quantity = cart[item.name].quantity;
+            //        }
+            //    }
+
+            //    itemSource.Add(item);
+            //}
         }
 
         void AddRemoveFilter(System.Object sender, System.EventArgs e)
@@ -161,6 +232,13 @@ namespace FTH.ViewModel
             var label = (Label)sender;
             var recognizer = (TapGestureRecognizer)label.GestureRecognizers[0];
             var item = (StoreItem)recognizer.CommandParameter;
+
+            if (item.quantity == item.availableAmt)
+            {
+                DisplayAlert("Oops", "You've already selected the max amount of this item that we currently have available.", "OK");
+                return;
+            }
+                
 
             if (totalQuantity < threshold)
             {
@@ -229,7 +307,7 @@ namespace FTH.ViewModel
 
         void NavigateToCartPage(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CartPage(), false);
+            Navigation.PushAsync(new CartPage(threshold), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

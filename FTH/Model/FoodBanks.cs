@@ -7,6 +7,7 @@ namespace FTH.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public string name { get; set; } //done
+        public string business_uid { get; set; } //done
         public string bankImg { get; set; } //done
         public string desc { get; set; } 
         public bool openNow { get; set; }

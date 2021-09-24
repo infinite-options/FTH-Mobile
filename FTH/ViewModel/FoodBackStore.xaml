@@ -26,7 +26,7 @@
                         <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFill"/>
                     </Frame>
                     </StackLayout>
-                    <StackLayout VerticalOptions="CenterAndExpand">
+                    <StackLayout Margin="10,0,0,0" VerticalOptions="CenterAndExpand">
                     <Label x:Name="foodBankName" TextColor="Black" FontSize="20" FontAttributes="Bold"></Label>
                     <Label x:Name="foodBankDistance" TextColor="Black" FontSize="15" ></Label>
                     </StackLayout>
@@ -37,11 +37,11 @@
                     <Label Text="You can pick any 5 items" FontSize="28" FontAttributes="Bold"></Label>
                 </StackLayout>
                 <StackLayout>
-                    <CollectionView x:Name="filterList" ItemsLayout="HorizontalList" Margin="5,0,0,0" HeightRequest="40">
+                    <CollectionView x:Name="filterList" ItemsLayout="HorizontalList" Margin="5,0,0,0" HeightRequest="60">
                         <CollectionView.ItemTemplate>
                             <DataTemplate >
-                                <StackLayout WidthRequest="90">
-                                    <Frame Padding="7.5" HasShadow="False" CornerRadius="15" BorderColor="#E7404A" WidthRequest="70" HorizontalOptions="Center" BackgroundColor="{Binding filterColor}">
+                                <StackLayout WidthRequest="110">
+                                    <Frame Padding="7" HasShadow="False" CornerRadius="15" BorderColor="#E7404A" WidthRequest="90" HorizontalOptions="Center" BackgroundColor="{Binding filterColor}">
                                         <StackLayout HorizontalOptions="Center">
                                             <Label Text="{Binding filterName}" TextColor="{Binding filterTextColor}" FontSize="12" FontAttributes="Bold"></Label>
                                         </StackLayout>

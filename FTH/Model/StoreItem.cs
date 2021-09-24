@@ -10,6 +10,7 @@ namespace FTH.Model
         public string image { get; set; }
         public string name { get; set; }
         public int quantity { get; set; }
+        public int availableAmt { get; set; }
         public string type { get; set; }
 
         public int quantityUpdate

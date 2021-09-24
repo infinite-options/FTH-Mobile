@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text;
 using FTH.Model;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
@@ -68,6 +69,7 @@ namespace FTH.ViewModel
             {
                 FoodBanks bank = new FoodBanks();
                 bank.name = bus.business_name;
+                bank.business_uid = bus.business_uid;
                 bank.bankImg = bus.business_image;
                 bank.TotalVisible = true;
                 bank.HoursVisible = false;
@@ -82,7 +84,17 @@ namespace FTH.ViewModel
                     else bank.delivery = false;
                 }
 
-                bank.pickup = true;
+                if (bus.pick_up != null)
+                {
+                    if (bus.pick_up == "1")
+                    {
+                        bank.pickup = true;
+                        bank.desc += " Pick-Up.";
+                    }
+                    else bank.pickup = false;
+                }
+
+                //bank.pickup = true;
 
                 try
                 {
@@ -767,10 +779,13 @@ namespace FTH.ViewModel
                 fbChosen.HoursVisible = false;
             else fbChosen.HoursVisible = true;
         }
-
-        void clickedFoodBank(System.Object sender, System.EventArgs e)
+        
+        async void clickedFoodBank(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new FoodBackStore());
+            Button button1 = (Button)sender;
+            FoodBanks bankChosen = button1.BindingContext as FoodBanks;
+
+            await Navigation.PushAsync(new FoodBackStore(bankChosen.name, bankChosen.distance, bankChosen.bankImg, bankChosen.itemLimit, bankChosen.business_uid));
         }
 
         //menu functions

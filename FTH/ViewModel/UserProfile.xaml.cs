@@ -35,9 +35,11 @@ namespace FTH.ViewModel
         bool withinZones = false;
         bool socialMediaLogin = false;
         Address addr;
+        EditProfile editprof;
 
         public UserProfile()
         {
+            editprof = new EditProfile();
             var width = DeviceDisplay.MainDisplayInfo.Width;
             var height = DeviceDisplay.MainDisplayInfo.Height;
             //addr = new Address();
@@ -45,8 +47,8 @@ namespace FTH.ViewModel
             //BindingContext = this;
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
-            //checkPlatform(height, width);
-            //getInfo();
+            checkPlatform(height, width);
+            getInfo();
 
         }
 
@@ -62,6 +64,113 @@ namespace FTH.ViewModel
                 
             }
         }
+
+        async void getInfo()
+        {
+            var request = new HttpRequestMessage();
+            Console.WriteLine("user_id: " + (string)Application.Current.Properties["user_id"]);
+            string url = "https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/Profile/" + (string)Application.Current.Properties["user_id"];
+            Debug.WriteLine("profile endpoint: " + url);
+            request.RequestUri = new Uri(url);
+            request.Method = HttpMethod.Get;
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                HttpContent content = response.Content;
+                Debug.WriteLine("content: " + content);
+                var userString = await content.ReadAsStringAsync();
+                Debug.WriteLine("userString: " + userString);
+                info_obj = JObject.Parse(userString);
+
+                name.Text = (info_obj["result"])[0]["customer_first_name"].ToString() + " " + (info_obj["result"])[0]["customer_last_name"].ToString();
+                phone.Text = (info_obj["result"])[0]["customer_phone_num"].ToString();
+                //schoolAffil.Text = (info_obj["result"])[0]["id_number"].ToString();
+                idNum.Text = (info_obj["result"])[0]["id_number"].ToString();
+                if ((info_obj["result"])[0]["customer_unit"] == null || (info_obj["result"])[0]["customer_unit"].ToString() == "")
+                {
+                    address.Text = (info_obj["result"])[0]["customer_address"].ToString() + ", " + (info_obj["result"])[0]["customer_city"].ToString() +
+                    ", " + (info_obj["result"])[0]["customer_state"].ToString() + " " + (info_obj["result"])[0]["customer_zip"].ToString();
+                }
+                else
+                {
+                    address.Text = (info_obj["result"])[0]["customer_address"].ToString() + ", " + (info_obj["result"])[0]["customer_unit"].ToString() +
+                        ", " + (info_obj["result"])[0]["customer_city"].ToString() + ", " + (info_obj["result"])[0]["customer_state"].ToString() +
+                        " " + (info_obj["result"])[0]["customer_zip"].ToString();
+                }
+                Console.WriteLine("user social media: " + (info_obj["result"])[0]["user_social_media"].ToString());
+
+                //fill update profile obj info with the fields that can't change
+                editprof.first_name = (info_obj["result"])[0]["customer_first_name"].ToString();
+                editprof.last_name = (info_obj["result"])[0]["customer_last_name"].ToString();
+                editprof.email = (info_obj["result"])[0]["customer_email"].ToString();
+                editprof.uid = (info_obj["result"])[0]["customer_uid"].ToString();
+                editprof.noti = "";
+            }
+        }
+
+        async void editClicked(System.Object sender, System.EventArgs e)
+        {
+
+
+            var editProfJSONString = JsonConvert.SerializeObject(editprof);
+            // Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
+            var editProfContent = new StringContent(editProfJSONString, Encoding.UTF8, "application/json");
+            Console.WriteLine("edit profile Content: " + editProfContent);
+            var client = new HttpClient();
+            var response = client.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/UpdateProfile", editProfContent);
+            await DisplayAlert("Success", "Profile updated!", "OK");
+            Console.WriteLine("RESPONSE TO UPDATEPROFILE   " + response.Result);
+            Console.WriteLine("UPDATEPROFILE JSON OBJECT BEING SENT: " + editProfJSONString);
+        }
+
+        /*
+         "{
+  ""message"": ""Profile Loaded successful"",
+  ""code"": 200,
+  ""result"": [
+    {
+      ""customer_uid"": ""100-000082"",
+      ""customer_created_at"": ""2020-12-16 16:58:15"",
+      ""customer_first_name"": ""Leena"",
+      ""customer_last_name"": ""M"",
+      ""role"": ""CUSTOMER"",
+      ""user_social_media"": ""GOOGLE"",
+      ""referral_source"": ""MOBILE"",
+      ""customer_phone_num"": ""4084760002"",
+      ""customer_email"": ""lmarathay@gmail.com"",
+      ""id_type"": null,
+      ""id_number"": null,
+      ""customer_address"": ""6123 Corte De La Reina"",
+      ""customer_unit"": """",
+      ""customer_city"": ""San Jose"",
+      ""customer_state"": ""CA"",
+      ""customer_zip"": ""95120"",
+      ""customer_lat"": ""37.227124"",
+      ""customer_long"": ""-121.886943"",
+      ""cust_notification_approval"": null,
+      ""SMS_freq_preference"": null,
+      ""SMS_last_notification"": null,
+      ""notification_group"": null,
+      ""customer_rep"": null,
+      ""password_salt"": ""NULL"",
+      ""password_hashed"": ""NULL"",
+      ""password_algorithm"": ""NULL"",
+      ""customer_updated_at"": null,
+      ""email_verified"": null,
+      ""social_id"": ""102102969003632228707"",
+      ""user_access_token"": ""ya29.a0ARrdaM890H_ZKuRGW_1M5WHZNbynauRrDeMh5u5kmT2iBU15Bo6aKWpZCGe085XHXSTsmP3APJ-S1M13k0AdTntaOi2aHfdMF3CxEiwc8ZLTcIItXuggCCnMALbdhyzlSWAloVObDrEkA3bImivV3dtL-Gow46k"",
+      ""user_refresh_token"": ""FALSE"",
+      ""mobile_access_token"": ""ya29.a0ARrdaM_uh7voa4sUf0_36UFDfxnAgtFNr4Gx8ilL5cxsM_jnUsBYxx7WCPgd29Fod2cpqSMM14t3L7d2gkv_f0d3CiGLCc7pbgHy1Yk2BVilHnB3m_WL94pEMhZoZuJ5VXl2USoXyxWIbms8txjA6gWVEiVc"",
+      ""mobile_refresh_token"": ""1//06WV46wtMv_lVCgYIARAAGAYSNwF-L9Irxw3SExJkk1rbt6uERD7pPNfEyymzyb4pgoe1uF6SRV0VKs6jwSpZe9xQGMhunI5nmKY"",
+      ""social_timestamp"": ""2022-03-09 16:58:15"",
+      ""cust_guid_device_id_notification"": ""[null, {\""guid\"": \""477563e0-011d-4d9f-aec3-1ef10625570f\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""9cf673ba-f529-4b8f-8978-228a53815e5b\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""acbe9e8c-0e28-4d75-b565-04b1c3fa8126\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""c9732399-8c36-4a3c-a612-f0265247c5d1\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""57a68e24-247f-43ae-b60f-204967cd3796\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""b5ac9832-79ee-417e-8c95-974f9f6950b3\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""adc65e65-1b67-4459-97d8-5aac37dd9438\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""9b4e91be-527e-4a2e-ace1-36498a76fdc7\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""bdb638f7-fb71-4957-ba72-b3ee64b83b05\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""fc483abf-daa8-4f36-9778-3a41723211fc\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""fc483abf-daa8-4f36-9778-3a41723211fc\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""fc483abf-daa8-4f36-9778-3a41723211fc\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""fc483abf-daa8-4f36-9778-3a41723211fc\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""fc483abf-daa8-4f36-9778-3a41723211fc\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""fc483abf-daa8-4f36-9778-3a41723211fc\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}, {\""guid\"": \""82a0e10c-00ce-4851-bac2-44335f1501ed\"", \""notification\"": \""TRUE\""}]"",
+      ""favorite_produce"": ""[\""Broccoli\"", \""Broccolini\"", \""Cauliflower\"", \""Cilantro\"", \""Green Onions\"", \""Pita Bread (5)\"", \""Rainbow Chard\"", \""Red Onion\"", \""Shallots\"", \""Spinach\"", \""Tomatoes\"", \""Zucchini\"", \""Zucchini - Eight Ball\""]""
+    }
+  ]
+}"
+         */
 
         //async void getInfo()
         //{
