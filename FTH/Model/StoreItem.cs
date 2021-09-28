@@ -12,6 +12,10 @@ namespace FTH.Model
         public int quantity { get; set; }
         public int availableAmt { get; set; }
         public string type { get; set; }
+        public string unit { get; set; }
+        public int price { get; set; }
+        public string item_uid { get; set; }
+        public string itm_business_uid { get; set; }
 
         public int quantityUpdate
         {

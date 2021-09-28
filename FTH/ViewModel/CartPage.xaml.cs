@@ -10,11 +10,13 @@ namespace FTH.ViewModel
     public partial class CartPage : ContentPage
     {
         public ObservableCollection<StoreItem> itemsSource = new ObservableCollection<StoreItem>();
+        public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         int threshold;
 
-        public CartPage(int storeThreshold)
+        public CartPage(int storeThreshold, Dictionary<StoreItem, int> itmAmts)
         {
             threshold = storeThreshold;
+            itemAmounts = itmAmts;
             InitializeComponent();
 
             SetFoodBank("Feeding Orange County", "5.3 miles away", "businessImage");
@@ -61,6 +63,9 @@ namespace FTH.ViewModel
                 cart.Remove(item.name);
             }
 
+            if (itemAmounts.ContainsKey(item))
+                itemAmounts.Remove(item);
+
             SetCartItems();
         }
 
@@ -84,6 +89,10 @@ namespace FTH.ViewModel
                 {
                     cart[item.name] = item;
                 }
+
+                if (itemAmounts.ContainsKey(item))
+                    itemAmounts[item]++;
+                else itemAmounts[item] = 1;
             }
 
             CheckTotalQuantity();
@@ -97,6 +106,10 @@ namespace FTH.ViewModel
 
             if (item.quantity != 0)
             {
+                if (itemAmounts.ContainsKey(item) && itemAmounts[item] == 1)
+                    itemAmounts.Remove(item);
+                else itemAmounts[item]--;
+
                 item.quantityUpdate = item.quantity - 1;
 
                 totalQuantity = totalQuantity - 1;
@@ -134,7 +147,7 @@ namespace FTH.ViewModel
 
         void NavigateToCheckoutPage(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ClientIntakeForm(), false);
+            Navigation.PushAsync(new ClientIntakeForm(itemAmounts), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

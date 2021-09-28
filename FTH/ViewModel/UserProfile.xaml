@@ -34,7 +34,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="phone.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Entry x:Name="phone" Grid.Column="1" Placeholder="(510)123-4567" FontSize="15" PlaceholderColor="#636363" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="phone" Grid.Column="1" Text="(510)123-4567" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 
@@ -45,7 +45,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="work.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Entry x:Name="schoolAffil" Grid.Column="1" Placeholder="School/Affiliation" FontSize="15" PlaceholderColor="#636363" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="schoolAffil" Grid.Column="1" Text="School/Affiliation" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 
@@ -56,7 +56,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="badge.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Entry x:Name="idNum" Grid.Column="1" Placeholder="ID Type / ID Number" FontSize="15" PlaceholderColor="#636363" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="idNum" Grid.Column="1" Text="ID Type / ID Number" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 
@@ -67,7 +67,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="home.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Entry x:Name="address" Grid.Column="1" Placeholder="123 Any Street, Santa Clara, CA 95122" FontSize="15" PlaceholderColor="#636363" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="address" Grid.Column="1" Text="123 Any Street, Santa Clara, CA 95122" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 

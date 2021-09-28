@@ -15,6 +15,8 @@ namespace FTH.ViewModel
         public ObservableCollection<StoreItem> itemSource = new ObservableCollection<StoreItem>();
         public ObservableCollection<FilterItem> filterSource = new ObservableCollection<FilterItem>();
         public static Dictionary<string, StoreItem> cart = new Dictionary<string, StoreItem>();
+        //used to store how much of each item the user has selected in their cart
+        public static Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
 
         public Color filterBackgroundColorSelected = Color.FromHex("#E7404A");
         public Color filterBackgroundColorNonselected = Color.White;
@@ -121,7 +123,11 @@ namespace FTH.ViewModel
                         name = business.item_name,
                         quantity = 0,
                         type = business.item_type,
-                        availableAmt = int.Parse(business.distribution_qty)
+                        availableAmt = int.Parse(business.distribution_qty),
+                        unit = business.dist_unit,
+                        price = 1,
+                        item_uid = business.item_uid,
+                        itm_business_uid = business.receive_business_uid
                     };
 
                     //if (cart.Count != 0)
@@ -254,6 +260,10 @@ namespace FTH.ViewModel
                 {
                     cart[item.name] = item;
                 }
+
+                if (itemAmounts.ContainsKey(item))
+                    itemAmounts[item]++;
+                else itemAmounts[item] = 1;
             }
 
             SetCartQuantity();
@@ -267,6 +277,9 @@ namespace FTH.ViewModel
 
             if (item.quantity != 0)
             {
+                if (itemAmounts.ContainsKey(item) && itemAmounts[item] == 1)
+                    itemAmounts.Remove(item);
+                else itemAmounts[item]--;
 
                 item.quantityUpdate = item.quantity - 1;
 
@@ -307,7 +320,7 @@ namespace FTH.ViewModel
 
         void NavigateToCartPage(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CartPage(threshold), false);
+            Navigation.PushAsync(new CartPage(threshold, itemAmounts), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

@@ -151,12 +151,14 @@ namespace FTH.ViewModel
                     Debug.WriteLine("USER LAST NAME: " + loginAttempt.result[0].customer_last_name);
                     Debug.WriteLine("USER EMAIL: " + loginAttempt.result[0].customer_email);
                     Application.Current.Properties["user_id"] = loginAttempt.result[0].customer_uid;
+                    //Application.Current.Properties["user_email"] = loginAttempt.result[0].customer_email;
 
                     DateTime today = DateTime.Now;
                     DateTime expDate = today.AddDays(Constant.days);
 
                     Application.Current.Properties["time_stamp"] = expDate;
                     Application.Current.Properties["platform"] = "DIRECT";
+
 
                     Application.Current.MainPage = new NavigationPage(new Filter());
 

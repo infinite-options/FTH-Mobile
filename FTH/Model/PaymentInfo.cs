@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FTH.Model
 {
-    public class Item
+    public class Item3
     {
         public string qty { get; set; }
         public string name { get; set; }

@@ -7,12 +7,13 @@ namespace FTH.ViewModel
 {
     public partial class EditAddressPage : ContentPage
     {
-
+        public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         private Address addr = new Address();
         public static AddressAutocomplete addressToValidate = null;
 
-        public EditAddressPage()
+        public EditAddressPage(Dictionary<StoreItem, int> itmAmts)
         {
+            itemAmounts = itmAmts;
             InitializeComponent();
             BackgroundColor = Color.FromHex("AB000000");
         }
@@ -102,7 +103,7 @@ namespace FTH.ViewModel
                 var updatedNavigationPage = new NavigationPage(storePage);
 
                 await updatedNavigationPage.PushAsync(cartPage, false);
-                await updatedNavigationPage.PushAsync(new CheckoutPage(), false);
+                await updatedNavigationPage.PushAsync(new CheckoutPage(itemAmounts), false);
 
                 Application.Current.MainPage = updatedNavigationPage;
             }

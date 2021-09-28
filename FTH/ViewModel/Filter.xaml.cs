@@ -784,7 +784,7 @@ namespace FTH.ViewModel
         {
             Button button1 = (Button)sender;
             FoodBanks bankChosen = button1.BindingContext as FoodBanks;
-
+            Application.Current.Properties["chosen_business_uid"] = bankChosen.business_uid;
             await Navigation.PushAsync(new FoodBackStore(bankChosen.name, bankChosen.distance, bankChosen.bankImg, bankChosen.itemLimit, bankChosen.business_uid));
         }
 

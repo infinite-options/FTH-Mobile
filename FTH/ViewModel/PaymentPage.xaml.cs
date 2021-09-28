@@ -1800,8 +1800,8 @@ namespace FTH.ViewModel
                 //need to add item_business_id
                 Model.Item item1 = new Model.Item();
                 item1.name = Preferences.Get("item_name", "");
-                item1.price = Preferences.Get("itemPrice", "00.00");
-                item1.qty = Preferences.Get("freqSelected", "");
+                //item1.price = Preferences.Get("itemPrice", "00.00");
+                //item1.qty = Preferences.Get("freqSelected", "");
                 item1.item_uid = Preferences.Get("item_uid", "");
                 item1.itm_business_uid = "200-000002";
                 List<Model.Item> itemsList = new List<Model.Item> { item1 };

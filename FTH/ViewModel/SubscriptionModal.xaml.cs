@@ -1154,10 +1154,10 @@ namespace FTH.ViewModel
                         //updated.cc_num = cc_num;
                         List<Item> list1 = new List<Item>();
                         Item item1 = new Item();
-                        item1.qty = Preferences.Get("freqSelected", "");
+                        //item1.qty = Preferences.Get("freqSelected", "");
                         item1.name = Preferences.Get("mealSelected", "") + " Meal Plan";
                         //item1.price = Preferences.Get("price", "");
-                        item1.price = Preferences.Get("itemPrice", "00.00");
+                        //item1.price = Preferences.Get("itemPrice", "00.00");
                         item1.item_uid = Preferences.Get("item_uid", "");
                         item1.itm_business_uid = itm_business_uid;
                         list1.Add(item1);
@@ -1283,10 +1283,10 @@ namespace FTH.ViewModel
 
                         List<Item> list1 = new List<Item>();
                         Item item1 = new Item();
-                        item1.qty = Preferences.Get("freqSelected", "");
+                        //item1.qty = Preferences.Get("freqSelected", "");
                         item1.name = Preferences.Get("mealSelected", "") + " Meal Plan";
                         //item1.price = Preferences.Get("price", "");
-                        item1.price = Preferences.Get("itemPrice", "00.00");
+                        //item1.price = Preferences.Get("itemPrice", "00.00");
                         item1.item_uid = Preferences.Get("item_uid", "");
                         item1.itm_business_uid = itm_business_uid;
                         list1.Add(item1);

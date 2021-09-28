@@ -10,10 +10,12 @@ namespace FTH.ViewModel
     public partial class WestValleyForm : ContentPage
     {
         public ObservableCollection<HouseholdComp> MembersColl = new ObservableCollection<HouseholdComp>();
+        public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         int memberNum;
 
-        public WestValleyForm()
+        public WestValleyForm(Dictionary<StoreItem, int> itmAmts)
         {
+            itemAmounts = itmAmts;
             memberNum = 1;
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
@@ -47,7 +49,7 @@ namespace FTH.ViewModel
 
         void submitClicked(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CheckoutPage());
+            Navigation.PushAsync(new CheckoutPage(itemAmounts));
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

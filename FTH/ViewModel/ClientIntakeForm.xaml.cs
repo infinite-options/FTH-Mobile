@@ -12,10 +12,12 @@ namespace FTH.ViewModel
     {
         Address addr;
         public ObservableCollection<HouseholdMembers> MembersColl = new ObservableCollection<HouseholdMembers>();
+        public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         int memberNum;
 
-        public ClientIntakeForm()
+        public ClientIntakeForm(Dictionary<StoreItem, int> itmAmts)
         {
+            itemAmounts = itmAmts;
             memberNum = 1;
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
@@ -171,7 +173,7 @@ namespace FTH.ViewModel
             }
 
             //Navigation.PushAsync(new CheckoutPage());
-            Navigation.PushAsync(new WestValleyForm());
+            Navigation.PushAsync(new WestValleyForm(itemAmounts));
         }
 
         void addMemberClicked(System.Object sender, System.EventArgs e)
