@@ -31,12 +31,14 @@ namespace FTH.ViewModel
         public FoodBackStore(string fbName, string fbDistance, string fbImage, int itemLimit, string businessUid)
         {
             bankName = fbName; bankDistance = fbDistance; bankImg = fbImage; bankUid = businessUid;
-            //threshold = itemLimit;
+            threshold = itemLimit;
+            //Debug.WriteLine("itemLimit: " + itemLimit.ToString());
+            //limit.Text = "You can pick up to " + itemLimit.ToString() + " items";
             //for testing:
-            threshold = 100;
+            threshold = 7;
             InitializeComponent();
 
-
+            limit.Text = "You can pick up to " + threshold.ToString() + " items";
             SetFoodBank();
             SetFilters();
             SetItems();

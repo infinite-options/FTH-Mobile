@@ -34,10 +34,10 @@
             </Grid>
             <StackLayout Grid.Row="2">
                 <StackLayout HorizontalOptions="Center">
-                    <Label Text="You can pick any 5 items" FontSize="28" FontAttributes="Bold"></Label>
+                    <Label x:Name="limit" Text="You can pick any 5 items" FontSize="25" FontAttributes="Bold"></Label>
                 </StackLayout>
                 <StackLayout>
-                    <CollectionView x:Name="filterList" ItemsLayout="HorizontalList" Margin="5,0,0,0" HeightRequest="60">
+                    <CollectionView x:Name="filterList" ItemsLayout="HorizontalList" Margin="5,5,0,0" HeightRequest="60">
                         <CollectionView.ItemTemplate>
                             <DataTemplate >
                                 <StackLayout WidthRequest="110">
@@ -132,7 +132,7 @@
             </StackLayout>
 
             <!--logged in menu-->
-            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 70, 20, 10" HeightRequest="40">
+            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 0, 20, 10" HeightRequest="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

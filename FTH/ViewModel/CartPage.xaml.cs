@@ -147,13 +147,15 @@ namespace FTH.ViewModel
 
         void NavigateToCheckoutPage(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ClientIntakeForm(itemAmounts), false);
+            if (itemAmounts.Count == 0)
+                DisplayAlert("Oops", "Choose items before checking out", "OK");
+            else Navigation.PushAsync(new ClientIntakeForm(itemAmounts), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)
         {
             //Application.Current.MainPage = new MainPage();
-            Navigation.PopAsync();
+            Navigation.PopAsync(false);
         }
 
         //menu functions

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using FTH.Model;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 using static FTH.ViewModel.EditAddressPage;
 using static FTH.ViewModel.FoodBackStore;
@@ -23,25 +24,50 @@ namespace FTH.ViewModel
             itemAmounts = itmAmts;
             InitializeComponent();
 
-            //pass the displayed info into the checkout obj
-            checkoutobj.delivery_first_name = "Carlos";
-            checkoutobj.delivery_last_name = "Torres";
-            checkoutobj.delivery_phone_num = "1231231234";
-            checkoutobj.delivery_email = "j12345l54321@gmail.com";
-            checkoutobj.delivery_address = "6123 Corte De La Reina";
-            checkoutobj.delivery_unit = "";
-            checkoutobj.delivery_city = "San Jose";
-            checkoutobj.delivery_state = "CA";
-            checkoutobj.delivery_zip = "95120";
-            checkoutobj.delivery_latitude = "37.227124";
-            checkoutobj.delivery_longitude = "-121.886943";
-
-
+            getInfo();
             SetFoodBank("Feeding Orange County", totalQuantity.ToString(), "businessImage");
             SetCartItems();
-            SetPersonalInfo("Carlos", "Torres", "4158329643");
-            SetFullAddress("1658 Sacramento Street", "San Francisco", "CA", "94109");
+            //SetPersonalInfo("Carlos", "Torres", "4158329643");
+            //SetFullAddress("1658 Sacramento Street", "San Francisco", "CA", "94109");
             SetFullDeliveryInfo("June 27, 2021", "10:00 AM - 12:00 PM");
+        }
+
+        async void getInfo()
+        {
+            var request = new HttpRequestMessage();
+            Console.WriteLine("user_id: " + (string)Application.Current.Properties["user_id"]);
+            string url = "https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/Profile/" + (string)Application.Current.Properties["user_id"];
+            Debug.WriteLine("profile endpoint: " + url);
+            request.RequestUri = new Uri(url);
+            request.Method = HttpMethod.Get;
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                HttpContent content = response.Content;
+                Debug.WriteLine("content: " + content);
+                var userString = await content.ReadAsStringAsync();
+                Debug.WriteLine("userString: " + userString);
+                var info_obj = JObject.Parse(userString);
+
+                //pass the displayed info into the checkout obj
+                checkoutobj.delivery_first_name = (info_obj["result"])[0]["customer_first_name"].ToString();
+                checkoutobj.delivery_last_name = (info_obj["result"])[0]["customer_last_name"].ToString();
+                checkoutobj.delivery_phone_num = (info_obj["result"])[0]["customer_phone_num"].ToString();
+                checkoutobj.delivery_email = (info_obj["result"])[0]["customer_email"].ToString();
+                checkoutobj.delivery_address = (info_obj["result"])[0]["customer_address"].ToString();
+                checkoutobj.delivery_unit = (info_obj["result"])[0]["customer_unit"].ToString();
+                checkoutobj.delivery_city = (info_obj["result"])[0]["customer_city"].ToString();
+                checkoutobj.delivery_state = (info_obj["result"])[0]["customer_state"].ToString();
+                checkoutobj.delivery_zip = (info_obj["result"])[0]["customer_zip"].ToString();
+                checkoutobj.delivery_latitude = (info_obj["result"])[0]["customer_lat"].ToString();
+                checkoutobj.delivery_longitude = (info_obj["result"])[0]["customer_long"].ToString();
+
+                SetPersonalInfo((info_obj["result"])[0]["customer_first_name"].ToString(), (info_obj["result"])[0]["customer_last_name"].ToString(), (info_obj["result"])[0]["customer_phone_num"].ToString());
+                SetFullAddress((info_obj["result"])[0]["customer_address"].ToString(), (info_obj["result"])[0]["customer_city"].ToString(),
+                    (info_obj["result"])[0]["customer_state"].ToString(), (info_obj["result"])[0]["customer_zip"].ToString());
+            }
         }
 
         void SetFoodBank(string name, string totalQuantity, string picture)
@@ -138,9 +164,9 @@ namespace FTH.ViewModel
             checkoutobj.pur_business_uid = Application.Current.Properties["chosen_business_uid"].ToString();
             checkoutobj.items = itmList;
             checkoutobj.order_instructions = "";
-            checkoutobj.delivery_instructions = "";
+            checkoutobj.delivery_instructions = "deliv instructions";
             checkoutobj.order_type = "food";
-            checkoutobj.purchase_notes = "good";
+            checkoutobj.purchase_notes = "purch notes";
             checkoutobj.start_delivery_date = "";
             checkoutobj.pay_coupon_id = "";
             checkoutobj.amount_due = price.ToString();
@@ -155,11 +181,11 @@ namespace FTH.ViewModel
             checkoutobj.payment_type = "STRIPE";
             checkoutobj.delivery_status = "FALSE";
             checkoutobj.subtotal = price.ToString();
-            checkoutobj.service_fee = "3";
-            checkoutobj.delivery_fee = "2";
-            checkoutobj.driver_tip = "2";
-            checkoutobj.taxes = "1.5";
-            checkoutobj.ambassador_code = "2";
+            checkoutobj.service_fee = "0";
+            checkoutobj.delivery_fee = "0";
+            checkoutobj.driver_tip = "0";
+            checkoutobj.taxes = "0";
+            checkoutobj.ambassador_code = "0";
 
             var getItemsSerializedObject = JsonConvert.SerializeObject(checkoutobj);
             var content = new StringContent(getItemsSerializedObject, Encoding.UTF8, "application/json");

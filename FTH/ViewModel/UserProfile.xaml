@@ -34,7 +34,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="phone.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Label x:Name="phone" Grid.Column="1" Text="(510)123-4567" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="phone" VerticalOptions="Center" VerticalTextAlignment="Center"  Grid.Column="1" Text="(510)123-4567" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 
@@ -45,7 +45,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="work.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Label x:Name="schoolAffil" Grid.Column="1" Text="School/Affiliation" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="schoolAffil" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="School/Affiliation" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 
@@ -56,7 +56,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="badge.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Label x:Name="idNum" Grid.Column="1" Text="ID Type / ID Number" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="idNum" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="ID Type / ID Number" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 
@@ -67,7 +67,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="home.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
-                    <Label x:Name="address" Grid.Column="1" Text="123 Any Street, Santa Clara, CA 95122" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Label x:Name="address" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="123 Any Street, Santa Clara, CA 95122" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
 
                 </Grid>
 
@@ -75,7 +75,7 @@
 
             </StackLayout>
 
-            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 70, 20, 10" HeightRequest="40">
+            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 0, 20, 10" HeightRequest="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

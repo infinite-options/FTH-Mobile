@@ -1100,7 +1100,7 @@
             </StackLayout>
 
             <!--logged in menu-->
-            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 70, 20, 10" HeightRequest="40">
+            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 0, 20, 10" HeightRequest="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

@@ -86,8 +86,8 @@ namespace FTH.ViewModel
 
                 name.Text = (info_obj["result"])[0]["customer_first_name"].ToString() + " " + (info_obj["result"])[0]["customer_last_name"].ToString();
                 phone.Text = (info_obj["result"])[0]["customer_phone_num"].ToString();
-                //schoolAffil.Text = (info_obj["result"])[0]["id_number"].ToString();
-                idNum.Text = (info_obj["result"])[0]["id_number"].ToString() + ": " + (info_obj["result"])[0]["id_number"].ToString();
+                schoolAffil.Text = (info_obj["result"])[0]["cust_affiliation"].ToString();
+                idNum.Text = (info_obj["result"])[0]["id_type"].ToString() + ": " + (info_obj["result"])[0]["id_number"].ToString();
                 if ((info_obj["result"])[0]["customer_unit"] == null || (info_obj["result"])[0]["customer_unit"].ToString() == "")
                 {
                     address.Text = (info_obj["result"])[0]["customer_address"].ToString() + ", " + (info_obj["result"])[0]["customer_city"].ToString() +

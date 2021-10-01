@@ -18,6 +18,7 @@ namespace FTH.Model.Login.LoginClasses
         public string longitude { get; set; }
         public string referral_source { get; set; }
         public string role { get; set; }
+        public string affiliation { get; set; }
         public string social { get; set; }
         public string password { get; set; }
         public string mobile_access_token { get; set; }

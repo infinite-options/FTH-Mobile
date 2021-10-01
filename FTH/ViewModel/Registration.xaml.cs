@@ -148,8 +148,16 @@ namespace FTH.ViewModel
                             latitude = $"{position.Latitude}";
                             longitude = $"{position.Longitude}";
 
-                            signUpInfo.Add("latitude", latitude);
-                            signUpInfo.Add("longitude", longitude);
+                            if (!signUpInfo.ContainsKey("latitude"))
+                            {
+                                signUpInfo.Add("latitude", latitude);
+                                signUpInfo.Add("longitude", longitude);
+                            }
+                            else
+                            {
+                                signUpInfo["latitude"] = latitude;
+                                signUpInfo["longitude"] = longitude;
+                            }
 
                             //map.MapType = MapType.Street;
                             //var mapSpan = new MapSpan(position, 0.001, 0.001);
@@ -185,20 +193,40 @@ namespace FTH.ViewModel
 
             if (platform == "DIRECT")
             {
-                signUpInfo.Add("first_name", FNameEntry.Text.Trim());
-                signUpInfo.Add("last_name", LNameEntry.Text.Trim());
-                signUpInfo.Add("email", emailEntry.Text.Trim());
-                signUpInfo.Add("phone", phoneEntry.Text.Trim());
-                signUpInfo.Add("affiliation", affilEntry.Text.Trim());
-                signUpInfo.Add("id_type", idTypeButton.Text.Trim());
-                signUpInfo.Add("id_num", idNumEntry.Text.Trim());
-                signUpInfo.Add("address", AddressEntry.Text.Trim());
-                if (AptEntry.Text == null)
-                    signUpInfo.Add("unit", "");
-                else signUpInfo.Add("unit", AptEntry.Text.Trim());
-                signUpInfo.Add("city", CityEntry.Text.Trim());
-                signUpInfo.Add("state", StateEntry.Text.Trim());
-                signUpInfo.Add("zip", ZipEntry.Text.Trim());
+                if (!signUpInfo.ContainsKey("first_name"))
+                {
+                    signUpInfo.Add("first_name", FNameEntry.Text.Trim());
+                    signUpInfo.Add("last_name", LNameEntry.Text.Trim());
+                    signUpInfo.Add("email", emailEntry.Text.Trim());
+                    signUpInfo.Add("phone", phoneEntry.Text.Trim());
+                    signUpInfo.Add("affiliation", affilEntry.Text.Trim());
+                    signUpInfo.Add("id_type", idTypeButton.Text.Trim());
+                    signUpInfo.Add("id_num", idNumEntry.Text.Trim());
+                    signUpInfo.Add("address", AddressEntry.Text.Trim());
+                    if (AptEntry.Text == null)
+                        signUpInfo.Add("unit", "");
+                    else signUpInfo.Add("unit", AptEntry.Text.Trim());
+                    signUpInfo.Add("city", CityEntry.Text.Trim());
+                    signUpInfo.Add("state", StateEntry.Text.Trim());
+                    signUpInfo.Add("zip", ZipEntry.Text.Trim());
+                }
+                else
+                {
+                    signUpInfo["first_name"] = FNameEntry.Text.Trim();
+                    signUpInfo["last_name"] = LNameEntry.Text.Trim();
+                    signUpInfo["email"] = emailEntry.Text.Trim();
+                    signUpInfo["phone"] = phoneEntry.Text.Trim();
+                    signUpInfo["affiliation"] = affilEntry.Text.Trim();
+                    signUpInfo["id_type"] = idTypeButton.Text.Trim();
+                    signUpInfo["id_num"] = idNumEntry.Text.Trim();
+                    signUpInfo["address"] = AddressEntry.Text.Trim();
+                    if (AptEntry.Text == null)
+                        signUpInfo["unit"] = "";
+                    else signUpInfo["unit"] = AptEntry.Text.Trim();
+                    signUpInfo["city"] = CityEntry.Text.Trim();
+                    signUpInfo["state"] = StateEntry.Text.Trim();
+                    signUpInfo["zip"] = ZipEntry.Text.Trim();
+                }
                 await Navigation.PushAsync(new CreatePassword(signUpInfo)); //Application.Current.MainPage = new CreatePassword();
             }
             else if (platform == "GOOGLE")
@@ -221,6 +249,7 @@ namespace FTH.ViewModel
                 signUpObj.longitude = signUpInfo["longitude"];
                 signUpObj.referral_source = "MOBILE";
                 signUpObj.role = "CUSTOMER";
+                signUpObj.affiliation = affilEntry.Text.Trim();
                 signUpObj.social = "GOOGLE";
                 signUpObj.password = "";
                 signUpObj.mobile_access_token = extraInfo["access_token"];

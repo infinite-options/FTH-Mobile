@@ -66,6 +66,7 @@ namespace FTH.ViewModel
                 signUpObj.latitude = signUpInput["latitude"];
                 signUpObj.longitude = signUpInput["longitude"];
                 signUpObj.referral_source = "MOBILE";
+                signUpObj.affiliation = signUpInput["affiliation"];
                 signUpObj.role = "CUSTOMER";
                 signUpObj.social = "NULL";
                 signUpObj.password = passEntry.Text.Trim();
