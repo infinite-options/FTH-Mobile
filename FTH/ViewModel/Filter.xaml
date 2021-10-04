@@ -184,7 +184,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
                                     <ImageButton Source="{Binding bankImg}" HeightRequest="65" WidthRequest="65" BackgroundColor="LightGray" CornerRadius="32"
@@ -226,7 +226,7 @@
 
                                     </Grid>
 
-                                    <Label Text="{Binding distance}" Grid.Column="2" Grid.Row="0" FontSize="14" HorizontalOptions="End" TextColor="Black"/>
+                                    <Label Text="{Binding distance}" Grid.Column="2" Grid.Row="0" FontSize="13" HorizontalOptions="End" TextColor="Black"/>
 
                                     <Button BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="0"
                                             Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Clicked="clickedFoodBank"/>

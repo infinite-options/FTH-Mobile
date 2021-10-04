@@ -44,7 +44,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The user&apos;s location is used to determine where the meals will be delivered as well as the billing calculations.</string>
+	<string>The user&apos;s location will be used to determine how far they are from each food bank.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
 	<key>CFBundleDisplayName</key>

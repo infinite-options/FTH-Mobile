@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 using FTH.Model;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace FTH.ViewModel
 {
@@ -24,6 +30,9 @@ namespace FTH.ViewModel
         Dictionary<FoodBanks, int> totalBanks = new Dictionary<FoodBanks, int>();
         //the current list of banks showing on the screen
         ObservableCollection<FoodBanks> currentList = new ObservableCollection<FoodBanks>();
+        double deviceLat = 0;
+        double deviceLong = 0;
+        Location deviceLoca;
 
         public Filter()
         {
@@ -53,6 +62,77 @@ namespace FTH.ViewModel
             Debug.WriteLine("foodbankcoll height after: " + foodBankColl.HeightRequest);
         }
 
+        public string GetXMLElement(XElement element, string name)
+        {
+            var el = element.Element(name);
+            if (el != null)
+            {
+                return el.Value;
+            }
+            return "";
+        }
+
+        public string GetXMLAttribute(XElement element, string name)
+        {
+            var el = element.Attribute(name);
+            if (el != null)
+            {
+                return el.Value;
+            }
+            return "";
+        }
+
+        CancellationTokenSource cts;
+
+        async Task GetCurrentLocation(string bankLatitude, string bankLongitude, FoodBanks bank)
+        {
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                cts = new CancellationTokenSource();
+                var location = await Geolocation.GetLocationAsync(request, cts.Token);
+
+                if (location != null)
+                {
+                    Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    deviceLat = location.Latitude;
+                    deviceLong = location.Longitude;
+                    //process the distance between the food bank and the phone
+                    Location fbLocation = new Location(Double.Parse(bankLatitude), Double.Parse(bankLongitude));
+                    Location deviceLocation = new Location(location.Latitude, location.Longitude);
+                    deviceLoca = deviceLocation;
+                    double miles = Location.CalculateDistance(fbLocation, deviceLocation, DistanceUnits.Miles);
+                    miles = Math.Round(miles, 1);
+                    Debug.WriteLine("distance between food bank and device: " + miles.ToString());
+                    bank.distance = miles.ToString() + " miles";
+                }
+                else
+                {
+                    bank.distance = "-----";
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+                await DisplayAlert("Oops", "Location permissions are not supported on this device.", "OK");
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+                await DisplayAlert("Oops", "Location permissions aren't enabled on this device.", "OK");
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+                await DisplayAlert("Oops", "Please enable location permissions.", "OK");
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+                await DisplayAlert("Oops", "A problem occurred when trying to get this device's location.", "OK");
+            }
+        }
+
         async void getFoodBanks()
         {
             var request = new HttpRequestMessage();
@@ -68,6 +148,124 @@ namespace FTH.ViewModel
             foreach (var bus in data.result.result)
             {
                 FoodBanks bank = new FoodBanks();
+                //try to get the latitude and longitude of the business
+                try
+                {
+
+                    // Setting request for USPS API
+
+                    Debug.WriteLine("INPUTS: ADDRESS1: {0}, ADDRESS2: {1}, CITY: {2}, STATE: {3}, ZIPCODE: {4}", bus.business_address, bus.business_unit, bus.business_city, bus.business_state, bus.business_zip);
+                    XDocument requestDoc = new XDocument(
+                        new XElement("AddressValidateRequest",
+                        new XAttribute("USERID", "400INFIN1745"),
+                        new XElement("Revision", "1"),
+                        new XElement("Address",
+                        new XAttribute("ID", "0"),
+                        new XElement("Address1", bus.business_address),
+                        new XElement("Address2", bus.business_unit != null ? bus.business_unit : ""),
+                        new XElement("City", bus.business_city),
+                        new XElement("State", bus.business_state),
+                        new XElement("Zip5", bus.business_zip),
+                        new XElement("Zip4", "")
+                             )
+                         )
+                     );
+
+                    // This endpoint needs to change
+                    var Addurl = "https://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML=" + requestDoc;
+                    var Addclient = new WebClient();
+                    var Addresponse = Addclient.DownloadString(Addurl);
+                    var xdoc = XDocument.Parse(Addresponse.ToString());
+                    Debug.WriteLine("RESULT FROM USPS: " + xdoc);
+                    foreach (XElement element in xdoc.Descendants("Address"))
+                    {
+                        if (GetXMLElement(element, "Error").Equals(""))
+                        {
+                            if ((GetXMLElement(element, "DPVConfirmation").Equals("Y") || GetXMLElement(element, "DPVConfirmation").Equals("S") || GetXMLElement(element, "DPVConfirmation").Equals("D")) && GetXMLElement(element, "Zip5").Equals(bus.business_zip) && GetXMLElement(element, "City").Equals(bus.business_city.ToUpper()))
+                            {
+                                Geocoder geoCoder = new Geocoder();
+
+                                IEnumerable<Position> approximateLocations = await geoCoder.GetPositionsForAddressAsync(bus.business_address + "," + bus.business_city + "," + bus.business_state);
+                                Position position = approximateLocations.FirstOrDefault();
+
+                                string bankLatitude = $"{position.Latitude}";
+                                string bankLongitude = $"{position.Longitude}";
+                                Debug.Write("bank latitude: " + bankLatitude);
+                                Debug.Write("bank longitude: " + bankLongitude);
+
+                                if (deviceLat == 0)
+                                {
+                                    await GetCurrentLocation(bankLatitude, bankLongitude, bank);
+                                    //get the device's location start
+                                    //try
+                                    //{
+                                    //    var location = await Geolocation.GetLastKnownLocationAsync();
+
+                                    //    if (location != null)
+                                    //    {
+                                    //        Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                                    //        deviceLat = location.Latitude;
+                                    //        deviceLong = location.Longitude;
+                                    //        //process the distance between the food bank and the phone
+                                    //        Location fbLocation = new Location(Double.Parse(bankLatitude), Double.Parse(bankLongitude));
+                                    //        Location deviceLocation = new Location(location.Latitude, location.Longitude);
+                                    //        deviceLoca = deviceLocation;
+                                    //        double miles = Location.CalculateDistance(fbLocation, deviceLocation, DistanceUnits.Miles);
+                                    //        miles = Math.Round(miles, 1);
+                                    //        Debug.WriteLine("distance between food bank and device: " + miles.ToString());
+                                    //        bank.distance = miles.ToString() + " miles";
+                                    //    }
+                                    //}
+                                    //catch (FeatureNotSupportedException fnsEx)
+                                    //{
+                                    //    // Handle not supported on device exception
+                                    //    await DisplayAlert("Oops", "Location permissions are not supported on this device.", "OK");
+                                    //}
+                                    //catch (FeatureNotEnabledException fneEx)
+                                    //{
+                                    //    // Handle not enabled on device exception
+                                    //    await DisplayAlert("Oops", "Location permissions aren't enabled on this device.", "OK");
+                                    //}
+                                    //catch (PermissionException pEx)
+                                    //{
+                                    //    // Handle permission exception
+                                    //    await DisplayAlert("Oops", "Please enable location permissions.", "OK");
+                                    //}
+                                    //catch (Exception ex)
+                                    //{
+                                    //    // Unable to get location
+                                    //    await DisplayAlert("Oops", "A problem occurred when trying to get this device's location.", "OK");
+                                    //}
+                                    ////get the device's location end
+                                }
+                                else
+                                {
+                                    Location fbLocation = new Location(Double.Parse(bankLatitude), Double.Parse(bankLongitude));
+
+                                    double miles = Location.CalculateDistance(fbLocation, deviceLoca, DistanceUnits.Miles);
+                                    miles = Math.Round(miles, 1);
+                                    Debug.WriteLine("(else) distance between food bank and device: " + miles.ToString());
+                                    bank.distance = miles.ToString() + " miles";
+                                }
+                            }
+                            else
+                            {
+                                bank.distance = "-----";
+                            }
+                        }
+                        else
+                        {
+                            bank.distance = "-----";
+                        }
+                    }
+                }
+                catch
+                {
+                    bank.distance = "-----";
+                }
+
+
+                //FoodBanks bank = new FoodBanks();
                 bank.name = bus.business_name;
                 bank.business_uid = bus.business_uid;
                 bank.bankImg = bus.business_image;
@@ -183,9 +381,11 @@ namespace FTH.ViewModel
                     }
                 }
 
+                
+
                 bank.FilterCount = 0;
                 bank.Height = 90;
-                bank.distance = "1.5 Miles";
+                //bank.distance = "1.5 Miles";
 
                 totalBanksColl.Add(bank);
                 totalBanks.Add(bank, 0);
