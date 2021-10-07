@@ -240,8 +240,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="1"/>
-                    <Label Grid.Column="1" VerticalOptions="Center" Text="Stably Housed" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="1"/>
+                    <Label x:Name="stable"  Grid.Column="1" VerticalOptions="Center" Text="Stably Housed" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
                 <Grid HeightRequest="40" Margin="20, 0" ColumnSpacing="10">
@@ -250,7 +250,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="2"/>
+                    <CheckBox CheckedChanged="checkboxSelected"  HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="2"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Literally homeless" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -260,7 +260,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="3"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="3"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Unstably housed / imminently losing housing" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -273,7 +273,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="4"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="4"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Rental by client (no subsidy)" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -283,7 +283,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="5"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="5"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Rental by client with Section 8" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -293,7 +293,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="6"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="6" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Rental by client with subsidy" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -303,7 +303,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="7"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="7" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Staying with family/friends" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -313,7 +313,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="8"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="8" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Emergency Shelter" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -323,7 +323,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="9"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="9" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Place not meant for human habitation (street, park, etc.)" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -333,7 +333,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="10"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="10" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Hotel/motel (no voucher)" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -343,7 +343,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="11"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="11" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Transitional housing /Safe Haven" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -354,7 +354,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="other" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">

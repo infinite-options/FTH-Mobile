@@ -111,7 +111,8 @@ namespace FTH.ViewModel
                 if (data.result.Length == 0)
                 {
                     await DisplayAlert("Oops", "This food bank currently has no items available.", "OK");
-                    await Navigation.PopAsync();
+                    //commented out for testing purposes
+                    //await Navigation.PopAsync();
                     return;
                 }
 

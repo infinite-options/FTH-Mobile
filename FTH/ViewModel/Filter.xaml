@@ -5,9 +5,9 @@
     x:Class="FTH.ViewModel.Filter">
     <ContentPage.Content>
         <!--<ScrollView x:Name="scroller">-->
-          <Grid x:Name="mainGrid">
+          <Grid x:Name="mainGrid" VerticalOptions="Fill">
               <!--<BoxView x:Name="headingBuffer" HeightRequest="70"/>-->
-            <StackLayout x:Name="mainStack" Margin="0,70,0,0">
+            <StackLayout x:Name="mainStack" Margin="0,70,0,0" VerticalOptions="Fill">
 
               <StackLayout x:Name="topStack">
                 <!--<BoxView x:Name="headingBuffer" HeightRequest="20"/>-->
@@ -36,7 +36,7 @@
                         </Frame>
 
                         <Frame x:Name="pickupFrame" HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
-                        <Button x:Name="pickupButton" Text="Pick-Up" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        <Button x:Name="pickupButton" Text="Pick-Up" Clicked="clickedPickup"  BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
                         </Frame>
 
                         <Frame x:Name="pickDateFrame"  HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" WidthRequest="90" Padding="10,0" CornerRadius="20">
@@ -121,9 +121,13 @@
                 </Grid>
 
                 <Label Text="Food Banks" FontAttributes="Bold" FontSize="27" HorizontalOptions="Start" HorizontalTextAlignment="Start" Margin="20,40,20,20"/>
+
+
               </StackLayout>
 
-                <CollectionView x:Name="foodBankColl" VerticalOptions="End" BackgroundColor="White">
+                <!--<Label x:Name="loadingText" HeightRequest="100" Margin="0, 50,0,0" Text="Loading Food Banks..." VerticalOptions="Fill" VerticalTextAlignment="Start" TextColor="DarkGray" FontAttributes="Bold" FontSize="22" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>--> 
+
+                <CollectionView x:Name="foodBankColl" VerticalOptions="EndAndExpand" BackgroundColor="Transparent">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                         Orientation="Vertical"
@@ -243,6 +247,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
 
                 <!--<BoxView x:Name="endingBuffer" HeightRequest="50"/>-->
 

@@ -13,12 +13,20 @@ namespace FTH.ViewModel
         Address addr;
         public ObservableCollection<HouseholdMembers> MembersColl = new ObservableCollection<HouseholdMembers>();
         public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
+        public Dictionary<int, string> checkboxText = new Dictionary<int, string>();
         int memberNum;
+        string housingStatus;
+        string livingSituation;
+        CheckBox prevHS;
+        CheckBox prevLS;
 
         public ClientIntakeForm(Dictionary<StoreItem, int> itmAmts)
         {
+            housingStatus = "";
+            livingSituation = "";
             itemAmounts = itmAmts;
             memberNum = 1;
+            fillCheckBoxTextDict();
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
             var width = DeviceDisplay.MainDisplayInfo.Width;
@@ -38,7 +46,21 @@ namespace FTH.ViewModel
 
         }
 
-
+        void fillCheckBoxTextDict()
+        {
+            checkboxText.Add(1, "1Stably Housed");
+            checkboxText.Add(2, "1Literally homeless");
+            checkboxText.Add(3, "1Unstably housed / imminently losing housing");
+            checkboxText.Add(4, "2Rental by client (no subsidy)");
+            checkboxText.Add(5, "2Rental by client with Section 8");
+            checkboxText.Add(6, "2Rental by client with subsidy");
+            checkboxText.Add(7, "2Staying with family/friends");
+            checkboxText.Add(8, "2Emergency Shelter");
+            checkboxText.Add(9, "2Place not meant for human habitation (street, park, etc.)");
+            checkboxText.Add(10, "2Hotel/motel (no voucher)");
+            checkboxText.Add(11, "2Transitional housing /Safe Haven");
+            checkboxText.Add(12, "2Other");
+        }
 
         //address autocomplete start
         // Auto-complete
@@ -187,6 +209,75 @@ namespace FTH.ViewModel
 
             membersCollView.ItemsSource = MembersColl;
             membersCollView.HeightRequest += 180;
+        }
+
+        void checkboxSelected(System.Object sender, Xamarin.Forms.CheckedChangedEventArgs e)
+        {
+            //Debug.WriteLine("prevHS: " + prevHS.ToString());
+            //Debug.WriteLine("prevLS: " + prevLS.ToString());
+
+
+            var checkbox1 = (CheckBox) sender;
+            //Debug.WriteLine("checked: " + checkbox1.IsChecked.ToString());
+
+            //the status of the checkbox is whatever it is after the click
+            //if (checkbox1.IsChecked == false)
+            //{
+            //    return;
+            //}
+
+            Debug.WriteLine("sender anchor: " + checkbox1.AnchorX.ToString());
+            Debug.WriteLine("value for key: " + checkboxText[(int)checkbox1.AnchorX]);
+            var value = checkboxText[(int)checkbox1.AnchorX];
+            //housing situation
+            if (value.Substring(0,1) == "1")
+            {
+                Debug.WriteLine("current living situation: " + livingSituation);
+
+                if (prevHS == checkbox1 && checkbox1.IsChecked == false)
+                {
+                    housingStatus = "";
+                    prevHS = null;
+                }
+                else if (checkbox1.IsChecked == false)
+                { }
+                else if (prevHS != null)
+                {
+                    prevHS.IsChecked = false;
+                    prevHS = checkbox1;
+                    housingStatus = value.Substring(1);
+                }
+                else
+                {
+                    housingStatus = value.Substring(1);
+                    prevHS = checkbox1;
+                }
+            }
+            //living situation
+            else
+            {
+                Debug.WriteLine("current housing status: " + housingStatus);
+
+                if (prevLS == checkbox1 && checkbox1.IsChecked == false)
+                {
+                    livingSituation = "";
+                    prevLS = null;
+                }
+                else if (checkbox1.IsChecked == false)
+                { }
+                else if (prevLS != null)
+                {
+                    prevLS.IsChecked = false;
+                    prevLS = checkbox1;
+                    livingSituation = value.Substring(1);
+                }
+                else
+                {
+                    livingSituation = value.Substring(1);
+                    prevLS = checkbox1;
+                }
+                //livingSituation = value.Substring(1);
+            }
         }
     }
 }

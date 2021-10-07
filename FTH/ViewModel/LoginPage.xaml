@@ -61,7 +61,18 @@
 
                 </Grid>
 
-                <Grid HorizontalOptions="Center" ColumnSpacing="10">
+                <Grid HorizontalOptions="Center" ColumnSpacing="10" Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label FontSize="13" Text="Forgot password?" VerticalOptions="Center" FontAttributes="Bold" HorizontalOptions="End" TextColor="Black"/>
+                    <Button Grid.Column="1" Text="Get Temporary Password" FontAttributes="Bold" TextColor="#E7404A" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="forgotPassClicked"/>
+
+                </Grid>
+
+                <Grid HorizontalOptions="Center" Margin="0,-10,0,0" ColumnSpacing="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -71,7 +82,6 @@
                     <Button Grid.Column="1" Text="Register" FontAttributes="Bold" TextColor="#E7404A" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="registerClicked"/>
 
                 </Grid>
-
 
                 <!--<ImageButton x:Name="registerButton" Source="registerButton.png" Margin="60,0,60,10" VerticalOptions="Center" HeightRequest="65"/>-->
 
@@ -143,6 +153,17 @@
                     </StackLayout>
 
             </Grid>
+
+            <!--<Grid BackgroundColor="LightGray" Padding="15" HeightRequest="100" Margin="20,0" VerticalOptions="Center">
+                <StackLayout>
+                    <Label Text="Reset Password" Margin="0,0,0,15" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+                    <Entry x:Name="oldpass" Placeholder="Temporary password" PlaceholderColor="LightGray" TextColor="Black" HorizontalOptions="Fill" BackgroundColor="White"/>
+                    <Entry x:Name="newpass" Placeholder="New password" PlaceholderColor="LightGray" TextColor="Black" HorizontalOptions="Fill" BackgroundColor="White"/>
+                    <Button VerticalOptions="End" HeightRequest="50" WidthRequest="100" CornerRadius="25" Text="Update Password" FontSize="14"
+                            TextColor="White" BackgroundColor="#E7404A" Clicked="updatePassClicked"/>
+                </StackLayout>
+
+            </Grid>-->
 
             </Grid>
         </StackLayout>

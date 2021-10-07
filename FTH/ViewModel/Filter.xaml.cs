@@ -399,9 +399,13 @@ namespace FTH.ViewModel
             //        HoursVisible = false
             //    });
             //}
-
+            //loadingText.IsVisible = false;
+            //foodBankColl.ItemsSource = totalBanksColl;
+            //currentList = totalBanksColl;
+            Debug.WriteLine("visible now");
             foodBankColl.ItemsSource = totalBanksColl;
             currentList = totalBanksColl;
+            //loadingText.IsVisible = false;
         }
 
         void getDates()
@@ -475,7 +479,7 @@ namespace FTH.ViewModel
 
         void clickedDelivery(System.Object sender, System.EventArgs e)
         {
-            foodBankColl.IsVisible = false;
+            //foodBankColl.IsVisible = false;
             foodBankColl.ScrollTo(0);
             //if the button is already selected, selected --> unselected
             if (deliveryButton.TextColor == Color.White)
@@ -556,8 +560,71 @@ namespace FTH.ViewModel
                 //}
             }
 
-            foodBankColl.IsVisible = true;
+            //foodBankColl.IsVisible = true;
+            //foodBankColl.VerticalOptions = LayoutOptions.Fill;
         }
+
+        void clickedPickup(System.Object sender, System.EventArgs e)
+        {
+            //foodBankColl.IsVisible = false;
+            foodBankColl.ScrollTo(0);
+            //if the button is already selected, selected --> unselected
+            if (pickupButton.TextColor == Color.White)
+            {
+                pickupFrame.BackgroundColor = Color.White;
+                pickupButton.TextColor = Color.FromHex("#E7404A");
+                ObservableCollection<FoodBanks> newBanks = new ObservableCollection<FoodBanks>();
+
+                foreach (var bank in totalBanksColl)
+                {
+                    //only show it if there are no more filters on it
+                    if (!bank.pickup && totalBanks[bank] > 1)
+                    {
+                        totalBanks[bank]--;
+                    }
+                    else if (!bank.pickup && totalBanks[bank] == 1)
+                    {
+                        totalBanks[bank]--;
+                        newBanks.Add(bank);
+                    }
+                    else if (totalBanks[bank] == 0)
+                        newBanks.Add(bank);
+                }
+
+                currentList = newBanks;
+                foodBankColl.ItemsSource = newBanks;
+
+            }
+            else //unselected --> selected
+            {
+                pickupFrame.BackgroundColor = Color.FromHex("#E7404A");
+                pickupButton.TextColor = Color.White;
+                ObservableCollection<FoodBanks> newBanks = new ObservableCollection<FoodBanks>();
+
+                //foreach(var bank in totalBanksColl)
+                //{
+                //    newBanks.Add(bank);
+                //}
+
+                foreach (var bank in totalBanksColl)
+                {
+                    if (!bank.pickup)
+                    {
+                        totalBanks[bank] += 1;
+                    }
+                    else if (currentList.Contains(bank))
+                        newBanks.Add(bank);
+                }
+
+                currentList = newBanks;
+                foodBankColl.ItemsSource = newBanks;
+
+            }
+
+            //foodBankColl.IsVisible = true;
+            //foodBankColl.VerticalOptions = LayoutOptions.Fill;
+        }
+
 
         void clickedShowDates(System.Object sender, System.EventArgs e)
         {
@@ -948,6 +1015,8 @@ namespace FTH.ViewModel
                     foodBankColl.ItemsSource = newBanks;
                 }
 
+                //foodBankColl.VerticalOptions = LayoutOptions.Fill;
+
                 if (selectedTypes.Count == 0)
                 {
                     pickTypeFrame.BackgroundColor = Color.White;
@@ -1004,6 +1073,7 @@ namespace FTH.ViewModel
         {
             openMenuGrid.IsVisible = true;
             whiteCover.IsVisible = true;
+            foodBankColl.VerticalOptions = LayoutOptions.FillAndExpand;
         }
 
         void openedMenuClicked(System.Object sender, System.EventArgs e)

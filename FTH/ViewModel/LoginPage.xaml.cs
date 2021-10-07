@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using FTH.Constants;
 using FTH.LogInClasses;
 using FTH.Model;
+using FTH.Model.Login;
 using FTH.Model.Login.LoginClasses;
 using FTH.Model.Login.LoginClasses.Apple;
 using Newtonsoft.Json;
@@ -28,9 +29,11 @@ namespace FTH.ViewModel
         LoginViewModel vm = new LoginViewModel();
         public event EventHandler SignIn;
         bool wrongPass;
+        bool forgotPassSent;
 
         public LoginPage()
         {
+            forgotPassSent = false;
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
             var width = DeviceDisplay.MainDisplayInfo.Width;
@@ -48,6 +51,26 @@ namespace FTH.ViewModel
         {
             Application.Current.MainPage = new MainPage();
         }
+
+        async void forgotPassClicked(System.Object sender, System.EventArgs e)
+        {
+            string result = await DisplayPromptAsync("Forgot Password", "Enter your email and we will send you a temporary password to log in with.", keyboard: Keyboard.Email);
+
+            ForgotPassword forgotPassObj = new ForgotPassword();
+            forgotPassObj.email = result;
+            string forgotpassContentJson = JsonConvert.SerializeObject(forgotPassObj); // make orderContent into json
+            var httpContent = new StringContent(forgotpassContentJson, Encoding.UTF8, "application/json"); // encode orderContentJson into format to send to database
+            var response = await client.PostAsync(Constant.BaseUrl + "/api/v2/set_temp_password", httpContent); // try to post to database
+            var message = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine("forgotpass message: " + message);
+            if (message.Contains("A temporary password has been sent"))
+            {
+                await DisplayAlert("Success", "A temporary password has been sent to your email.", "OK");
+                forgotPassSent = true;
+            }
+            else await DisplayAlert("Oops", "There was an error when we were trying to send you a temp password.", "OK");
+        }
+
 
         //menu functions
         void registerClicked(System.Object sender, System.EventArgs e)
@@ -159,6 +182,29 @@ namespace FTH.ViewModel
                     Application.Current.Properties["time_stamp"] = expDate;
                     Application.Current.Properties["platform"] = "DIRECT";
 
+
+                    //if the user clicked forgot password and they were sent an email with the temporary one
+                    if (forgotPassSent)
+                    {
+                        string result = await DisplayPromptAsync("Update Password", "Enter a password you would like to use to replace the temporary one we gave you.", accept: "Confirm");
+
+                        UpdatePassword updatePassObj = new UpdatePassword();
+                        updatePassObj.customer_uid = loginAttempt.result[0].customer_uid;
+                        updatePassObj.old_password = passEntry.Text.Trim();
+                        updatePassObj.new_password = result;
+                        string updatepassContentJson = JsonConvert.SerializeObject(updatePassObj); // make orderContent into json
+                        var httpContent = new StringContent(updatepassContentJson, Encoding.UTF8, "application/json"); // encode orderContentJson into format to send to database
+                        var response = await client.PostAsync(Constant.BaseUrl + "/api/v2/change_password", httpContent); // try to post to database
+                        var message = await response.Content.ReadAsStringAsync();
+                        System.Diagnostics.Debug.WriteLine("changepass message: " + message);
+                        if (message.Contains("Password updated"))
+                        {
+                            await DisplayAlert("Success", "Your password has been updated.", "OK");
+                            forgotPassSent = true;
+                        }
+                        else await DisplayAlert("Oops", "We could not update your password at this time.", "OK");
+                    }
+                    
 
                     Application.Current.MainPage = new NavigationPage(new Filter());
 

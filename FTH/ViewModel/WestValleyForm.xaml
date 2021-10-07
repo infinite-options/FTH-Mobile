@@ -58,7 +58,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="1"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="1" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="One week or less" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -68,7 +68,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="2"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="2" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="More than a week but less than a month" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -78,7 +78,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="3"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="3" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="1-3 months" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -88,7 +88,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="4"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="4" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="More than 3 months but less than a year" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -98,7 +98,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="5"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="5" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="More than a year" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -113,7 +113,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="6"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="6" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Female" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -123,7 +123,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="7"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="7" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Male" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -133,7 +133,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="8"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="8" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Transgender F-M" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -143,7 +143,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="9"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="9" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Transgender M-F" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -154,7 +154,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="10"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="10" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="other" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
@@ -168,7 +168,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="11"/>
+                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="11" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -181,7 +181,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Single" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -191,7 +191,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="13"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="13"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Married" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -201,7 +201,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="14"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="14"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Separated" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -211,7 +211,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="15"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="15"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Divorced" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -221,7 +221,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="16"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="16"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Domestic Partner" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -231,7 +231,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="17"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="17"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Widowed" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -244,7 +244,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="18"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="18"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Some School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -254,7 +254,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="19"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="19"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="GED" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -264,7 +264,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="20"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="20"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="AA degree" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -274,7 +274,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="21"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="21"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="College degree" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -284,7 +284,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="22"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="22"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Graduate degree" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -297,7 +297,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="23"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="23"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Elementary School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -307,7 +307,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="24"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="24"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Middle School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -317,7 +317,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="25"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="25"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="High School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -327,7 +327,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="26"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="26"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Junior College" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -337,7 +337,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="27"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="27"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Undergraduate School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -347,7 +347,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="28"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="28"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Graduate School" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -364,7 +364,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="29"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="29"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -374,7 +374,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="30"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="30"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -384,7 +384,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="31"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="31"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -397,7 +397,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="32"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="32"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="American Indian/Alaskan Native" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -407,7 +407,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="33"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="33"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="American Indian/Alaskan Native and White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -417,7 +417,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="34"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="34"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Asian" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -427,7 +427,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="35"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="35"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Asian and White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -437,7 +437,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="36"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="36"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Black / African American" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -447,7 +447,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="37"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="37"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Black / African and White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -457,7 +457,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="38"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="38"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Native Hawaiian/ Pacific Islander" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -467,7 +467,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="39"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="39"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="American Indian/ Alaskan Native and Black/ African American" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -477,7 +477,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="40"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="40"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="White" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -487,7 +487,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="41"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="41"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -497,7 +497,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="42"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="42"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other Multi-Racial" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -510,7 +510,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="43"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="43"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -520,7 +520,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="44"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="44"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -533,7 +533,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="45"/>
+                    <CheckBox  CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="45"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -543,7 +543,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="46"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="46"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -553,7 +553,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="47"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="47"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -566,7 +566,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="48"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="48"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Alcohol abuse" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -576,7 +576,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="49"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="49"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Drug abuse" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -586,7 +586,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="50"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="50"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Mental health problems" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -596,7 +596,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="51"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="51"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Development disability" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -606,7 +606,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="52"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="52"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Physical disability" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -616,7 +616,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="53"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="53"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Chronic health condition" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -626,7 +626,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="54"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="54"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="HIV/AIDS" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -637,7 +637,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="55"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="55"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="otherDisability" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
@@ -654,7 +654,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="56"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="56"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="English" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -664,7 +664,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="57"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="57"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Chinese" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -674,7 +674,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="58"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="58"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Russian" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -684,7 +684,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="59"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="59"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Spanish" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -694,7 +694,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="60"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="60"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Vietnamese" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -705,7 +705,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="61"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="61"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="otherLang" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
@@ -722,7 +722,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="62"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="62"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Fluent" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -732,7 +732,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="63"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="63"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Semi-fluent" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -742,7 +742,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="64"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="64"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Not fluent" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -760,7 +760,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="65"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="65"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Full time, 35+ hrs/wk" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -770,7 +770,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="66"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="66"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Part time, less than 35 hrs/wk" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -780,7 +780,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="67"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="67"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Retired" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -790,7 +790,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="68"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="68"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Unemployed, seeking work" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -800,7 +800,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="69"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="69"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Disable, not in labor force" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -810,7 +810,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="70"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="70"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Full time homemaker" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -820,7 +820,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="71"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="71"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Student" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -830,7 +830,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="72"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="72"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Unknown" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -843,7 +843,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="73"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="73"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Medi-Cal" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -853,7 +853,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="74"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="74"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Medicare" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -863,7 +863,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="75"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="75"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Medicaide" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -873,7 +873,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="76"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="76"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Uninsured" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -883,7 +883,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="77"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="77"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Private Insurance" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -893,7 +893,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="78"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="78"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Work Insurance" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -906,7 +906,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="79"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="79"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -916,7 +916,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="80"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="80"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -930,7 +930,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="81"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="81"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Yes, Monthly Amount: $" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="amt" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
@@ -944,7 +944,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="82"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="82"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -977,7 +977,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="83"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="83"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Yes" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
@@ -987,7 +987,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="84"/>
+                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="84"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 
