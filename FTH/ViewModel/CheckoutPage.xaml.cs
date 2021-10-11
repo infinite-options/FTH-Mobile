@@ -169,7 +169,8 @@ namespace FTH.ViewModel
             checkoutobj.purchase_notes = "purch notes";
             checkoutobj.start_delivery_date = "";
             checkoutobj.pay_coupon_id = "";
-            checkoutobj.amount_due = price.ToString();
+            //checkoutobj.amount_due = price.ToString();
+            checkoutobj.amount_due = "0";
             checkoutobj.amount_discount = "0";
             checkoutobj.amount_paid = "0";
             checkoutobj.info_is_Addon = "FALSE";
@@ -180,7 +181,7 @@ namespace FTH.ViewModel
             checkoutobj.charge_id = "";
             checkoutobj.payment_type = "STRIPE";
             checkoutobj.delivery_status = "FALSE";
-            checkoutobj.subtotal = price.ToString();
+            checkoutobj.subtotal = "0";
             checkoutobj.service_fee = "0";
             checkoutobj.delivery_fee = "0";
             checkoutobj.driver_tip = "0";

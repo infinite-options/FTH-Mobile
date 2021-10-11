@@ -32,15 +32,15 @@
                            />
                 </Frame>
 
-                <Frame x:Name="lastName" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                <Frame x:Name="last4" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="25" HeightRequest="32">
-                    <Entry x:Name="LNameEntry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Last 4 Digits of Social Security*" PlaceholderColor="Black"
+                    <Entry x:Name="Last4Entry" Keyboard="Numeric" FontSize="16" TextColor="Black" Placeholder="Last 4 Digits of Social Security*" PlaceholderColor="Black"
                            />
                 </Frame>
 
-                <Frame x:Name="phoneNum" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
+                <Frame x:Name="dob" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="25" HeightRequest="32">
-                    <Entry x:Name="phoneEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Date of Birth*" PlaceholderColor="Black"
+                    <Entry x:Name="dobEntry" Keyboard="Text" FontSize="16" TextColor="Black" Placeholder="Date of Birth*" PlaceholderColor="Black"
                            />
                 </Frame>
 

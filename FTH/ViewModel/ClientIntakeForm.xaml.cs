@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
 using FTH.Model;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -160,7 +163,7 @@ namespace FTH.ViewModel
 
         //end of menu functions
 
-        void submitButton_Clicked(System.Object sender, System.EventArgs e)
+        async void submitButton_Clicked(System.Object sender, System.EventArgs e)
         {
             foreach (HouseholdMembers houseMem in MembersColl)
             {
@@ -170,9 +173,52 @@ namespace FTH.ViewModel
                 Debug.WriteLine("relationship: " + houseMem.MemberRelationship);
             }
 
+            foreach (var element in mainStack.Children)
+            {
+                //Debug.WriteLine("element class id:" + element.ClassId);
+                //Debug.WriteLine("element: " + element.ToString());
+                if (element.ToString() == "Xamarin.Forms.Frame")
+                {
+                    var frame = (Frame)element;
+                    if (frame.Content.ToString() == "Xamarin.Forms.Entry")
+                    {
+                        var entry = (Entry)frame.Content;
+                        Debug.WriteLine("placeholder: " + entry.Placeholder);
+                        if ((entry.Placeholder != null && entry.Placeholder != "" && entry.Placeholder.Contains("*")) && (entry.Text == "" || entry.Text == null))
+                        {
+                            await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                            return;
+                        }
+                    }
+                }
+
+                if (livingSituation == "" || housingStatus == "")
+                {
+                    await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                    return;
+                }
+
+                if (livingSituation == "Other" && (otherEntry.Text == "" || otherEntry.Text == null))
+                {
+                    await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                    return;
+                }
+
+
+
+                //try
+                //{
+                //    Debug.WriteLine("frame");
+                //    var frame = (Frame)element;
+                //    Debug.WriteLine("frame child: " + frame.Content.ToString());
+                //    //Debug.WriteLine("frame child: " + frame.Content.ToString());
+                //}
+                //catch { }
+            }
+
             if (AddressEntry.Text == null || CityEntry.Text == null || StateEntry.Text == null || ZipEntry.Text == null)
             {
-                DisplayAlert("Oops", "Fill all of the fields before continuing.", "OK");
+                await DisplayAlert("Oops", "Fill all of the fields before continuing.", "OK");
                 return;
             }
 
@@ -185,17 +231,64 @@ namespace FTH.ViewModel
             var addressValidationCode = addValid.ValidateAddressString(AddressEntry.Text, unit, CityEntry.Text, StateEntry.Text, ZipEntry.Text);
             if (addressValidationCode == null)
             {
-                DisplayAlert("Invalid Address", "The address you entered couldn't be confirmed. Please enter another one.", "OK");
+                await DisplayAlert("Invalid Address", "The address you entered couldn't be confirmed. Please enter another one.", "OK");
                 return;
             }
             else if (addressValidationCode == "D")
             {
-                DisplayAlert("Missing Info", "Please enter your unit/apartment number into the appropriate field.", "OK");
+                await DisplayAlert("Missing Info", "Please enter your unit/apartment number into the appropriate field.", "OK");
                 return;
             }
 
+            ClientIntakePost clientform = new ClientIntakePost();
+            clientform.customer_uid = (string)Application.Current.Properties["user_id"];
+            clientform.name = FNameEntry.Text;
+            clientform.last4_ss = int.Parse(Last4Entry.Text.Trim());
+            clientform.dob = dobEntry.Text;
+            clientform.address = AddressEntry.Text;
+            clientform.city = CityEntry.Text;
+            clientform.county = countyEntry.Text;
+            clientform.state = StateEntry.Text;
+            clientform.zip = ZipEntry.Text;
+            clientform.home_phone = phoneHomeEntry.Text;
+            clientform.cell_phone = phoneCellEntry.Text;
+            List<CI_HouseholdMembers> CImembers = new List<CI_HouseholdMembers>();
+
+            foreach (HouseholdMembers houseMem in MembersColl)
+            {
+                CImembers.Add(new CI_HouseholdMembers
+                {
+                    name = houseMem.MemberName,
+                    age = int.Parse(houseMem.MemberAge),
+                    relationship = houseMem.MemberRelationship
+                });
+                //Debug.WriteLine("title: " + houseMem.MemberTitle);
+                //Debug.WriteLine("name: " + houseMem.MemberName);
+                //Debug.WriteLine("age: " + houseMem.MemberAge);
+                //Debug.WriteLine("relationship: " + houseMem.MemberRelationship);
+            }
+            clientform.household_members = CImembers;
+            clientform.under_18 = int.Parse(under18Entry.Text);
+            clientform.over_18 = int.Parse(over18Entry.Text);
+            clientform.over_65 = int.Parse(over65Entry.Text);
+            clientform.housing_status = housingStatus;
+            if (livingSituation == "Other")
+                clientform.living_situation = "Other: " + otherEntry.Text;
+            else clientform.living_situation = livingSituation;
+            clientform.submit_date = dateEntry.Text;
+
+            var submitFormJSONString = JsonConvert.SerializeObject(clientform);
+            // Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
+            var submitFormContent = new StringContent(submitFormJSONString, Encoding.UTF8, "application/json");
+            Console.WriteLine("submitForm Content: " + submitFormContent);
+            var client = new HttpClient();
+            var response = client.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/households", submitFormContent);
+            //await DisplayAlert("Success", "Profile updated!", "OK");
+            Console.WriteLine("RESPONSE TO HOUSEHOLDS   " + response.Result);
+            Console.WriteLine("HOUSEHOLDS JSON OBJECT BEING SENT: " + submitFormJSONString);
+
             //Navigation.PushAsync(new CheckoutPage());
-            Navigation.PushAsync(new WestValleyForm(itemAmounts));
+            await Navigation.PushAsync(new WestValleyForm(itemAmounts));
         }
 
         void addMemberClicked(System.Object sender, System.EventArgs e)
