@@ -24,7 +24,15 @@
 
                 <Label FontSize="30" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="West Valley Community Services Form:" FontAttributes="Bold" Margin="0, 10,0,10"/>
 
-                <Label x:Name="pageNum" FontSize="16" HorizontalOptions="End" Text="Page 1 of 4" Margin="0, 10,25,10"/>
+                <Grid Margin="25, 10,25,10" HeightRequest="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="prevButton" Clicked="prevClicked" Text="&lt; Previous Page" IsVisible="false" TextColor="Black" FontSize="16" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Label Grid.Column="1" x:Name="pageNum" FontSize="16" HorizontalOptions="End" Text="Page 1 of 4" VerticalOptions="Center"/>
+                </Grid>
 
               <StackLayout x:Name="firstPage">
                 <Label FontSize="20" HorizontalOptions="Start" Text="Living Situation:" FontAttributes="Bold" Margin="25, 10,0,3"/>
@@ -158,7 +166,7 @@
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="other" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
-                        <Entry x:Name="otherEntry" Keyboard="Text" FontSize="16" TextColor="Black" PlaceholderColor="Black"/>
+                        <Entry x:Name="otherGenderEntry" Keyboard="Text" FontSize="16" TextColor="Black" PlaceholderColor="Black"/>
                     </Frame>
                 </Grid>
 

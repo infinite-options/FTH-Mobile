@@ -112,17 +112,17 @@ namespace FTH.ViewModel
 
         async void editClicked(System.Object sender, System.EventArgs e)
         {
+            await Navigation.PushAsync(new UpdateProfile());
 
-
-            var editProfJSONString = JsonConvert.SerializeObject(editprof);
-            // Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
-            var editProfContent = new StringContent(editProfJSONString, Encoding.UTF8, "application/json");
-            Console.WriteLine("edit profile Content: " + editProfContent);
-            var client = new HttpClient();
-            var response = client.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/UpdateProfile", editProfContent);
-            await DisplayAlert("Success", "Profile updated!", "OK");
-            Console.WriteLine("RESPONSE TO UPDATEPROFILE   " + response.Result);
-            Console.WriteLine("UPDATEPROFILE JSON OBJECT BEING SENT: " + editProfJSONString);
+            //var editProfJSONString = JsonConvert.SerializeObject(editprof);
+            //// Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
+            //var editProfContent = new StringContent(editProfJSONString, Encoding.UTF8, "application/json");
+            //Console.WriteLine("edit profile Content: " + editProfContent);
+            //var client = new HttpClient();
+            //var response = client.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/UpdateProfile", editProfContent);
+            //await DisplayAlert("Success", "Profile updated!", "OK");
+            //Console.WriteLine("RESPONSE TO UPDATEPROFILE   " + response.Result);
+            //Console.WriteLine("UPDATEPROFILE JSON OBJECT BEING SENT: " + editProfJSONString);
         }
 
         /*
@@ -770,7 +770,6 @@ namespace FTH.ViewModel
         {
             Application.Current.MainPage = new LoginPage();
         }
-
         //end of menu functions
     }
 }

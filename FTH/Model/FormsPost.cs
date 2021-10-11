@@ -10,6 +10,7 @@ namespace FTH.Model
         public int last4_ss { get; set; }
         public string dob { get; set; }
         public string address { get; set; }
+        //public string unit { get; set; }
         public string city { get; set; }
         public string county { get; set; }
         public string state { get; set; }

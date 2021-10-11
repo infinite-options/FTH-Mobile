@@ -265,6 +265,7 @@
     <BundleResource Include="Resources\menuProfileRed.png" />
     <BundleResource Include="Resources\menuSearchRed.png" />
     <BundleResource Include="Resources\menuUtensilsRed.png" />
+    <BundleResource Include="Resources\saveChangesButton.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppleSignIn\" />

@@ -246,6 +246,7 @@ namespace FTH.ViewModel
             clientform.last4_ss = int.Parse(Last4Entry.Text.Trim());
             clientform.dob = dobEntry.Text;
             clientform.address = AddressEntry.Text;
+            //clientform.unit = unit;
             clientform.city = CityEntry.Text;
             clientform.county = countyEntry.Text;
             clientform.state = StateEntry.Text;

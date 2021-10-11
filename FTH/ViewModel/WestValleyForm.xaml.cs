@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
 using FTH.Model;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -160,9 +163,115 @@ namespace FTH.ViewModel
             membersCollView.HeightRequest += 300;
         }
 
-        void submitClicked(System.Object sender, System.EventArgs e)
+        async void submitClicked(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CheckoutPage(itemAmounts));
+            if (homelessnessExtent == "" || gender == "" || maritalStatus == "" || education == "" || highestGrade == ""
+                || hispanicOrigin == "" || primaryEthnicity == "" || veteran == "" || disability == "" || disabilityDesc == ""
+                || primaryLang == "" || engFluency == "" || employmentStatus == "" || medicalInsurance == "" || specialNutrition == ""
+                || calfresh == "" || contactClient == "")
+            {
+                await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                return;
+            }
+
+            if (gender == "Other" && (otherGenderEntry.Text == "" || otherGenderEntry.Text == null))
+            {
+                await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                return;
+            }
+
+            if (disabilityDesc == "Other" && (otherDisabilityEntry.Text == "" || otherDisabilityEntry.Text == null))
+            {
+                await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                return;
+            }
+
+            if (primaryLang == "Other" && (otherLangEntry.Text == "" || otherLangEntry.Text == null))
+            {
+                await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                return;
+            }
+
+            foreach (var element in mainStack.Children)
+            {
+                //Debug.WriteLine("element class id:" + element.ClassId);
+                //Debug.WriteLine("element: " + element.ToString());
+                if (element.ToString() == "Xamarin.Forms.Frame")
+                {
+                    var frame = (Frame)element;
+                    if (frame.Content.ToString() == "Xamarin.Forms.Entry")
+                    {
+                        var entry = (Entry)frame.Content;
+                        Debug.WriteLine("placeholder: " + entry.Placeholder);
+                        if ((entry.Placeholder != null && entry.Placeholder != "") && (entry.Text == "" || entry.Text == null))
+                        {
+                            await DisplayAlert("Oops", "fill in all of the required information before submitting", "OK");
+                            return;
+                        }
+                    }
+                }
+            }
+
+            WestValleyPost wvForm = new WestValleyPost();
+            wvForm.customer_uid = (string)Application.Current.Properties["user_id"];
+            wvForm.name = adultNameEntry.Text;
+            wvForm.last_permanent_zip = zipCodeEntry.Text;
+            wvForm.last_sleep_city = cityEntry.Text;
+            wvForm.extent_homelessness = homelessnessExtent;
+            if (gender == "Other")
+                wvForm.gender = "Other: " + otherGenderEntry.Text;
+            //wvForm.gender = gender;
+            wvForm.marital_status = maritalStatus;
+            wvForm.education = education;
+            wvForm.highest_grade_level = highestGrade;
+            wvForm.hispanic_origin = hispanicOrigin;
+            wvForm.primary_ethnicity = primaryEthnicity;
+            wvForm.veteran = veteran;
+            wvForm.long_disability = disability;
+            if (disabilityDesc == "Other")
+                wvForm.long_disability_desc = "Other: " + otherDisabilityEntry.Text;
+            //wvForm.long_disability_desc = disabilityDesc;
+            if (primaryLang == "Other")
+                wvForm.primary_lang = "Other: " + otherLangEntry.Text;
+            //wvForm.primary_lang = primaryLang;
+            wvForm.english_fluency = engFluency;
+            wvForm.employment_status = employmentStatus;
+            wvForm.medical_insurance = medicalInsurance;
+            wvForm.special_nutrition = specialNutrition;
+            wvForm.calfresh = calfresh;
+            wvForm.calfresh_amount = double.Parse(amtEntry.Text.Trim());
+            wvForm.emergency_name = emergencyNameEntry.Text;
+            wvForm.emergency_phone = emergencyNumEntry.Text;
+            wvForm.emergency_relationship = emergencyRelationEntry.Text;
+            wvForm.emergency_client = contactClient;
+
+            List<WV_HouseholdMembers> WVmembers = new List<WV_HouseholdMembers>();
+
+            foreach (HouseholdComp houseMem in MembersColl)
+            {
+                WVmembers.Add(new WV_HouseholdMembers
+                {
+                    name = houseMem.MemberName,
+                    last4_ss = int.Parse(houseMem.MemberSSN),
+                    age = int.Parse(houseMem.MemberAge),
+                    relationship = houseMem.MemberRelationship,
+                    dob = houseMem.MemberDOB
+                });
+            }
+
+            wvForm.household_members = WVmembers;
+            wvForm.submit_date = dateEntry.Text;
+
+            var submitFormJSONString = JsonConvert.SerializeObject(wvForm);
+            var submitFormContent = new StringContent(submitFormJSONString, Encoding.UTF8, "application/json");
+            Debug.WriteLine("WV submitForm Content: " + submitFormContent);
+            var client = new HttpClient();
+            var response = client.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/households", submitFormContent);
+            //await DisplayAlert("Success", "Profile updated!", "OK");
+            Debug.WriteLine("RESPONSE TO WV HOUSEHOLDS   " + response.Result);
+            Debug.WriteLine("WV HOUSEHOLDS JSON OBJECT BEING SENT: " + submitFormJSONString);
+
+            await Navigation.PushAsync(new CheckoutPage(itemAmounts));
         }
 
         void backClicked(System.Object sender, System.EventArgs e)
@@ -171,10 +280,34 @@ namespace FTH.ViewModel
             Navigation.PopAsync();
         }
 
+        void prevClicked(System.Object sender, System.EventArgs e)
+        {
+            if (pageNum.Text == "Page 4 of 4")
+            {
+                pageNum.Text = "Page 3 of 4";
+                fourthPage.IsVisible = false;
+                thirdPage.IsVisible = true;
+            }
+            else if (pageNum.Text == "Page 3 of 4")
+            {
+                pageNum.Text = "Page 2 of 4";
+                thirdPage.IsVisible = false;
+                secondPage.IsVisible = true;
+            }
+            else if (pageNum.Text == "Page 2 of 4")
+            {
+                prevButton.IsVisible = false;
+                pageNum.Text = "Page 1 of 4";
+                secondPage.IsVisible = false;
+                firstPage.IsVisible = true;
+            }
+        }
+
         void continueClicked(System.Object sender, System.EventArgs e)
         {
             if (pageNum.Text == "Page 1 of 4")
             {
+                prevButton.IsVisible = true;
                 pageNum.Text = "Page 2 of 4";
                 firstPage.IsVisible = false;
                 secondPage.IsVisible = true;
@@ -187,7 +320,7 @@ namespace FTH.ViewModel
                 thirdPage.IsVisible = true;
                 scroller.ScrollToAsync(0, 0, true);
             }
-            else
+            else //pageNum.Text == Page 3 of 4
             {
                 pageNum.Text = "Page 4 of 4";
                 thirdPage.IsVisible = false;
