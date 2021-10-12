@@ -54,7 +54,7 @@
 
                     <Frame x:Name="street" Padding="20,10" Margin="20,0.5" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="25" HeightRequest="32">
-                    <Entry x:Name="AddressEntry" Text="{Binding AddressText}" FontSize="17" TextColor="Black" TextChanged="OnAddressChanged"
+                    <Entry x:Name="AddressEntry" Text="{Binding AddressText}" FontSize="17" TextColor="Black"
                            Focused="addressEntryFocused" Unfocused="addressEntryUnfocused" Placeholder="Current Address*" PlaceholderColor="Black"/>
                     </Frame>
 
@@ -354,7 +354,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12" CheckedChanged="checkboxSelected"/>
+                    <CheckBox x:Name="otherCheckbox" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="12" CheckedChanged="checkboxSelected"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="other" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">

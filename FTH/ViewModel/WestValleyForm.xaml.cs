@@ -239,7 +239,9 @@ namespace FTH.ViewModel
             wvForm.medical_insurance = medicalInsurance;
             wvForm.special_nutrition = specialNutrition;
             wvForm.calfresh = calfresh;
-            wvForm.calfresh_amount = double.Parse(amtEntry.Text.Trim());
+            if (amtEntry.Text == "" || amtEntry.Text == null)
+                wvForm.calfresh_amount = 0;
+            else wvForm.calfresh_amount = double.Parse(amtEntry.Text.Trim());
             wvForm.emergency_name = emergencyNameEntry.Text;
             wvForm.emergency_phone = emergencyNumEntry.Text;
             wvForm.emergency_relationship = emergencyRelationEntry.Text;

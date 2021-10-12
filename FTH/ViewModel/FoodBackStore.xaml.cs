@@ -323,7 +323,7 @@ namespace FTH.ViewModel
 
         void NavigateToCartPage(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CartPage(threshold, itemAmounts), false);
+            Navigation.PushAsync(new CartPage(bankName, bankDistance, bankImg, threshold, itemAmounts), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

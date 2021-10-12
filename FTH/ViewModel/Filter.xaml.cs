@@ -33,6 +33,7 @@ namespace FTH.ViewModel
         double deviceLat = 0;
         double deviceLong = 0;
         Location deviceLoca;
+        double savedfbListHeight = 0;
 
         public Filter()
         {
@@ -50,6 +51,8 @@ namespace FTH.ViewModel
             Console.WriteLine("Height = " + height.ToString());
 
             InitializeComponent();
+            if (Preferences.Get("foodBankListHeight", "") != "")
+                foodBankColl.HeightRequest = double.Parse(Preferences.Get("foodBankListHeight", ""));
 
             getDates();
             getFoodBanks();
@@ -1071,9 +1074,15 @@ namespace FTH.ViewModel
 
         void menuClicked(System.Object sender, System.EventArgs e)
         {
+            //Debug.WriteLine("height of foodbank list: " + foodBankColl.Height);
+            double savedHeight = foodBankColl.Height;
+            savedfbListHeight = savedHeight;
             openMenuGrid.IsVisible = true;
             whiteCover.IsVisible = true;
-            foodBankColl.VerticalOptions = LayoutOptions.FillAndExpand;
+            foodBankColl.HeightRequest = savedHeight;
+            //Debug.WriteLine("height of foodbank list after reset: " + foodBankColl.Height);
+            //foodBankColl.VerticalOptions = LayoutOptions.EndAndExpand;
+            //Debug.WriteLine("height of foodbank list after vertical options set: " + foodBankColl.Height);
         }
 
         void openedMenuClicked(System.Object sender, System.EventArgs e)
@@ -1090,6 +1099,9 @@ namespace FTH.ViewModel
 
         void loginClicked(System.Object sender, System.EventArgs e)
         {
+            openMenuGrid.IsVisible = false;
+            whiteCover.IsVisible = false;
+            Preferences.Set("foodBankListHeight", foodBankColl.Height + 25);
             Application.Current.MainPage = new LoginPage();
         }
 

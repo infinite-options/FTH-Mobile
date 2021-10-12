@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using FTH.Model;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using static FTH.ViewModel.FoodBackStore;
 
@@ -12,14 +13,18 @@ namespace FTH.ViewModel
         public ObservableCollection<StoreItem> itemsSource = new ObservableCollection<StoreItem>();
         public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         int threshold;
+        string fbName, fbDist, fbImg;
 
-        public CartPage(int storeThreshold, Dictionary<StoreItem, int> itmAmts)
+        public CartPage(string bankName, string bankDistance, string bankImage, int storeThreshold, Dictionary<StoreItem, int> itmAmts)
         {
             threshold = storeThreshold;
+            fbName = bankName;
+            fbDist = bankDistance;
+            fbImg = bankImage;
             itemAmounts = itmAmts;
             InitializeComponent();
 
-            SetFoodBank("Feeding Orange County", "5.3 miles away", "businessImage");
+            SetFoodBank(bankName, bankDistance, bankImage);
             SetCartItems();
 
         }
@@ -150,6 +155,11 @@ namespace FTH.ViewModel
             //if (itemAmounts.Count == 0)
             //    DisplayAlert("Oops", "Choose items before checking out", "OK");
             //else Navigation.PushAsync(new ClientIntakeForm(itemAmounts), false);
+
+            //set variable that will determine whether or not to show the user the West Valley Form on the way to checkout
+            if (fbName == "West Valley Community Services")
+                Preferences.Set("isWV", true);
+            else Preferences.Set("isWV", false);
             Navigation.PushAsync(new ClientIntakeForm(itemAmounts), false);
         }
 

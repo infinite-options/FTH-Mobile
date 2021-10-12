@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using FTH.Model;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -39,14 +40,168 @@ namespace FTH.ViewModel
             addr = new Address();
 
             InitializeComponent();
+            autofillForm();
 
-            MembersColl.Add(new HouseholdMembers
+            //MembersColl.Add(new HouseholdMembers
+            //{
+            //    MemberTitle = "Member 1:"
+            //});
+
+            //membersCollView.ItemsSource = MembersColl;
+
+        }
+
+        async void autofillForm()
+        {
+            
+
+            var request = new HttpRequestMessage();
+            request.RequestUri = new Uri("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/households");
+            request.Method = HttpMethod.Get;
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                MemberTitle = "Member 1:"
-            });
+                var message = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    var data = JsonConvert.DeserializeObject<FormsGet>(message);
+                    var receivedList = data.result;
+                    for (int i = receivedList.Count - 1; i >= 0; i--)
+                    {
+                        if (receivedList[i].customer_uid == (string)Application.Current.Properties["user_id"])
+                        {
+                            Debug.WriteLine("id matched");
 
-            membersCollView.ItemsSource = MembersColl;
+                            FNameEntry.Text = receivedList[i].name;
+                            Last4Entry.Text = receivedList[i].last4_ss;
+                            dobEntry.Text = receivedList[i].dob;
+                            AddressEntry.Text = receivedList[i].address;
+                            CityEntry.Text = receivedList[i].city;
+                            StateEntry.Text = receivedList[i].state;
+                            ZipEntry.Text = receivedList[i].zip;
+                            countyEntry.Text = receivedList[i].county;
+                            phoneHomeEntry.Text = receivedList[i].home_phone;
+                            phoneCellEntry.Text = receivedList[i].cell_phone;
+                            under18Entry.Text = receivedList[i].under_18;
+                            over18Entry.Text = receivedList[i].over_18;
+                            over65Entry.Text = receivedList[i].over_65;
 
+                            string householdMems = receivedList[i].household_members;
+                            JArray membersArray = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(householdMems);
+
+                            foreach (JObject member in membersArray)
+                            {
+                                MembersColl.Add(new HouseholdMembers
+                                {
+                                    MemberTitle = "Member " + memberNum.ToString() + ":",
+                                    MemberName = (string)member["name"],
+                                    MemberAge = (string)member["age"],
+                                    MemberRelationship = (string)member["relationship"]
+                                });
+
+                                membersCollView.ItemsSource = MembersColl;
+                                if (memberNum != 1)
+                                    membersCollView.HeightRequest += 180;
+                                memberNum++;
+                            }
+
+                            //search for housing_status (1)
+                            foreach(var item in checkboxText)
+                            {
+                                Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0,1) == "1" && item.Value.Substring(1).ToLower() == receivedList[i].housing_status.ToLower())
+                                {
+                                    Debug.WriteLine("inside first if");
+                                    foreach (var outerElement in mainStack.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            Debug.WriteLine("inside second if");
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    Debug.WriteLine("inside third if");
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for living_situation (2)
+                            if (receivedList[i].living_situation.ToLower().Contains("other:"))
+                            {
+                                otherCheckbox.IsChecked = true;
+                                otherEntry.Text = receivedList[i].living_situation.Substring(receivedList[i].living_situation.ToLower().IndexOf("other:") + 7);
+                            }
+                            else
+                            {
+                                foreach (var item in checkboxText)
+                                {
+                                    if (item.Value.Substring(0, 1) == "2" && item.Value.Substring(1).ToLower() == receivedList[i].living_situation.ToLower())
+                                    {
+                                        foreach (var outerElement in mainStack.Children)
+                                        {
+                                            if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                            {
+                                                var grid = (Grid)outerElement;
+                                                foreach (var innerElement in grid.Children)
+                                                {
+                                                    if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                    {
+                                                        var checkbox = (CheckBox)innerElement;
+                                                        if (checkbox.AnchorX == item.Key)
+                                                            checkbox.IsChecked = true;
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            AddressEntry.TextChanged += OnAddressChanged;
+                            return;
+                        }
+                        
+                    }
+                    //if (data.customer_uid == )
+                    //FNameEntry.Text = data.name;
+
+                }
+                catch
+                {
+                    MembersColl.Add(new HouseholdMembers
+                    {
+                        MemberTitle = "Member 1:"
+                    });
+
+                    membersCollView.ItemsSource = MembersColl;
+                    Debug.WriteLine("something went wrong when fetching autofill info from households");
+                    AddressEntry.TextChanged += OnAddressChanged;
+                    return;
+                }
+            }
+            else
+            {
+                Debug.WriteLine("something went wrong when fetching autofill info from households");
+                MembersColl.Add(new HouseholdMembers
+                {
+                    MemberTitle = "Member 1:"
+                });
+
+                membersCollView.ItemsSource = MembersColl;
+                AddressEntry.TextChanged += OnAddressChanged;
+            }
         }
 
         void fillCheckBoxTextDict()
@@ -289,7 +444,10 @@ namespace FTH.ViewModel
             Console.WriteLine("HOUSEHOLDS JSON OBJECT BEING SENT: " + submitFormJSONString);
 
             //Navigation.PushAsync(new CheckoutPage());
-            await Navigation.PushAsync(new WestValleyForm(itemAmounts));
+            //Preferences.Set("isWV", true);
+            if (Preferences.Get("isWV", false) == false)
+                await Navigation.PushAsync(new CheckoutPage(itemAmounts));
+            else await Navigation.PushAsync(new WestValleyForm(itemAmounts));
         }
 
         void addMemberClicked(System.Object sender, System.EventArgs e)

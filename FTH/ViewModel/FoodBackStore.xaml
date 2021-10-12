@@ -21,8 +21,8 @@
             </Grid>
             <Grid Grid.Row="1">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="20,0,0,0">
-                    <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Frame x:Name="userFrame" HasShadow="False" IsClippedToBounds="True" BorderColor="#E7404A" WidthRequest="118" HeightRequest="118" CornerRadius="59" Padding="0">
+                    <StackLayout HorizontalOptions="CenterAndExpand" WidthRequest="110">
+                    <Frame x:Name="userFrame" HasShadow="False" IsClippedToBounds="True" BorderColor="#E7404A" WidthRequest="100" HeightRequest="100" CornerRadius="46" Padding="0">
                         <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFill"/>
                     </Frame>
                     </StackLayout>

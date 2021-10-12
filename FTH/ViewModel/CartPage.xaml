@@ -22,9 +22,9 @@
             <StackLayout Grid.Row="1">
                 <Label Margin="20,0,0,0" Text="My Cart" TextColor="Black" FontSize="28" FontAttributes="Bold"></Label>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="20,0,0,0">
-                    <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Frame x:Name="userFrame" HasShadow="False" IsClippedToBounds="True" BorderColor="#E7404A" WidthRequest="118" HeightRequest="118" CornerRadius="59" Padding="0">
-                        <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFill"/>
+                    <StackLayout HorizontalOptions="CenterAndExpand" WidthRequest="110">
+                    <Frame x:Name="userFrame" HasShadow="False" IsClippedToBounds="True" BorderColor="#E7404A" WidthRequest="100" HeightRequest="100" CornerRadius="48" Padding="0">
+                        <Image x:Name="foodBankPicture" Aspect="AspectFill"/>
                     </Frame>
                     </StackLayout>
                     <StackLayout VerticalOptions="CenterAndExpand">
@@ -100,7 +100,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <StackLayout HeightRequest="60" Margin="0,0,0,22">
+                <StackLayout HeightRequest="40" Margin="0,0,0,0">
                     <Button Margin="50,0,50,0" Clicked="NavigateToCheckoutPage" CornerRadius="22" Text="Continue to checkout" TextColor="White" FontAttributes="Bold" FontSize="18" BackgroundColor="#E7404A"></Button>
                 </StackLayout>
             </StackLayout>

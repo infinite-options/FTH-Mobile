@@ -127,7 +127,7 @@
 
                 <!--<Label x:Name="loadingText" HeightRequest="100" Margin="0, 50,0,0" Text="Loading Food Banks..." VerticalOptions="Fill" VerticalTextAlignment="Start" TextColor="DarkGray" FontAttributes="Bold" FontSize="22" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>--> 
 
-                <CollectionView x:Name="foodBankColl" VerticalOptions="EndAndExpand" BackgroundColor="Transparent">
+                <CollectionView x:Name="foodBankColl" VerticalOptions="Start" BackgroundColor="Transparent">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                         Orientation="Vertical"
