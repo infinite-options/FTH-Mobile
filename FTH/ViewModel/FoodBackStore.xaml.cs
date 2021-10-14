@@ -34,6 +34,7 @@ namespace FTH.ViewModel
             threshold = itemLimit;
             //Debug.WriteLine("itemLimit: " + itemLimit.ToString());
             //limit.Text = "You can pick up to " + itemLimit.ToString() + " items";
+
             //for testing:
             threshold = 7;
             InitializeComponent();
@@ -58,7 +59,7 @@ namespace FTH.ViewModel
             {
                 filterList.ItemsSource = filterSource;
 
-                var filterArray = new string[] { "Fruits", "Vegetables", "Meals", "Desserts", "Beverages", "Dairy", "Snacks", "Canned Foods" };
+                var filterArray = new string[] { "fruit", "vegetable", "meal", "dessert", "beverage", "dairy", "snack", "canned food" };
 
                 foreach (var type in filterArray)
                 {
@@ -120,17 +121,27 @@ namespace FTH.ViewModel
 
                 foreach (var business in data.result)
                 {
+                    int item_quantity;
+                    if (business.item_qty == "")
+                    {
+                        //set quantity to 5 for testing to checkout with items
+                        item_quantity = 5;
+                        //item_quantity = 0;
+                    }
+                        
+                    else item_quantity = int.Parse(business.item_qty);
+
                     var item = new StoreItem()
                     {
                         image = business.item_photo,
                         name = business.item_name,
                         quantity = 0,
                         type = business.item_type,
-                        availableAmt = int.Parse(business.distribution_qty),
-                        unit = business.dist_unit,
+                        availableAmt = item_quantity,
+                        unit = business.item_unit,
                         price = 1,
                         item_uid = business.item_uid,
-                        itm_business_uid = business.receive_business_uid
+                        itm_business_uid = business.itm_business_uid
                     };
 
                     //if (cart.Count != 0)
@@ -148,7 +159,9 @@ namespace FTH.ViewModel
             catch
             {
                 await DisplayAlert("Oops", "This food bank currently has no items available.", "OK");
-                await Navigation.PopAsync();
+
+                //commented out for testing
+                //await Navigation.PopAsync();
             }
 
             //itemsList.ItemsSource = itemSource;
@@ -351,6 +364,11 @@ namespace FTH.ViewModel
             menu.IsVisible = true;
         }
 
+        void filterClicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new Filter());
+        }
+
         void browseClicked(System.Object sender, System.EventArgs e)
         {
             //Application.Current.MainPage = new FoodBanksMap();
@@ -359,6 +377,7 @@ namespace FTH.ViewModel
 
         void loginClicked(System.Object sender, System.EventArgs e)
         {
+            Debug.WriteLine("logout clicked");
             Application.Current.MainPage = new LoginPage();
         }
 

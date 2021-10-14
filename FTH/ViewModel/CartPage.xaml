@@ -21,17 +21,33 @@
             </Grid>
             <StackLayout Grid.Row="1">
                 <Label Margin="20,0,0,0" Text="My Cart" TextColor="Black" FontSize="28" FontAttributes="Bold"></Label>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="20,0,0,0">
-                    <StackLayout HorizontalOptions="CenterAndExpand" WidthRequest="110">
-                    <Frame x:Name="userFrame" HasShadow="False" IsClippedToBounds="True" BorderColor="#E7404A" WidthRequest="100" HeightRequest="100" CornerRadius="48" Padding="0">
-                        <Image x:Name="foodBankPicture" Aspect="AspectFill"/>
+                <Grid Margin="20,0,0,0" VerticalOptions="Fill" HeightRequest="110">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="95"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame x:Name="userFrame" HasShadow="False" BorderColor="#E7404A" WidthRequest="86" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="86" CornerRadius="45" Padding="0">
+                        <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFit"/>
+                    </Frame>
+
+                    <StackLayout Margin="10,0,0,0" VerticalOptions="CenterAndExpand" Grid.Column="1">
+                    <Label x:Name="foodBankName" TextColor="Black" FontSize="20" FontAttributes="Bold"></Label>
+                    <Label x:Name="foodBankDistance" TextColor="Black" FontSize="15" ></Label>
+                    </StackLayout>
+
+                </Grid>
+                <!--<StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="20,10,0,0" HeightRequest="120">
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Frame x:Name="userFrame" HasShadow="False" BorderColor="#E7404A" WidthRequest="86" VerticalOptions="Center" HeightRequest="86" CornerRadius="42" Padding="0">
+                        <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFit"/>
                     </Frame>
                     </StackLayout>
                     <StackLayout VerticalOptions="CenterAndExpand">
                     <Label x:Name="foodBankName" TextColor="Black" FontSize="20" FontAttributes="Bold"></Label>
                     <Label x:Name="foodBankDistance" TextColor="Black" FontSize="15" ></Label>
                     </StackLayout>
-                </StackLayout>
+                </StackLayout>-->
             </StackLayout>
             <StackLayout Grid.Row="2">
                 <CollectionView x:Name="cartItemList" Margin="20,0,20,0">
@@ -106,7 +122,7 @@
             </StackLayout>
 
              <!--logged in menu-->
-            <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 0, 20, 10" HeightRequest="40">
+            <Grid x:Name="openMenuGrid" Grid.RowSpan="3" IsVisible="false" Margin="20, 0, 20, 10" HeightRequest="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

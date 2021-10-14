@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace FTH.ViewModel
@@ -41,5 +41,43 @@ namespace FTH.ViewModel
         {
             Navigation.PopAsync();
         }
+
+        //menu functions
+        void profileClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new NavigationPage(new UserProfile());
+            Navigation.PushAsync(new UserProfile());
+        }
+
+        void menuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = true;
+            menu.IsVisible = false;
+        }
+
+        void openedMenuClicked(System.Object sender, System.EventArgs e)
+        {
+            openMenuGrid.IsVisible = false;
+            menu.IsVisible = true;
+        }
+
+        void filterClicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new Filter());
+        }
+
+        void browseClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new FoodBanksMap());
+        }
+
+        void loginClicked(System.Object sender, System.EventArgs e)
+        {
+            Debug.WriteLine("logout clicked");
+            Application.Current.MainPage = new LoginPage();
+        }
+
+        //end of menu functions
     }
 }

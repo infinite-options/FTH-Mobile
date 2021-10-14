@@ -178,7 +178,7 @@
             </ScrollView>
 
             <!--logged in menu-->
-            <Grid x:Name="openMenuGrid" IsVisible="false" Grid.RowSpan="3" Margin="20, 0, 20, 10" HeightRequest="40">
+            <Grid x:Name="openMenuGrid" Grid.Row="3" IsVisible="false" Grid.RowSpan="3" Margin="20, 0, 20, 10" HeightRequest="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

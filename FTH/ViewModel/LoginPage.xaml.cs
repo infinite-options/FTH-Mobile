@@ -166,6 +166,10 @@ namespace FTH.ViewModel
                 {
                     await DisplayAlert("Oops", "Wrong password", "OK");
                 }
+                else if (loginAttempt != null && loginAttempt.message.ToLower().Contains("email not found"))
+                {
+                    await DisplayAlert("Oops", "Email not found. Please sign up", "OK");
+                }
                 else if (loginAttempt != null)
                 {
                     Debug.WriteLine("USER'S DATA");

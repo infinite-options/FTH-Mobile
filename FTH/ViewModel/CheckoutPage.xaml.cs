@@ -7,6 +7,7 @@ using System.Text;
 using FTH.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using static FTH.ViewModel.EditAddressPage;
 using static FTH.ViewModel.FoodBackStore;
@@ -23,9 +24,9 @@ namespace FTH.ViewModel
         {
             itemAmounts = itmAmts;
             InitializeComponent();
-
+            
             getInfo();
-            SetFoodBank("Feeding Orange County", totalQuantity.ToString(), "businessImage");
+            SetFoodBank(Preferences.Get("chosenBankName", ""), totalQuantity.ToString(), Preferences.Get("chosenBankImg", ""));
             SetCartItems();
             //SetPersonalInfo("Carlos", "Torres", "4158329643");
             //SetFullAddress("1658 Sacramento Street", "San Francisco", "CA", "94109");

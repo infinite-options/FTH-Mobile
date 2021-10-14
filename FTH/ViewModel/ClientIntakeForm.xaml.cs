@@ -185,6 +185,7 @@ namespace FTH.ViewModel
                         MemberTitle = "Member 1:"
                     });
 
+                    memberNum++;
                     membersCollView.ItemsSource = MembersColl;
                     Debug.WriteLine("something went wrong when fetching autofill info from households");
                     AddressEntry.TextChanged += OnAddressChanged;
@@ -194,14 +195,16 @@ namespace FTH.ViewModel
             else
             {
                 Debug.WriteLine("something went wrong when fetching autofill info from households");
-                MembersColl.Add(new HouseholdMembers
-                {
-                    MemberTitle = "Member 1:"
-                });
-
-                membersCollView.ItemsSource = MembersColl;
-                AddressEntry.TextChanged += OnAddressChanged;
             }
+
+            MembersColl.Add(new HouseholdMembers
+            {
+                MemberTitle = "Member 1:"
+            });
+
+            memberNum++;
+            membersCollView.ItemsSource = MembersColl;
+            AddressEntry.TextChanged += OnAddressChanged;
         }
 
         void fillCheckBoxTextDict()
@@ -452,13 +455,12 @@ namespace FTH.ViewModel
 
         void addMemberClicked(System.Object sender, System.EventArgs e)
         {
-            memberNum++;
-            
             MembersColl.Add(new HouseholdMembers
             {
                 MemberTitle = "Member " + memberNum.ToString() + ":"
             });
 
+            memberNum++;
             membersCollView.ItemsSource = MembersColl;
             membersCollView.HeightRequest += 180;
         }

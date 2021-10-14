@@ -18,6 +18,8 @@ namespace FTH.ViewModel
         public CartPage(string bankName, string bankDistance, string bankImage, int storeThreshold, Dictionary<StoreItem, int> itmAmts)
         {
             threshold = storeThreshold;
+            Preferences.Set("chosenBankName", bankName);
+            Preferences.Set("chosenBankImg", bankImage);
             fbName = bankName;
             fbDist = bankDistance;
             fbImg = bankImage;
