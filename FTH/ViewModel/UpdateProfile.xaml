@@ -8,7 +8,7 @@
             <StackLayout>
                 <BoxView x:Name="headingBuffer" HeightRequest="20"/>
             <Grid>
-                <Image Source="backgroundBlob.png" HorizontalOptions="Fill" Margin="-330, -1200, -330, 0" HeightRequest="700" WidthRequest="700"/> 
+                <Image Source="backgroundBlob.png" HorizontalOptions="Fill" Margin="-330, -1000, -330, 0" HeightRequest="700" WidthRequest="700"/> 
             <StackLayout x:Name="mainStack">
 
                 <Grid x:Name="headerGrid" Margin="20, 0, 20, 10" HeightRequest="40">
@@ -76,7 +76,7 @@
                         </Grid>
                     </Frame>
 
-                    <ListView x:Name="idList" IsVisible="False" HeightRequest="185" Margin="0,30,0,0" ItemSelected="idListItemSelected">
+                    <!--<ListView x:Name="idList" IsVisible="False" HeightRequest="185" Margin="0,30,0,0" ItemSelected="idListItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -87,7 +87,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
 
-                    </ListView>
+                    </ListView>-->
 
                     <Frame x:Name="idNum" Padding="20,10" Margin="0,2,0,0.5" BackgroundColor="White" HasShadow="False"
                               BorderColor="#707070" CornerRadius="25" HorizontalOptions="Fill" HeightRequest="32" VerticalOptions="Start">
@@ -120,20 +120,20 @@
 
                         <Frame x:Name="street" Padding="20,10" Margin="0,0.5" BackgroundColor="White" HasShadow="False"
                               BorderColor="#707070" CornerRadius="25" HeightRequest="32">
-                        <Entry x:Name="AddressEntry" Text="{Binding AddressText}" FontSize="17" TextColor="Black" TextChanged="OnAddressChanged"
+                        <Entry x:Name="AddressEntry" Text="{Binding AddressText}" FontSize="17" TextColor="Black"
                                Focused="addressEntryFocused" Unfocused="addressEntryUnfocused" Placeholder="Current Address" PlaceholderColor="Black"/>
                         </Frame>
 
                   
                     </Grid>
 
-                    <ListView x:Name="addressList" ItemsSource="{Binding Addresses}" IsVisible="false" Margin="0, 0, 0, 20" ItemSelected="addressSelected" HeightRequest="180">
+                    <!--<ListView x:Name="addressList" ItemsSource="{Binding Addresses}" IsVisible="false" Margin="0, 0, 0, 20" ItemSelected="addressSelected" HeightRequest="180">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextCell Text="{Binding Address}"/>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-                    </ListView>
+                    </ListView>-->
 
                     <Grid x:Name="UnitCity" HorizontalOptions="Center" VerticalOptions="Center"  ColumnSpacing="4" Margin="0,0.5">
                         <Grid.ColumnDefinitions>
@@ -186,11 +186,54 @@
                 </Grid>
 
 
-                <ImageButton Source="saveChangesButton.png" Margin="30,20,30,0" HorizontalOptions="Fill"/>
+                <ImageButton Source="saveChangesButton.png" Clicked="saveChanges" Margin="30,20,30,0" HorizontalOptions="Fill"/>
 
-                <ImageButton Source="continueButton.png" Margin="30,-10,30,20" HorizontalOptions="Fill"/>
+                <ImageButton Source="continueButton.png" Clicked="profileClicked" Margin="30,-10,30,20" HorizontalOptions="Fill"/>
 
             </StackLayout>
+
+            <Grid Margin="30,530,30,10" ColumnSpacing="10" x:Name="idGrid" IsVisible="false">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                <ListView x:Name="idList" Grid.Column="1" Margin="7,0" VerticalOptions="Start" HeightRequest="185" ItemSelected="idListItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                            <Frame CornerRadius="0" BorderColor="#E7404A" HeightRequest="18" Padding="0" HasShadow="False">
+                                <Label Text="{Binding type}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="15" TextColor="#E7404A"/>
+                            </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+            </Grid>
+
+            <Grid Margin="30,690,30,0" ColumnSpacing="10" x:Name="addressGrid" IsVisible="false">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                <ListView x:Name="addressList" ItemsSource="{Binding Addresses}" Grid.Column="1" ItemSelected="addressSelected" VerticalOptions="Start" HeightRequest="180">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell Text="{Binding Address}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                    </ListView>
+
+            </Grid>
 
             <Grid x:Name="openMenuGrid" IsVisible="false" Margin="20, 0, 20, 10" HeightRequest="40">
                 <Grid.RowDefinitions>
@@ -226,7 +269,7 @@
 
                             <Image HeightRequest="29" Source="menuUtensilsRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="Order Food" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="Start"/>
-                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="orderClicked"/>
                         </Grid>
 
                         <Grid ColumnSpacing="10">
@@ -267,6 +310,8 @@
             </Grid>
 
             </Grid>
+
+                <BoxView HeightRequest="50"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

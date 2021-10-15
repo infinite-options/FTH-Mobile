@@ -200,7 +200,7 @@ namespace FTH.ViewModel
             Debug.WriteLine("RDSResponse from checkout endpoint: " + RDSResponse.ToString());
             Debug.WriteLine("RDSMessage from checkout endpoint: " + RDSMessage.ToString());
 
-            await Navigation.PushAsync(new OrderConfirmationPage(), false);
+            await Navigation.PushAsync(new OrderConfirmationPage(deliveryDate.Text, deliveryTime.Text, userAddress.Text + ", " + userCityStateZipcode.Text), false);
         }
 
         void NavigateToEditAddressPage(System.Object sender, System.EventArgs e)
@@ -231,6 +231,12 @@ namespace FTH.ViewModel
         {
             openMenuGrid.IsVisible = false;
             menu.IsVisible = true;
+        }
+
+        void orderClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new Filter());
         }
 
         void browseClicked(System.Object sender, System.EventArgs e)

@@ -37,17 +37,6 @@
                     </StackLayout>
 
                 </Grid>
-                <!--<StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="20,10,0,0" HeightRequest="120">
-                    <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Frame x:Name="userFrame" HasShadow="False" BorderColor="#E7404A" WidthRequest="86" VerticalOptions="Center" HeightRequest="86" CornerRadius="42" Padding="0">
-                        <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFit"/>
-                    </Frame>
-                    </StackLayout>
-                    <StackLayout VerticalOptions="CenterAndExpand">
-                    <Label x:Name="foodBankName" TextColor="Black" FontSize="20" FontAttributes="Bold"></Label>
-                    <Label x:Name="foodBankDistance" TextColor="Black" FontSize="15" ></Label>
-                    </StackLayout>
-                </StackLayout>-->
             </StackLayout>
             <StackLayout Grid.Row="2">
                 <CollectionView x:Name="cartItemList" Margin="20,0,20,0">
@@ -156,7 +145,7 @@
 
                             <Image HeightRequest="29" Source="menuUtensilsRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="Order Food" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="Start"/>
-                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="orderClicked"/>
                         </Grid>
 
                         <Grid ColumnSpacing="10">

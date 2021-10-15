@@ -418,7 +418,7 @@
 
                             <Image HeightRequest="29" Source="menuUtensilsRed.png" HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="Transparent"/>
                             <Label Grid.Column="1" Text="Order Food" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="#E7404A" HorizontalOptions="Start"/>
-                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="browseClicked"/>
+                            <Button BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Clicked="orderClicked"/>
                         </Grid>
 
                         <Grid ColumnSpacing="10">

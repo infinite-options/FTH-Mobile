@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Text;
 using FTH.Model;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace FTH.ViewModel
@@ -10,13 +13,16 @@ namespace FTH.ViewModel
     {
         Address addr;
         ObservableCollection<idType> idTypes = new ObservableCollection<idType>();
+        Dictionary<string, string> autofillInfoDict = new Dictionary<string, string>();
 
-        public UpdateProfile()
+        public UpdateProfile(Dictionary<string,string> updateProfileInfoDict)
         {
+            autofillInfoDict = updateProfileInfoDict;
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
 
             InitializeComponent();
+            autofillInfo();
             addr = new Address();
 
             idTypes.Add(new idType
@@ -38,11 +44,39 @@ namespace FTH.ViewModel
             idList.ItemsSource = idTypes;
         }
 
+        void autofillInfo()
+        {
+            try
+            {
+                if (autofillInfoDict.ContainsKey("first_name"))
+                {
+                    name.Text = autofillInfoDict["first_name"] + " " + autofillInfoDict["last_name"];
+                    phoneEntry.Text = autofillInfoDict["phone_num"];
+                    schoolAffilEntry.Text = autofillInfoDict["affiliation"];
+                    idTypeButton.Text = autofillInfoDict["id_type"];
+                    idNumEntry.Text = autofillInfoDict["id_number"];
+                    //AddressEntry.Text = autofillInfoDict["address"];
+                    if (autofillInfoDict["unit"] != "")
+                        AptEntry.Text = autofillInfoDict["unit"];
+                    CityEntry.Text = autofillInfoDict["city"];
+                    StateEntry.Text = autofillInfoDict["state"];
+                    ZipEntry.Text = autofillInfoDict["zip"];
+                    AddressEntry.Text = autofillInfoDict["address"];
+                }
+            }
+            catch
+            {
+
+            }
+
+            AddressEntry.TextChanged += OnAddressChanged;
+        }
+
         void idTypeClicked(System.Object sender, System.EventArgs e)
         {
-            if (idList.IsVisible == true)
-                idList.IsVisible = false;
-            else idList.IsVisible = true;
+            if (idGrid.IsVisible == true)
+                idGrid.IsVisible = false;
+            else idGrid.IsVisible = true;
 
             idTypeFrame.HeightRequest = 32;
             idNum.HeightRequest = 32;
@@ -50,7 +84,7 @@ namespace FTH.ViewModel
 
         void idListItemSelected(System.Object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            idList.IsVisible = false;
+            idGrid.IsVisible = false;
             idTypeButton.Text = ((idType)idList.SelectedItem).type;
 
             idTypeFrame.HeightRequest = 32;
@@ -89,9 +123,15 @@ namespace FTH.ViewModel
 
         private async void OnAddressChanged(object sender, TextChangedEventArgs eventArgs)
         {
-            addressList.IsVisible = true;
-            UnitCity.IsVisible = false;
-            StateZip.IsVisible = false;
+            addressGrid.IsVisible = true;
+            //these 2 lines commented out for testing
+            //UnitCity.IsVisible = false;
+            //StateZip.IsVisible = false;
+            unit.BorderColor = Color.White;
+            city.BorderColor = Color.White;
+            state.BorderColor = Color.White;
+            zipCode.BorderColor = Color.White;
+
             //UnitCityState.IsVisible = false;
             //ZipPhone.IsVisible = false;
             addressList.ItemsSource = await addr.GetPlacesPredictionsAsync(AddressEntry.Text);
@@ -100,22 +140,64 @@ namespace FTH.ViewModel
 
         private void addressEntryFocused(object sender, EventArgs eventArgs)
         {
+            //unit.BorderColor = Color.White;
+            //city.BorderColor = Color.White;
+            //state.BorderColor = Color.White;
+            //zipCode.BorderColor = Color.White;
             //addr.addressEntryFocused(addressList, new Grid[] { UnitCityState, ZipPhone });
         }
 
         private void addressEntryUnfocused(object sender, EventArgs eventArgs)
         {
+            unit.BorderColor = Color.FromHex("#707070");
+            city.BorderColor = Color.FromHex("#707070");
+            state.BorderColor = Color.FromHex("#707070");
+            zipCode.BorderColor = Color.FromHex("#707070");
             addr.addressEntryUnfocused(addressList, new Grid[] { UnitCity, StateZip });
         }
 
         private void addressSelected(System.Object sender, System.EventArgs e)
         {
             addr.addressSelected(addressList, new Grid[] { UnitCity, StateZip }, AddressEntry, CityEntry, StateEntry, ZipEntry);
-            addressList.IsVisible = false;
-            UnitCity.IsVisible = true;
-            StateZip.IsVisible = true;
+            addressGrid.IsVisible = false;
+            //UnitCity.IsVisible = true;
+            //StateZip.IsVisible = true;
+            unit.BorderColor = Color.FromHex("#707070");
+            city.BorderColor = Color.FromHex("#707070");
+            state.BorderColor = Color.FromHex("#707070");
+            zipCode.BorderColor = Color.FromHex("#707070");
         }
         //address autocomplete end
+
+        async void saveChanges(System.Object sender, System.EventArgs e)
+        {
+            EditProfile editprof = new EditProfile();
+            editprof.first_name = autofillInfoDict["first_name"];
+            editprof.last_name = autofillInfoDict["last_name"];
+            editprof.phone_num = phoneEntry.Text;
+            editprof.email = autofillInfoDict["email"];
+            editprof.id_type = idTypeButton.Text;
+            editprof.id_number = idNumEntry.Text;
+            editprof.address = AddressEntry.Text;
+            if (AptEntry.Text == null)
+                editprof.unit = "";
+            else editprof.unit = AptEntry.Text;
+            editprof.city = CityEntry.Text;
+            editprof.state = StateEntry.Text;
+            editprof.zip = ZipEntry.Text;
+            editprof.uid = autofillInfoDict["cust_uid"];
+            editprof.noti = autofillInfoDict["notification"];
+
+            var editProfJSONString = JsonConvert.SerializeObject(editprof);
+            // Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
+            var editProfContent = new StringContent(editProfJSONString, Encoding.UTF8, "application/json");
+            Console.WriteLine("edit profile Content: " + editProfContent);
+            var client = new HttpClient();
+            var response = client.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/UpdateProfile", editProfContent);
+            await DisplayAlert("Success", "Profile updated!", "OK");
+            Console.WriteLine("RESPONSE TO UPDATEPROFILE   " + response.Result);
+            Console.WriteLine("UPDATEPROFILE JSON OBJECT BEING SENT: " + editProfJSONString);
+        }
 
         //menu functions
         void profileClicked(System.Object sender, System.EventArgs e)
@@ -136,6 +218,12 @@ namespace FTH.ViewModel
             openMenuGrid.IsVisible = false;
             //whiteCover.IsVisible = false;
             menu.IsVisible = true;
+        }
+
+        void orderClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new Filter());
         }
 
         void browseClicked(System.Object sender, System.EventArgs e)

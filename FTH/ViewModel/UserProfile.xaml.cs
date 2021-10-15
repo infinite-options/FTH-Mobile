@@ -24,6 +24,7 @@ namespace FTH.ViewModel
     {
         public ObservableCollection<Plans> customerProfileInfo = new ObservableCollection<Plans>();
         public ObservableCollection<PaymentInfo> NewPlan = new ObservableCollection<PaymentInfo>();
+        public Dictionary<string, string> profileInfoDict = new Dictionary<string, string>();
         PaymentInfo orderInfo;
         ArrayList itemsArray = new ArrayList();
         ArrayList purchIdArray = new ArrayList();
@@ -107,12 +108,27 @@ namespace FTH.ViewModel
                 editprof.email = (info_obj["result"])[0]["customer_email"].ToString();
                 editprof.uid = (info_obj["result"])[0]["customer_uid"].ToString();
                 editprof.noti = "";
+
+                profileInfoDict.Add("first_name", (info_obj["result"])[0]["customer_first_name"].ToString());
+                profileInfoDict.Add("last_name", (info_obj["result"])[0]["customer_last_name"].ToString());
+                profileInfoDict.Add("phone_num", (info_obj["result"])[0]["customer_phone_num"].ToString());
+                profileInfoDict.Add("email", (info_obj["result"])[0]["customer_email"].ToString());
+                profileInfoDict.Add("affiliation", (info_obj["result"])[0]["cust_affiliation"].ToString());
+                profileInfoDict.Add("id_type", (info_obj["result"])[0]["id_type"].ToString());
+                profileInfoDict.Add("id_number", (info_obj["result"])[0]["id_number"].ToString());
+                profileInfoDict.Add("address", (info_obj["result"])[0]["customer_address"].ToString());
+                profileInfoDict.Add("unit", (info_obj["result"])[0]["customer_unit"].ToString());
+                profileInfoDict.Add("city", (info_obj["result"])[0]["customer_city"].ToString());
+                profileInfoDict.Add("state", (info_obj["result"])[0]["customer_state"].ToString());
+                profileInfoDict.Add("zip", (info_obj["result"])[0]["customer_zip"].ToString());
+                profileInfoDict.Add("cust_uid", (info_obj["result"])[0]["customer_uid"].ToString());
+                profileInfoDict.Add("notification", (info_obj["result"])[0]["cust_guid_device_id_notification"].ToString());
             }
         }
 
         async void editClicked(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new UpdateProfile());
+            await Navigation.PushAsync(new UpdateProfile(profileInfoDict));
 
             //var editProfJSONString = JsonConvert.SerializeObject(editprof);
             //// Console.WriteLine("newPaymentJSONString" + newPaymentJSONString);
@@ -758,6 +774,12 @@ namespace FTH.ViewModel
             openMenuGrid.IsVisible = false;
             //whiteCover.IsVisible = false;
             menu.IsVisible = true;
+        }
+
+        void orderClicked(System.Object sender, System.EventArgs e)
+        {
+            //Application.Current.MainPage = new FoodBanksMap();
+            Navigation.PushAsync(new Filter());
         }
 
         void browseClicked(System.Object sender, System.EventArgs e)

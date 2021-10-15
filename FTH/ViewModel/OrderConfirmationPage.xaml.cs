@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FTH.ViewModel
 {
     public partial class OrderConfirmationPage : ContentPage
     {
-        public OrderConfirmationPage()
+        public OrderConfirmationPage(string delivDate, string delivTime, string delivAddress)
         {
             InitializeComponent();
 
@@ -15,11 +16,11 @@ namespace FTH.ViewModel
 
             if (orderType == "DELIVERY")
             {
-                SetFoodBankNameTimeAddressDelivery("Feeding Orange County", "10:00 AM - 12:00 PM", "123 Any Street Santa Clara, CA 95120.");
+                SetFoodBankNameTimeAddressDelivery(Preferences.Get("chosenBankName", ""), delivTime, delivAddress + ".");
             }
             else if (orderType == "PICKUP")
             {
-                SetFoodBankNameTimeAddressPickUp("Feeding Orange County", "12:00 PM", "July 27th.");
+                SetFoodBankNameTimeAddressPickUp(Preferences.Get("chosenBankName", ""), delivTime, delivDate);
             }
         }
 
