@@ -59,7 +59,7 @@ namespace FTH.ViewModel
             {
                 filterList.ItemsSource = filterSource;
 
-                var filterArray = new string[] { "fruit", "vegetable", "meal", "dessert", "beverage", "dairy", "snack", "canned food" };
+                var filterArray = new string[] { "fruit", "vegetable", "meal", "dessert", "beverage", "dairy", "snack", "canned" };
 
                 foreach (var type in filterArray)
                 {

@@ -116,5 +116,8 @@ namespace FTH.Model
         public string distance { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
+        public string bus_img { get; set; }
+        public string bus_uid { get; set; }
+        public string item_limit { get; set; }
     }
 }

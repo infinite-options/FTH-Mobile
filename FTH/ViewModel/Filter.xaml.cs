@@ -199,47 +199,6 @@ namespace FTH.ViewModel
                                 if (deviceLat == 0)
                                 {
                                     await GetCurrentLocation(bankLatitude, bankLongitude, bank);
-                                    //get the device's location start
-                                    //try
-                                    //{
-                                    //    var location = await Geolocation.GetLastKnownLocationAsync();
-
-                                    //    if (location != null)
-                                    //    {
-                                    //        Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                                    //        deviceLat = location.Latitude;
-                                    //        deviceLong = location.Longitude;
-                                    //        //process the distance between the food bank and the phone
-                                    //        Location fbLocation = new Location(Double.Parse(bankLatitude), Double.Parse(bankLongitude));
-                                    //        Location deviceLocation = new Location(location.Latitude, location.Longitude);
-                                    //        deviceLoca = deviceLocation;
-                                    //        double miles = Location.CalculateDistance(fbLocation, deviceLocation, DistanceUnits.Miles);
-                                    //        miles = Math.Round(miles, 1);
-                                    //        Debug.WriteLine("distance between food bank and device: " + miles.ToString());
-                                    //        bank.distance = miles.ToString() + " miles";
-                                    //    }
-                                    //}
-                                    //catch (FeatureNotSupportedException fnsEx)
-                                    //{
-                                    //    // Handle not supported on device exception
-                                    //    await DisplayAlert("Oops", "Location permissions are not supported on this device.", "OK");
-                                    //}
-                                    //catch (FeatureNotEnabledException fneEx)
-                                    //{
-                                    //    // Handle not enabled on device exception
-                                    //    await DisplayAlert("Oops", "Location permissions aren't enabled on this device.", "OK");
-                                    //}
-                                    //catch (PermissionException pEx)
-                                    //{
-                                    //    // Handle permission exception
-                                    //    await DisplayAlert("Oops", "Please enable location permissions.", "OK");
-                                    //}
-                                    //catch (Exception ex)
-                                    //{
-                                    //    // Unable to get location
-                                    //    await DisplayAlert("Oops", "A problem occurred when trying to get this device's location.", "OK");
-                                    //}
-                                    ////get the device's location end
                                 }
                                 else
                                 {
