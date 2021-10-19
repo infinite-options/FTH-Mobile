@@ -126,6 +126,13 @@ namespace FTH.ViewModel
             }
         }
 
+        async void clientFormClicked(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new EditClientIntakeForm());
+            //await Navigation.PushAsync(new UpdateProfile(profileInfoDict));
+
+        }
+
         async void editClicked(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new UpdateProfile(profileInfoDict));

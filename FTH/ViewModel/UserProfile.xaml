@@ -9,7 +9,7 @@
             <StackLayout>
                 <BoxView x:Name="headingBuffer" HeightRequest="20"/>
             <Grid>
-                <Image Source="backgroundBlob.png" HorizontalOptions="Fill" Margin="-330, -650, -330, 0" HeightRequest="700" WidthRequest="700"/> 
+                <Image Source="backgroundBlob.png" HorizontalOptions="Fill" Margin="-330, -770, -330, 0" HeightRequest="700" WidthRequest="700"/> 
             <StackLayout x:Name="mainStack">
 
                 <Grid x:Name="headerGrid" Margin="20, 0, 20, 10" HeightRequest="40">
@@ -33,7 +33,7 @@
                 </Grid>
                 
 
-                <Grid Margin="50,0,50,10" HeightRequest="50">
+                <Grid Margin="40,5" HeightRequest="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="7*"/>
@@ -44,7 +44,9 @@
 
                 </Grid>
 
-                <Grid Margin="50,0,50,10" HeightRequest="50">
+                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+
+                <Grid Margin="40,5" HeightRequest="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="7*"/>
@@ -55,7 +57,9 @@
 
                 </Grid>
 
-                <Grid Margin="50,0,50,10" HeightRequest="50">
+                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+
+                <Grid Margin="40,5" HeightRequest="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="7*"/>
@@ -66,7 +70,9 @@
 
                 </Grid>
 
-                <Grid Margin="50,0,50,25" HeightRequest="50">
+                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+
+                <Grid Margin="40,5" HeightRequest="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="7*"/>
@@ -74,6 +80,28 @@
 
                     <Image Source="home.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
                     <Label x:Name="address" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="123 Any Street, Santa Clara, CA 95122" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
+
+                </Grid>
+
+                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+
+                <Grid Margin="40,5" HeightRequest="120">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5.5*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="home.png" HorizontalOptions="Start" HeightRequest="50" WidthRequest="50"/>
+                    <Label x:Name="clientForm" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="Client Intake Form" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
+                    <ImageButton Grid.Column="2" Clicked="clientFormClicked" Source="editIcon" VerticalOptions="Fill" HorizontalOptions="Fill" />
+
+                    <Label Grid.Row="1" x:Name="wvForm" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="West Valley Community Services Form" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
+                    <ImageButton Grid.Row="1" Grid.Column="2" Source="editIcon" VerticalOptions="Fill" HorizontalOptions="Fill"/>
 
                 </Grid>
 

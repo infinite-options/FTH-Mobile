@@ -72,7 +72,7 @@
                 </CollectionView>
 
                 <Grid x:Name="clearDatesGrid" IsVisible="False">
-                <Label TextDecorations="Underline" FontAttributes="Bold" Text="Clear Selection" HorizontalOptions="Center" FontSize="15" TextColor="#E7404A"/>
+                <Label TextDecorations="Underline" FontAttributes="Bold" Text="Clear Date Selection" HorizontalOptions="Center" FontSize="15" TextColor="#E7404A"/>
                 <Button HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Clicked="clickedClearDates"/>
                 </Grid>
 

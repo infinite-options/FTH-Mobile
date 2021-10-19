@@ -54,7 +54,7 @@ namespace FTH.ViewModel
 
         async void forgotPassClicked(System.Object sender, System.EventArgs e)
         {
-            string result = await DisplayPromptAsync("Forgot Password", "Enter your email and we will send you a temporary password to log in with.", keyboard: Keyboard.Email);
+            string result = await DisplayPromptAsync("Forgot Password", "Enter your email and we will send you a temporary password.", keyboard: Keyboard.Email);
 
             ForgotPassword forgotPassObj = new ForgotPassword();
             forgotPassObj.email = result;
@@ -191,7 +191,7 @@ namespace FTH.ViewModel
                     if (forgotPassSent)
                     {
                         string result = await DisplayPromptAsync("Update Password", "Enter a password you would like to use to replace the temporary one we gave you.", accept: "Confirm");
-
+                        
                         UpdatePassword updatePassObj = new UpdatePassword();
                         updatePassObj.customer_uid = loginAttempt.result[0].customer_uid;
                         updatePassObj.old_password = passEntry.Text.Trim();
