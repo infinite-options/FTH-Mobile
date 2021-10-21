@@ -13,6 +13,7 @@ namespace FTH.Model
         public string dotw { get; set; }
         public string day { get; set; }
         public string month { get; set; }
+        public DateTime dateObj { get; set; }
         //public string fullDateTime { get; set; }
         public string BackgroundImg
         {

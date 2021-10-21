@@ -34,9 +34,12 @@ namespace FTH.ViewModel
         double deviceLong = 0;
         Location deviceLoca;
         double savedfbListHeight = 0;
+        DateTime todaysDate;
+        string orderDateChosen;
 
         public Filter()
         {
+            orderDateChosen = "";
             Debug.WriteLine("user id: " + Application.Current.Properties["user_id"]);
 
             selectedTypes = new List<ImageButton>();
@@ -372,37 +375,59 @@ namespace FTH.ViewModel
 
         void getDates()
         {
-            Date1 newDate = new Date1();
-            newDate.BackgroundImg = "dateUnselected.png";
-            newDate.dotw = "S";
-            newDate.day = "27";
-            newDate.month = "Jun";
-            newDate.TextColor = Color.Black;
-            availableDates.Add(newDate);
-
-            for (int i = 0; i < 11; i++)
+            //DateTime todayDate = DateTime.Now;
+            //Debug.WriteLine("todays date: " + todayDate.Month + " " + todayDate.Day + " " + todayDate.DayOfWeek);
+            for (int i = 0; i < 15; i++)
             {
-                availableDates.Add(new Date1
-                {
-                    BackgroundImg = "dateUnselected.png",
-                    dotw = "S",
-                    day = "27",
-                    month = "Jun",
-                    TextColor = Color.Black
-
-                });
+                todaysDate = DateTime.Now;
+                DateTime nextDate = todaysDate.AddDays(i);
+                Debug.WriteLine("todays date: " + nextDate.ToLongDateString() + " endOfLongDate " + nextDate.Date);
+                Date1 addingDate = new Date1();
+                addingDate.BackgroundImg = "dateUnselected.png";
+                addingDate.dotw = nextDate.DayOfWeek.ToString().Substring(0, 1);
+                addingDate.day = nextDate.Day.ToString();
+                addingDate.month = nextDate.ToLongDateString().Substring(nextDate.ToLongDateString().IndexOf(",") + 2, 3);
+                addingDate.TextColor = Color.Black;
+                addingDate.dateObj = nextDate;
+                availableDates.Add(addingDate);
             }
+
+
+            //Date1 newDate = new Date1();
+            //newDate.BackgroundImg = "dateUnselected.png";
+            //newDate.dotw = "S";
+            //newDate.day = "27";
+            //newDate.month = "Jun";
+            //newDate.TextColor = Color.Black;
+            //availableDates.Add(newDate);
+
+            //for (int i = 0; i < 11; i++)
+            //{
+            //    availableDates.Add(new Date1
+            //    {
+            //        BackgroundImg = "dateUnselected.png",
+            //        dotw = "S",
+            //        day = "27",
+            //        month = "Jun",
+            //        TextColor = Color.Black
+
+            //    });
+            //}
 
             dateCarousel.ItemsSource = availableDates;
         }
+
 
         private void dateChange(object sender, EventArgs e)
         {
             Button button1 = (Button)sender;
             Date1 dateChosen = button1.BindingContext as Date1;
 
+            //unselected -> selected
             if (dateChosen.BackgroundImg == "dateUnselected.png")
             {
+                orderDateChosen = dateChosen.dateObj.ToLongDateString();
+
                 if (selectedDate != null)
                 {
                     selectedDate.BackgroundImg = "dateUnselected.png";
@@ -419,9 +444,36 @@ namespace FTH.ViewModel
 
                 pickDateFrame.BackgroundColor = Color.FromHex("#E7404A"); 
                 pickDateButton.TextColor = Color.White;
+
+                ObservableCollection<FoodBanks> newBanks = new ObservableCollection<FoodBanks>();
+
+                foreach (var bank in totalBanksColl)
+                {
+                    if ((dateChosen.dateObj.DayOfWeek.ToString() == "Monday" && bank.mondayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Tuesday" && bank.tuesdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Wednesday" && bank.wednesdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Thursday" && bank.thursdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Friday" && bank.fridayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Saturday" && bank.saturdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Sunday" && bank.sundayHours == "Closed"))
+                    {
+                        totalBanks[bank] += 1;
+                    }
+                    else if (currentList.Contains(bank))
+                    {
+                        newBanks.Add(bank);
+                    }
+                }
+
+                currentList = newBanks;
+                foodBankColl.ItemsSource = newBanks;
+
             }
+            //selected -> unselected
             else
             {
+                orderDateChosen = "";
+
                 selectedDate = null;
                 pickDateFrame.BackgroundColor = Color.White;
                 pickDateButton.TextColor = Color.FromHex("#E7404A");
@@ -436,6 +488,118 @@ namespace FTH.ViewModel
                 //    pickDateFrame.BackgroundColor = Color.White;
                 //    pickDateButton.TextColor = Color.FromHex("#E7404A");
                 //}
+                ObservableCollection<FoodBanks> newBanks = new ObservableCollection<FoodBanks>();
+
+                foreach (var bank in totalBanksColl)
+                {
+                    if (totalBanks[bank] > 1 &&
+                        ((dateChosen.dateObj.DayOfWeek.ToString() == "Monday" && bank.mondayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Tuesday" && bank.tuesdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Wednesday" && bank.wednesdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Thursday" && bank.thursdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Friday" && bank.fridayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Saturday" && bank.saturdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Sunday" && bank.sundayHours == "Closed")))
+                    {
+                        totalBanks[bank]--;
+                    }
+                    else if (totalBanks[bank] == 1 &&
+                        ((dateChosen.dateObj.DayOfWeek.ToString() == "Monday" && bank.mondayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Tuesday" && bank.tuesdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Wednesday" && bank.wednesdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Thursday" && bank.thursdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Friday" && bank.fridayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Saturday" && bank.saturdayHours == "Closed") ||
+                        (dateChosen.dateObj.DayOfWeek.ToString() == "Sunday" && bank.sundayHours == "Closed")))
+                    {
+                        totalBanks[bank]--;
+                        newBanks.Add(bank);
+                    }
+                    else if (totalBanks[bank] == 0)
+                        newBanks.Add(bank);
+
+                  
+                }
+
+                currentList = newBanks;
+                foodBankColl.ItemsSource = newBanks;
+
+            }
+        }
+
+        void clickedOpenNow(System.Object sender, System.EventArgs e)
+        {
+            //foodBankColl.IsVisible = false;
+            foodBankColl.ScrollTo(0);
+            //if the button is already selected, selected --> unselected
+            if (openNowButton.TextColor == Color.White)
+            {
+                openNowFrame.BackgroundColor = Color.White;
+                openNowButton.TextColor = Color.FromHex("#E7404A");
+                ObservableCollection<FoodBanks> newBanks = new ObservableCollection<FoodBanks>();
+
+                foreach (var bank in totalBanksColl)
+                {
+                    //only show it if there are no more filters on it
+                    if (totalBanks[bank] > 1 &&
+                        ((todaysDate.DayOfWeek.ToString() == "Monday" && bank.mondayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Tuesday" && bank.tuesdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Wednesday" && bank.wednesdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Thursday" && bank.thursdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Friday" && bank.fridayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Saturday" && bank.saturdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Sunday" && bank.sundayHours == "Closed")))
+                    {
+                        totalBanks[bank]--;
+                    }
+                    else if (totalBanks[bank] == 1 &&
+                        ((todaysDate.DayOfWeek.ToString() == "Monday" && bank.mondayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Tuesday" && bank.tuesdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Wednesday" && bank.wednesdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Thursday" && bank.thursdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Friday" && bank.fridayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Saturday" && bank.saturdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Sunday" && bank.sundayHours == "Closed")))
+                    {
+                        totalBanks[bank]--;
+                        newBanks.Add(bank);
+                    }
+                    else if (totalBanks[bank] == 0)
+                        newBanks.Add(bank);
+
+                }
+
+                currentList = newBanks;
+                foodBankColl.ItemsSource = newBanks;
+
+            }
+            else //unselected --> selected
+            {
+                openNowFrame.BackgroundColor = Color.FromHex("#E7404A");
+                openNowButton.TextColor = Color.White;
+                ObservableCollection<FoodBanks> newBanks = new ObservableCollection<FoodBanks>();
+
+
+                foreach (var bank in totalBanksColl)
+                {
+                    if ((todaysDate.DayOfWeek.ToString() == "Monday" && bank.mondayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Tuesday" && bank.tuesdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Wednesday" && bank.wednesdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Thursday" && bank.thursdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Friday" && bank.fridayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Saturday" && bank.saturdayHours == "Closed") ||
+                        (todaysDate.DayOfWeek.ToString() == "Sunday" && bank.sundayHours == "Closed"))
+                    {
+                        totalBanks[bank] += 1;
+                    }
+                    else if (currentList.Contains(bank))
+                    {
+                        newBanks.Add(bank);
+                    }
+                }
+
+                currentList = newBanks;
+                foodBankColl.ItemsSource = newBanks;
             }
         }
 
@@ -610,6 +774,7 @@ namespace FTH.ViewModel
 
         void clickedClearDates(System.Object sender, System.EventArgs e)
         {
+            orderDateChosen = "";
             selectedDate.BackgroundImg = "dateUnselected.png";
             selectedDate.TextColor = Color.Black;
             pickDateButton.Text = "Pick a date";
@@ -1013,6 +1178,14 @@ namespace FTH.ViewModel
         
         async void clickedFoodBank(System.Object sender, System.EventArgs e)
         {
+            if (orderDateChosen == "")
+            {
+                await DisplayAlert("Oops", "Pick a delivery/pickup date before continuing.", "OK");
+                return;
+            }
+
+            Application.Current.Properties["date_chosen"] = orderDateChosen;
+
             Button button1 = (Button)sender;
             FoodBanks bankChosen = button1.BindingContext as FoodBanks;
             Application.Current.Properties["chosen_business_uid"] = bankChosen.business_uid;

@@ -30,7 +30,7 @@ namespace FTH.ViewModel
             SetCartItems();
             //SetPersonalInfo("Carlos", "Torres", "4158329643");
             //SetFullAddress("1658 Sacramento Street", "San Francisco", "CA", "94109");
-            SetFullDeliveryInfo("June 27, 2021", "10:00 AM - 12:00 PM");
+            SetFullDeliveryInfo((string)Application.Current.Properties["date_chosen"], "10:00 AM - 12:00 PM");
         }
 
         async void getInfo()

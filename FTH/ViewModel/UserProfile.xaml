@@ -44,7 +44,7 @@
 
                 </Grid>
 
-                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+                <BoxView Margin="40,5" HeightRequest="1" BackgroundColor="#707070"/>
 
                 <Grid Margin="40,5" HeightRequest="50">
                     <Grid.ColumnDefinitions>
@@ -57,7 +57,7 @@
 
                 </Grid>
 
-                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+                <BoxView Margin="40,5" HeightRequest="1" BackgroundColor="#707070"/>
 
                 <Grid Margin="40,5" HeightRequest="50">
                     <Grid.ColumnDefinitions>
@@ -70,7 +70,7 @@
 
                 </Grid>
 
-                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+                <BoxView Margin="40,5" HeightRequest="1" BackgroundColor="#707070"/>
 
                 <Grid Margin="40,5" HeightRequest="50">
                     <Grid.ColumnDefinitions>
@@ -83,7 +83,7 @@
 
                 </Grid>
 
-                <BoxView Margin="40,5" HeightRequest="2" BackgroundColor="#707070"/>
+                <BoxView Margin="40,5" HeightRequest="1" BackgroundColor="#707070"/>
 
                 <Grid Margin="40,5" HeightRequest="120">
                     <Grid.RowDefinitions>

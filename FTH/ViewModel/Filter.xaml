@@ -28,7 +28,7 @@
                 <ScrollView Orientation="Horizontal">
                     <StackLayout Orientation="Horizontal" HeightRequest="70">
                         <Frame x:Name="openNowFrame" HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">
-                        <Button x:Name="openNowButton" Text="Open Now" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
+                        <Button x:Name="openNowButton" Clicked="clickedOpenNow" Text="Open Now" BackgroundColor="Transparent" FontSize="15" FontAttributes="Bold" TextColor="#E7404A"/>
                         </Frame>
 
                         <Frame x:Name="deliveryFrame" HasShadow="False" BorderColor="#E7404A" VerticalOptions="Center" Margin="5,5" HeightRequest="40" Padding="10,0" CornerRadius="20">

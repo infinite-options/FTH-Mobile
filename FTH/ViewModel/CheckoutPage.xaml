@@ -72,23 +72,24 @@
                         <Label Text="Order Summary" FontSize="20" TextColor="Black" FontAttributes="Bold"></Label>
                     </StackLayout>
                 </StackLayout>
-                <CollectionView x:Name="itemList" VerticalOptions="FillAndExpand">
+                <CollectionView x:Name="itemList" HeightRequest="185" VerticalOptions="FillAndExpand">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"></GridItemsLayout>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="140" Padding="2" CornerRadius="20" IsClippedToBounds="True" HasShadow="False" BorderColor="LightGray">
+                            <Frame HeightRequest="152" Padding="2" CornerRadius="20" IsClippedToBounds="True" HasShadow="False" BorderColor="LightGray">
                                 <StackLayout >
-                                    <Frame HasShadow="False" Margin="5,5,5,5" Padding="0" HeightRequest="61">
+                                    <Frame HasShadow="False" Margin="5,5,5,0" Padding="0" HeightRequest="61">
                                         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                                             <Image Source="{Binding image}" HeightRequest="61" WidthRequest="98"></Image>
                                         </StackLayout>
                                     </Frame>
-                                    <StackLayout HorizontalOptions="Center">
-                                        <Label Text="{Binding name}"></Label>
-                                    </StackLayout>
-                                    <StackLayout HorizontalOptions="CenterAndExpand">
+                                    <Grid HeightRequest="45" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Label Text="{Binding name}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" MaxLines="2" FontSize="14"/>
+
+                                    </Grid>
+                                    <StackLayout HorizontalOptions="CenterAndExpand" Margin="0,0,0,7">
                                         <StackLayout HeightRequest="32" WidthRequest="32">
                                             <RelativeLayout HeightRequest="32" WidthRequest="32">
                                                 <Ellipse HeightRequest="32" Fill="#E7404A" StrokeThickness="0" WidthRequest="32"></Ellipse>
