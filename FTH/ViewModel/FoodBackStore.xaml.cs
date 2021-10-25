@@ -27,9 +27,11 @@ namespace FTH.ViewModel
         public int threshold = 5;
         public string bankName, bankDistance, bankImg, bankUid;
         public int bankItemLimit;
+        FoodBanks chosenFb;
 
-        public FoodBackStore(string fbName, string fbDistance, string fbImage, int itemLimit, string businessUid)
+        public FoodBackStore(FoodBanks foodbank, string fbName, string fbDistance, string fbImage, int itemLimit, string businessUid)
         {
+            chosenFb = foodbank;
             bankName = fbName; bankDistance = fbDistance; bankImg = fbImage; bankUid = businessUid;
             threshold = itemLimit;
             //Debug.WriteLine("itemLimit: " + itemLimit.ToString());
@@ -336,7 +338,7 @@ namespace FTH.ViewModel
 
         void NavigateToCartPage(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CartPage(bankName, bankDistance, bankImg, threshold, itemAmounts), false);
+            Navigation.PushAsync(new CartPage(chosenFb, bankName, bankDistance, bankImg, threshold, itemAmounts), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

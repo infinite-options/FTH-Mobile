@@ -1178,23 +1178,52 @@ namespace FTH.ViewModel
         
         async void clickedFoodBank(System.Object sender, System.EventArgs e)
         {
-            if (orderDateChosen == "")
-            {
-                await DisplayAlert("Oops", "Pick a delivery/pickup date before continuing.", "OK");
-                return;
-            }
-
-            Application.Current.Properties["date_chosen"] = orderDateChosen;
-
             Button button1 = (Button)sender;
             FoodBanks bankChosen = button1.BindingContext as FoodBanks;
+
+            if (orderDateChosen == "")
+            {
+                bool dateAvailable = false;
+                //just check a little over a week's worth of dates
+                for (int i = 0; i < 8; i++)
+                {
+                    Debug.WriteLine("available date: " + availableDates[i].dateObj.ToLongDateString());
+                    if ((availableDates[i].dateObj.DayOfWeek.ToString() == "Monday" && bankChosen.mondayHours != "Closed") ||
+                        (availableDates[i].dateObj.DayOfWeek.ToString() == "Tuesday" && bankChosen.tuesdayHours != "Closed") ||
+                        (availableDates[i].dateObj.DayOfWeek.ToString() == "Wednesday" && bankChosen.wednesdayHours != "Closed") ||
+                        (availableDates[i].dateObj.DayOfWeek.ToString() == "Thursday" && bankChosen.thursdayHours != "Closed") ||
+                        (availableDates[i].dateObj.DayOfWeek.ToString() == "Friday" && bankChosen.fridayHours != "Closed") ||
+                        (availableDates[i].dateObj.DayOfWeek.ToString() == "Saturday" && bankChosen.saturdayHours != "Closed") ||
+                        (availableDates[i].dateObj.DayOfWeek.ToString() == "Sunday" && bankChosen.sundayHours != "Closed"))
+                    {
+                        dateAvailable = true;
+                        Application.Current.Properties["date_chosen"] = availableDates[i].dateObj.ToLongDateString();
+                    }
+                }
+
+                //if none of the available dates work
+                if (dateAvailable == false)
+                {
+                    await DisplayAlert("Oops", "This food bank isn't available right now.", "OK");
+                    return;
+                }
+                
+            }
+            else Application.Current.Properties["date_chosen"] = orderDateChosen;
+            //else Preferences.Set("date_chosen", orderDateChosen);
+
+            Debug.WriteLine("date chosen in filter pg: " + (string)Application.Current.Properties["date_chosen"]);
+
+            //Application.Current.Properties["date_chosen"] = orderDateChosen;
+
+
             Application.Current.Properties["chosen_business_uid"] = bankChosen.business_uid;
             Debug.WriteLine("sending name: " + bankChosen.name);
             Debug.WriteLine("sending distance: " + bankChosen.distance);
             Debug.WriteLine("sending bankImg: " + bankChosen.bankImg);
             Debug.WriteLine("sending itemLimit: " + bankChosen.itemLimit);
             Debug.WriteLine("sending business_uid: " + bankChosen.business_uid);
-            await Navigation.PushAsync(new FoodBackStore(bankChosen.name, bankChosen.distance, bankChosen.bankImg, bankChosen.itemLimit, bankChosen.business_uid));
+            await Navigation.PushAsync(new FoodBackStore(bankChosen, bankChosen.name, bankChosen.distance, bankChosen.bankImg, bankChosen.itemLimit, bankChosen.business_uid));
         }
 
         //menu functions

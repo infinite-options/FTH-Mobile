@@ -19,7 +19,7 @@ namespace FTH.ViewModel
     public partial class FoodBanksMap : ContentPage
     {
         Dictionary<string, KeyValuePair<double, double>> latLongDict;
-        public ObservableCollection<MappedFoodBanks> FoodBanks = new ObservableCollection<MappedFoodBanks>();
+        public ObservableCollection<FoodBanks> FoodBanks = new ObservableCollection<FoodBanks>();
         double deviceLat;
         double deviceLong;
         Location deviceLoca;
@@ -212,7 +212,7 @@ namespace FTH.ViewModel
 
                 foreach (var foundBank in data.banks_found)
                 {
-                    MappedFoodBanks newBank = new MappedFoodBanks();
+                    FoodBanks newBank = new FoodBanks();
                     try
                     {
 
@@ -296,9 +296,116 @@ namespace FTH.ViewModel
                     newBank.name = foundBank.business_name;
                     newBank.latitude = double.Parse(foundBank.business_latitude);
                     newBank.longitude = double.Parse(foundBank.business_longitude);
-                    newBank.bus_img = foundBank.business_image;
-                    newBank.bus_uid = foundBank.business_uid;
-                    newBank.item_limit = foundBank.limit_per_person;
+                    newBank.bankImg = foundBank.business_image;
+                    newBank.business_uid = foundBank.business_uid;
+
+                    try
+                    {
+                        newBank.itemLimit = int.Parse(foundBank.limit_per_person);
+                    }
+                    catch
+                    {
+                        newBank.itemLimit = 0;
+                    }
+
+                    if (foundBank.delivery != 0)
+                    {
+                        if (foundBank.delivery == 1)
+                        {
+                            newBank.delivery = true;
+                            newBank.desc = "Delivery.";
+                        }
+                        else newBank.delivery = false;
+                    }
+
+                    if (foundBank.pick_up != 0)
+                    {
+                        if (foundBank.pick_up == 1)
+                        {
+                            newBank.pickup = true;
+                            newBank.desc += " Pick-Up.";
+                        }
+                        else newBank.pickup = false;
+                    }
+
+                    if (foundBank.business_accepting_hours != null)
+                    {
+                        try
+                        {
+                            Debug.WriteLine("business hours: " + foundBank.business_accepting_hours);
+                            var hoursdata = JsonConvert.DeserializeObject<AcceptingHours>(foundBank.business_accepting_hours);
+
+                            if (hoursdata.Monday[0] == "N/A")
+                                newBank.mondayHours = "Closed";
+                            else newBank.mondayHours = hoursdata.Monday[0].Substring(0, 5) + " - " + hoursdata.Monday[1].Substring(0, 5);
+
+                            if (hoursdata.Tuesday[0] == "N/A")
+                                newBank.tuesdayHours = "Closed";
+                            else newBank.tuesdayHours = hoursdata.Tuesday[0].Substring(0, 5) + " - " + hoursdata.Tuesday[1].Substring(0, 5);
+
+                            if (hoursdata.Wednesday[0] == "N/A")
+                                newBank.wednesdayHours = "Closed";
+                            else newBank.wednesdayHours = hoursdata.Wednesday[0].Substring(0, 5) + " - " + hoursdata.Wednesday[1].Substring(0, 5);
+
+                            if (hoursdata.Thursday[0] == "N/A")
+                                newBank.thursdayHours = "Closed";
+                            else newBank.thursdayHours = hoursdata.Thursday[0].Substring(0, 5) + " - " + hoursdata.Thursday[1].Substring(0, 5);
+
+                            if (hoursdata.Friday[0] == "N/A")
+                                newBank.fridayHours = "Closed";
+                            else newBank.fridayHours = hoursdata.Friday[0].Substring(0, 5) + " - " + hoursdata.Friday[1].Substring(0, 5);
+
+                            if (hoursdata.Saturday[0] == "N/A")
+                                newBank.saturdayHours = "Closed";
+                            else newBank.saturdayHours = hoursdata.Saturday[0].Substring(0, 5) + " - " + hoursdata.Saturday[1].Substring(0, 5);
+
+                            if (hoursdata.Sunday[0] == "N/A")
+                                newBank.sundayHours = "Closed";
+                            else newBank.sundayHours = hoursdata.Sunday[0].Substring(0, 5) + " - " + hoursdata.Sunday[1].Substring(0, 5);
+                        }
+                        catch
+                        {
+                            newBank.mondayHours = "Closed";
+                            newBank.tuesdayHours = "Closed";
+                            newBank.wednesdayHours = "Closed";
+                            newBank.thursdayHours = "Closed";
+                            newBank.fridayHours = "Closed";
+                            newBank.saturdayHours = "Closed";
+                            newBank.sundayHours = "Closed";
+                        }
+                    }
+
+                    if (foundBank.item_types != null)
+                    {
+                        Debug.WriteLine("item types: " + foundBank.item_types);
+                        try
+                        {
+                            var typesdata = JsonConvert.DeserializeObject<Types>(foundBank.item_types);
+                            newBank.fruits = typesdata.fruits;
+                            newBank.vegetables = typesdata.vegetables;
+                            newBank.meals = typesdata.meals;
+                            newBank.desserts = typesdata.desserts;
+                            newBank.beverages = typesdata.beverages;
+                            newBank.dairy = typesdata.dairy;
+                            newBank.snacks = typesdata.snacks;
+                            newBank.cannedFoods = typesdata.cannedFoods;
+                        }
+                        catch
+                        {
+                            Debug.WriteLine("didn't work");
+                            newBank.fruits = false;
+                            newBank.vegetables = false;
+                            newBank.meals = false;
+                            newBank.desserts = false;
+                            newBank.beverages = false;
+                            newBank.dairy = false;
+                            newBank.snacks = false;
+                            newBank.cannedFoods = false;
+                        }
+                    }
+
+
+
 
                     FoodBanks.Add(newBank);
 
@@ -349,7 +456,7 @@ namespace FTH.ViewModel
         void updateCenter(System.Object sender, System.EventArgs e)
         {
             Button button = (Button)sender;
-            MappedFoodBanks fb = button.BindingContext as MappedFoodBanks;
+            FoodBanks fb = button.BindingContext as FoodBanks;
             Position center = new Position(fb.latitude, fb.longitude);
             map2.MapType = MapType.Street;
             var mapSpan = new MapSpan(center, 360 / (Math.Pow(2, 11)), 360 / (Math.Pow(2, 11)));
@@ -359,8 +466,8 @@ namespace FTH.ViewModel
         void fbClicked(System.Object sender, System.EventArgs e)
         {
             ImageButton button = (ImageButton)sender;
-            MappedFoodBanks fb = button.BindingContext as MappedFoodBanks;
-            Navigation.PushAsync(new FoodBackStore(fb.name, fb.distance, fb.bus_img, int.Parse(fb.item_limit), fb.bus_uid));
+            FoodBanks fb = button.BindingContext as FoodBanks;
+            Navigation.PushAsync(new FoodBackStore(fb, fb.name, fb.distance, fb.bankImg, fb.itemLimit, fb.business_uid));
         }
 
         //guest menu functions

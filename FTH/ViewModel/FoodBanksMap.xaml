@@ -63,7 +63,7 @@
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
 
-                                <ImageButton Source="{Binding bus_img}" Grid.Column="0" BackgroundColor="LightGray" WidthRequest="85" HeightRequest="85" CornerRadius="42"
+                                <ImageButton Source="{Binding bankImg}" Grid.Column="0" BackgroundColor="LightGray" WidthRequest="85" HeightRequest="85" CornerRadius="42"
                                              HorizontalOptions="Center" VerticalOptions="Center"/>    
 
                                 <StackLayout Grid.Column="1" HorizontalOptions="Start" Margin="0,10,0,0">

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Net.Http;
 using FTH.Model;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using static FTH.ViewModel.FoodBackStore;
@@ -14,9 +17,13 @@ namespace FTH.ViewModel
         public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         int threshold;
         string fbName, fbDist, fbImg;
+        bool formFilled;
+        FoodBanks chosenFb;
 
-        public CartPage(string bankName, string bankDistance, string bankImage, int storeThreshold, Dictionary<StoreItem, int> itmAmts)
+        public CartPage(FoodBanks foodbank, string bankName, string bankDistance, string bankImage, int storeThreshold, Dictionary<StoreItem, int> itmAmts)
         {
+            chosenFb = foodbank;
+            formFilled = false;
             threshold = storeThreshold;
             Preferences.Set("chosenBankName", bankName);
             Preferences.Set("chosenBankImg", bankImage);
@@ -29,6 +36,38 @@ namespace FTH.ViewModel
             SetFoodBank(bankName, bankDistance, bankImage);
             SetCartItems();
 
+            checkClientIntakeFormCompletion();
+        }
+
+        async void checkClientIntakeFormCompletion()
+        {
+            var request = new HttpRequestMessage();
+            request.RequestUri = new Uri("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/households");
+            request.Method = HttpMethod.Get;
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var message = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    var data = JsonConvert.DeserializeObject<FormsGet>(message);
+                    var receivedList = data.result;
+                    for (int i = receivedList.Count - 1; i >= 0; i--)
+                    {
+                        if (receivedList[i].customer_uid == (string)Application.Current.Properties["user_id"] && receivedList[i].dob != "" && receivedList[i].dob == null)
+                        {
+                            Debug.WriteLine("the client intake form has been filled out before");
+                            formFilled = true;
+                        }
+                    }
+                }
+                catch
+                {
+                    
+                }
+            }
         }
 
         void SetCartItems()
@@ -162,7 +201,9 @@ namespace FTH.ViewModel
             if (fbName == "West Valley Community Services")
                 Preferences.Set("isWV", true);
             else Preferences.Set("isWV", false);
-            Navigation.PushAsync(new ClientIntakeForm(itemAmounts), false);
+            if (!formFilled)
+                Navigation.PushAsync(new ClientIntakeForm(chosenFb, itemAmounts), false);
+            else Navigation.PushAsync(new CheckoutPage(chosenFb, itemAmounts), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

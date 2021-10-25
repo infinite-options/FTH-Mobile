@@ -19,9 +19,11 @@ namespace FTH.ViewModel
         public ObservableCollection<StoreItem> itemsSource = new ObservableCollection<StoreItem>();
         public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         CheckoutPost checkoutobj = new CheckoutPost();
+        FoodBanks chosenFb;
 
-        public CheckoutPage(Dictionary<StoreItem, int> itmAmts)
+        public CheckoutPage(FoodBanks foodbank, Dictionary<StoreItem, int> itmAmts)
         {
+            chosenFb = foodbank;
             itemAmounts = itmAmts;
             InitializeComponent();
             
@@ -205,7 +207,7 @@ namespace FTH.ViewModel
 
         void NavigateToEditAddressPage(System.Object sender, System.EventArgs e)
         {
-            Application.Current.MainPage.Navigation.PushModalAsync(new EditAddressPage(itemAmounts), false);
+            Application.Current.MainPage.Navigation.PushModalAsync(new EditAddressPage(chosenFb, itemAmounts), false);
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

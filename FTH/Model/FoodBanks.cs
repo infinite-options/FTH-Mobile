@@ -35,6 +35,11 @@ namespace FTH.Model
         int filterCount;
         double height;
 
+        //added from mapped food banks
+        public double latitude { get; set; }
+        public double longitude { get; set; }
+        //added
+
         public double Height
         {
             set
@@ -112,12 +117,37 @@ namespace FTH.Model
 
     public class MappedFoodBanks
     {
-        public string name { get; set; }
+        public string name { get; set; } //done
+        public string business_uid { get; set; } //done
+        public string bankImg { get; set; } 
+        public string desc { get; set; }
+        public bool openNow { get; set; }
+        public bool delivery { get; set; } 
+        public bool pickup { get; set; }
+        public int itemLimit { get; set; } 
+        public bool fruits { get; set; }
+        public bool vegetables { get; set; } 
+        public bool meals { get; set; } 
+        public bool desserts { get; set; } 
+        public bool beverages { get; set; } 
+        public bool dairy { get; set; } 
+        public bool snacks { get; set; } 
+        public bool cannedFoods { get; set; } 
+        public string mondayHours { get; set; } 
+        public string tuesdayHours { get; set; } 
+        public string wednesdayHours { get; set; } 
+        public string thursdayHours { get; set; } 
+        public string fridayHours { get; set; } 
+        public string saturdayHours { get; set; } 
+        public string sundayHours { get; set; } 
         public string distance { get; set; }
+        bool hoursVisible;
+        bool totalVisible;
+        int filterCount;
+        double height;
         public double latitude { get; set; }
         public double longitude { get; set; }
         public string bus_img { get; set; }
-        public string bus_uid { get; set; }
         public string item_limit { get; set; }
     }
 }

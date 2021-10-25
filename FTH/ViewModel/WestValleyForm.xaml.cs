@@ -34,10 +34,11 @@ namespace FTH.ViewModel
         string specialNutrition; CheckBox prevSN; //done
         string calfresh; CheckBox prevC; //done
         string contactClient; CheckBox prevCC;
+        FoodBanks chosenFb;
 
-
-        public WestValleyForm(Dictionary<StoreItem, int> itmAmts)
+        public WestValleyForm(FoodBanks foodbank, Dictionary<StoreItem, int> itmAmts)
         {
+            chosenFb = foodbank;
             homelessnessExtent = ""; gender = ""; maritalStatus = ""; education = ""; highestGrade = "";
             hispanicOrigin = ""; primaryEthnicity = ""; veteran = ""; disability = ""; disabilityDesc = ""; 
             primaryLang = ""; engFluency = ""; employmentStatus = ""; medicalInsurance = ""; specialNutrition = ""; calfresh = "";
@@ -273,7 +274,7 @@ namespace FTH.ViewModel
             Debug.WriteLine("RESPONSE TO WV HOUSEHOLDS   " + response.Result);
             Debug.WriteLine("WV HOUSEHOLDS JSON OBJECT BEING SENT: " + submitFormJSONString);
 
-            await Navigation.PushAsync(new CheckoutPage(itemAmounts));
+            await Navigation.PushAsync(new CheckoutPage(chosenFb, itemAmounts));
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

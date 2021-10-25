@@ -10,9 +10,11 @@ namespace FTH.ViewModel
         public Dictionary<StoreItem, int> itemAmounts = new Dictionary<StoreItem, int>();
         private Address addr = new Address();
         public static AddressAutocomplete addressToValidate = null;
+        FoodBanks chosenFb;
 
-        public EditAddressPage(Dictionary<StoreItem, int> itmAmts)
+        public EditAddressPage(FoodBanks foodbank, Dictionary<StoreItem, int> itmAmts)
         {
+            chosenFb = foodbank;
             itemAmounts = itmAmts;
             InitializeComponent();
             BackgroundColor = Color.FromHex("AB000000");
@@ -103,7 +105,7 @@ namespace FTH.ViewModel
                 var updatedNavigationPage = new NavigationPage(storePage);
 
                 await updatedNavigationPage.PushAsync(cartPage, false);
-                await updatedNavigationPage.PushAsync(new CheckoutPage(itemAmounts), false);
+                await updatedNavigationPage.PushAsync(new CheckoutPage(chosenFb, itemAmounts), false);
 
                 Application.Current.MainPage = updatedNavigationPage;
             }

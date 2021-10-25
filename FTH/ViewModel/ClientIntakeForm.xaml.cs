@@ -23,9 +23,11 @@ namespace FTH.ViewModel
         string livingSituation;
         CheckBox prevHS;
         CheckBox prevLS;
+        FoodBanks chosenFb;
 
-        public ClientIntakeForm(Dictionary<StoreItem, int> itmAmts)
+        public ClientIntakeForm(FoodBanks foodbank, Dictionary<StoreItem, int> itmAmts)
         {
+            chosenFb = foodbank;
             housingStatus = "";
             livingSituation = "";
             itemAmounts = itmAmts;
@@ -455,8 +457,8 @@ namespace FTH.ViewModel
             //Navigation.PushAsync(new CheckoutPage());
             //Preferences.Set("isWV", true);
             if (Preferences.Get("isWV", false) == false)
-                await Navigation.PushAsync(new CheckoutPage(itemAmounts));
-            else await Navigation.PushAsync(new WestValleyForm(itemAmounts));
+                await Navigation.PushAsync(new CheckoutPage(chosenFb, itemAmounts));
+            else await Navigation.PushAsync(new WestValleyForm(chosenFb, itemAmounts));
         }
 
         void addMemberClicked(System.Object sender, System.EventArgs e)

@@ -9,7 +9,7 @@
         <Grid Margin="0,30,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition Height="140"></RowDefinition>
+                <RowDefinition Height="130"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -72,17 +72,17 @@
                         <Label Text="Order Summary" FontSize="20" TextColor="Black" FontAttributes="Bold"></Label>
                     </StackLayout>
                 </StackLayout>
-                <CollectionView x:Name="itemList" HeightRequest="185" VerticalOptions="FillAndExpand">
+                <CollectionView x:Name="itemList" HeightRequest="220" VerticalOptions="FillAndExpand">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"></GridItemsLayout>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="152" Padding="2" CornerRadius="20" IsClippedToBounds="True" HasShadow="False" BorderColor="LightGray">
+                            <Frame HeightRequest="145" Padding="2" CornerRadius="20" HasShadow="False" BorderColor="LightGray">
                                 <StackLayout >
-                                    <Frame HasShadow="False" Margin="5,5,5,0" Padding="0" HeightRequest="61">
+                                    <Frame HasShadow="False" Margin="5,5,5,0" Padding="0" HeightRequest="50">
                                         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                            <Image Source="{Binding image}" HeightRequest="61" WidthRequest="98"></Image>
+                                            <Image Source="{Binding image}" HeightRequest="50" WidthRequest="98"></Image>
                                         </StackLayout>
                                     </Frame>
                                     <Grid HeightRequest="45" HorizontalOptions="Center" VerticalOptions="Center">
@@ -106,7 +106,9 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+
+
+                <StackLayout Orientation="Horizontal" Margin="0,15,0,5">
                     <StackLayout HeightRequest="26" WidthRequest="26" >
                         <RelativeLayout HeightRequest="26" WidthRequest="26">
                             <Ellipse HeightRequest="26" Fill="#E7404A" StrokeThickness="0" WidthRequest="26"></Ellipse>
@@ -121,6 +123,7 @@
                         <Label Text="Personal Information" FontSize="20" TextColor="Black" FontAttributes="Bold"></Label>
                     </StackLayout>
                 </StackLayout>
+
                 <StackLayout Margin="-5,0,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -138,8 +141,15 @@
                         </StackLayout>
                     </Grid>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
-                    <StackLayout HeightRequest="26" WidthRequest="26" >
+
+                <Grid HeightRequest="60">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0" Orientation="Horizontal" Margin="0,10,0,5">
+                    <StackLayout HeightRequest="26" WidthRequest="26" VerticalOptions="Center">
                         <RelativeLayout HeightRequest="26" WidthRequest="26">
                             <Ellipse HeightRequest="26" Fill="#E7404A" StrokeThickness="0" WidthRequest="26"></Ellipse>
                             <StackLayout HeightRequest="26" WidthRequest="26">
@@ -153,6 +163,11 @@
                         <Label Text="Delivery Information" FontSize="20" TextColor="Black" FontAttributes="Bold"></Label>
                     </StackLayout>
                 </StackLayout>
+
+                <Button Grid.Column="1" Text="Pickup" HorizontalOptions="Center" TextColor="#E7404A" HeightRequest="30" BackgroundColor="White" BorderColor="#E7404A" WidthRequest="50" CornerRadius="15"/>
+
+                </Grid>
+
                 <StackLayout Margin="-5,0,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
