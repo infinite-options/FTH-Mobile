@@ -43,7 +43,7 @@
                                     <FormattedString>
                                         <Span x:Name="foodBankName" TextColor="Black"/>
                                         <Span x:Name="deliveryTime"  TextColor="#E7404A"/>
-                                        <Span Text="to " TextColor="Black"/>
+                                        <Span x:Name="middle" Text="to " TextColor="Black"/>
                                         <Span x:Name="deliveryAddress" TextColor="#E7404A"/>
                                     </FormattedString>
                                 </Label.FormattedText>

@@ -30,6 +30,11 @@ namespace FTH.Model
         public string saturdayHours { get; set; } //done
         public string sundayHours { get; set; } //done
         public string distance { get; set; }
+        public string address { get; set; }
+        public string unit { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public string zip { get; set; }
         bool hoursVisible;
         bool totalVisible;
         int filterCount;

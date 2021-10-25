@@ -245,6 +245,8 @@ namespace FTH.ViewModel
 
         void loginClicked(System.Object sender, System.EventArgs e)
         {
+            Application.Current.Properties["platform"] = "GUEST";
+            Application.Current.Properties.Remove("user_id");
             Application.Current.MainPage = new LoginPage();
         }
 

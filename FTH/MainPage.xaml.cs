@@ -66,6 +66,7 @@ namespace FTH
         {
             try
             {
+                Application.Current.Properties["platform"] = "GUEST";
                 var width = DeviceDisplay.MainDisplayInfo.Width;
                 var height = DeviceDisplay.MainDisplayInfo.Height;
                 Console.WriteLine("Width = " + width.ToString());

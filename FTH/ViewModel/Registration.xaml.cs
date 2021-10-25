@@ -34,6 +34,7 @@ namespace FTH.ViewModel
 
         public Registration(string p, Dictionary<string, string> info)
         {
+            Application.Current.Properties["platform"] = "GUEST";
             platform = p;
             extraInfo = info;
             NavigationPage.SetHasBackButton(this, false);

@@ -294,6 +294,11 @@ namespace FTH.ViewModel
                     }
 
                     newBank.name = foundBank.business_name;
+                    newBank.address = foundBank.business_address;
+                    newBank.unit = foundBank.business_unit;
+                    newBank.city = foundBank.business_city;
+                    newBank.state = foundBank.business_state;
+                    newBank.zip = foundBank.business_zip;
                     newBank.latitude = double.Parse(foundBank.business_latitude);
                     newBank.longitude = double.Parse(foundBank.business_longitude);
                     newBank.bankImg = foundBank.business_image;
@@ -465,6 +470,9 @@ namespace FTH.ViewModel
 
         void fbClicked(System.Object sender, System.EventArgs e)
         {
+            if ((string)Application.Current.Properties["platform"] == "GUEST")
+                return;
+
             ImageButton button = (ImageButton)sender;
             FoodBanks fb = button.BindingContext as FoodBanks;
             Navigation.PushAsync(new FoodBackStore(fb, fb.name, fb.distance, fb.bankImg, fb.itemLimit, fb.business_uid));
@@ -510,10 +518,12 @@ namespace FTH.ViewModel
 
         void loginClicked(System.Object sender, System.EventArgs e)
         {
+            //Application.Current.Properties["platform"] = "GUEST";
+            //Application.Current.Properties.Remove("user_id");
             Application.Current.MainPage = new LoginPage();
         }
 
-        //end of menu functions
+        //end of guest menu functions
 
         //logged in menu functions
         void profileClicked(System.Object sender, System.EventArgs e)
@@ -551,6 +561,7 @@ namespace FTH.ViewModel
         void logoutClicked(System.Object sender, System.EventArgs e)
         {
             Application.Current.Properties["platform"] = "GUEST";
+            Application.Current.Properties.Remove("user_id");
             Application.Current.MainPage = new LoginPage();
         }
         //end of menu functions

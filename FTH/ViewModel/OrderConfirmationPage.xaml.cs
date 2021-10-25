@@ -8,17 +8,17 @@ namespace FTH.ViewModel
 {
     public partial class OrderConfirmationPage : ContentPage
     {
-        public OrderConfirmationPage(string delivDate, string delivTime, string delivAddress)
+        public OrderConfirmationPage(string option, string delivDate, string delivTime, string delivAddress)
         {
             InitializeComponent();
 
-            var orderType = "DELIVERY";
+            //var orderType = "DELIVERY";
 
-            if (orderType == "DELIVERY")
+            if (option == "delivery")
             {
                 SetFoodBankNameTimeAddressDelivery(Preferences.Get("chosenBankName", ""), delivTime, delivAddress + ".");
             }
-            else if (orderType == "PICKUP")
+            else if (option == "pickup")
             {
                 SetFoodBankNameTimeAddressPickUp(Preferences.Get("chosenBankName", ""), delivTime, delivDate);
             }
@@ -34,6 +34,7 @@ namespace FTH.ViewModel
         void SetFoodBankNameTimeAddressPickUp(string name, string time, string date)
         {
             foodBankName.Text = "Your order from " + name + " will be ready for pickup\nat ";
+            middle.Text = "on ";
             deliveryTime.Text = time + " ";
             deliveryAddress.Text = date;
         }
@@ -75,6 +76,8 @@ namespace FTH.ViewModel
 
         void loginClicked(System.Object sender, System.EventArgs e)
         {
+            Application.Current.Properties["platform"] = "GUEST";
+            Application.Current.Properties.Remove("user_id");
             Debug.WriteLine("logout clicked");
             Application.Current.MainPage = new LoginPage();
         }

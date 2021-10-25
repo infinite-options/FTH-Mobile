@@ -33,6 +33,7 @@ namespace FTH.ViewModel
 
         public LoginPage()
         {
+            Application.Current.Properties["platform"] = "GUEST";
             forgotPassSent = false;
             NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);

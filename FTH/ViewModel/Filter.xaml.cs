@@ -236,6 +236,11 @@ namespace FTH.ViewModel
                 bank.bankImg = bus.business_image;
                 bank.TotalVisible = true;
                 bank.HoursVisible = false;
+                bank.address = bus.business_address;
+                bank.unit = bus.business_unit;
+                bank.city = bus.business_city;
+                bank.state = bus.business_state;
+                bank.zip = bus.business_zip;
 
                 if (bus.delivery != null)
                 {
@@ -1198,6 +1203,7 @@ namespace FTH.ViewModel
                     {
                         dateAvailable = true;
                         Application.Current.Properties["date_chosen"] = availableDates[i].dateObj.ToLongDateString();
+                        break;
                     }
                 }
 
@@ -1269,6 +1275,8 @@ namespace FTH.ViewModel
             openMenuGrid.IsVisible = false;
             whiteCover.IsVisible = false;
             Preferences.Set("foodBankListHeight", foodBankColl.Height + 25);
+            Application.Current.Properties["platform"] = "GUEST";
+            Application.Current.Properties.Remove("user_id");
             Application.Current.MainPage = new LoginPage();
         }
 
