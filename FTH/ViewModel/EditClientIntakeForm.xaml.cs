@@ -154,6 +154,14 @@ namespace FTH.ViewModel
             Application.Current.MainPage = new LoginPage();
         }
 
+
         //end of menu functions
+
+        void editClicked(System.Object sender, System.EventArgs e)
+        {
+            FoodBanks emptyFb = new FoodBanks();
+            Dictionary<StoreItem, int> emptyDict = new Dictionary<StoreItem, int>();
+            Navigation.PushAsync(new ClientIntakeForm(true, emptyFb, emptyDict));
+        }
     }
 }

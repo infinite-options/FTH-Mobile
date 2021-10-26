@@ -90,26 +90,36 @@ namespace FTH.ViewModel
         {
             try
             {
+                string url = "https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/getItems?business_uid=" + bankUid;
+                Debug.WriteLine("url for getItems: " + url);
+                var request3 = new HttpRequestMessage();
+                request3.RequestUri = new Uri(url);
+                request3.Method = HttpMethod.Get;
+                var client2 = new HttpClient();
+                HttpResponseMessage response = await client2.SendAsync(request3);
+                var message = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine("RDSResponse from getItems endpoint: " + response.ToString());
+                Debug.WriteLine("RDSMessage from getItems endpoint: " + message.ToString());
+                var data = JsonConvert.DeserializeObject<GetItemsResponse>(message);
 
+                //List<string> foodTypes = new List<string>();
+                //List<string> bankIds = new List<string>();
+                //bankIds.Add(bankUid);
+                //GetItems getItemsObj = new GetItems();
+                //getItemsObj.types = foodTypes;
+                //getItemsObj.ids = bankIds;
 
-                List<string> foodTypes = new List<string>();
-                List<string> bankIds = new List<string>();
-                bankIds.Add(bankUid);
-                GetItems getItemsObj = new GetItems();
-                getItemsObj.types = foodTypes;
-                getItemsObj.ids = bankIds;
+                //var getItemsSerializedObject = JsonConvert.SerializeObject(getItemsObj);
+                //var content = new StringContent(getItemsSerializedObject, Encoding.UTF8, "application/json");
 
-                var getItemsSerializedObject = JsonConvert.SerializeObject(getItemsObj);
-                var content = new StringContent(getItemsSerializedObject, Encoding.UTF8, "application/json");
+                //System.Diagnostics.Debug.WriteLine("getItems obj: " + getItemsSerializedObject);
 
-                System.Diagnostics.Debug.WriteLine("getItems obj: " + getItemsSerializedObject);
-
-                var getItemsClient = new HttpClient();
-                var RDSResponse = await getItemsClient.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/getItems", content);
-                var RDSMessage = await RDSResponse.Content.ReadAsStringAsync();
-                Debug.WriteLine("RDSResponse from getItems endpoint: " + RDSResponse.ToString());
-                Debug.WriteLine("RDSMessage from getItems endpoint: " + RDSMessage.ToString());
-                var data = JsonConvert.DeserializeObject<GetItemsResponse>(RDSMessage);
+                //var getItemsClient = new HttpClient();
+                //var RDSResponse = await getItemsClient.PostAsync("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/getItems", content);
+                //var RDSMessage = await RDSResponse.Content.ReadAsStringAsync();
+                //Debug.WriteLine("RDSResponse from getItems endpoint: " + RDSResponse.ToString());
+                //Debug.WriteLine("RDSMessage from getItems endpoint: " + RDSMessage.ToString());
+                //var data = JsonConvert.DeserializeObject<GetItemsResponse>(RDSMessage);
                 //BusinessInfo[] filler = new BusinessInfo[0];
                 if (data.result.Length == 0)
                 {
@@ -124,14 +134,14 @@ namespace FTH.ViewModel
                 foreach (var business in data.result)
                 {
                     int item_quantity;
-                    if (business.item_qty == "")
+                    if (business.sup_num == "")
                     {
                         //set quantity to 5 for testing to checkout with items
                         item_quantity = 5;
                         //item_quantity = 0;
                     }
                         
-                    else item_quantity = int.Parse(business.item_qty);
+                    else item_quantity = int.Parse(business.sup_num);
 
                     var item = new StoreItem()
                     {
@@ -140,10 +150,10 @@ namespace FTH.ViewModel
                         quantity = 0,
                         type = business.item_type,
                         availableAmt = item_quantity,
-                        unit = business.item_unit,
+                        unit = business.detailed_unit,
                         price = 1,
                         item_uid = business.item_uid,
-                        itm_business_uid = business.itm_business_uid
+                        itm_business_uid = business.receive_business_uid
                     };
 
                     //if (cart.Count != 0)

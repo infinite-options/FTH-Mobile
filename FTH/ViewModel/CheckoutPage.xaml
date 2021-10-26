@@ -144,8 +144,8 @@
 
                 <Grid HeightRequest="60">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/> <!--1* and 100-->
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
                 <StackLayout Grid.Column="0" Orientation="Horizontal" Margin="0,10,0,5">
@@ -164,7 +164,14 @@
                     </StackLayout>
                 </StackLayout>
 
-                <Button x:Name="switchButton" Grid.Column="1" Text="Pickup" Clicked="clickedPickup" HorizontalOptions="Center" TextColor="#E7404A" HeightRequest="30" BackgroundColor="White" BorderColor="#E7404A" WidthRequest="80" CornerRadius="15"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End">
+
+                <Label Text="Delivery" VerticalOptions="Center" FontSize="8" TextColor="Black" HorizontalOptions="Start"/>
+                <Switch x:Name="delivPickupSwitch" Toggled="delivPickupSwitch_Toggled" OnColor="Transparent"/>
+                <Label Text="Pickup" VerticalOptions="Center" FontSize="8" TextColor="Black" HorizontalOptions="End"/>
+                </StackLayout>
+
+                <!--<Button x:Name="switchButton" Grid.Column="1" Text="Pickup" Clicked="clickedPickup" HorizontalOptions="Center" TextColor="#E7404A" HeightRequest="30" BackgroundColor="White" BorderColor="#E7404A" WidthRequest="80" CornerRadius="15"/>-->
 
                 </Grid>
 
@@ -255,7 +262,7 @@
           </Frame>
 
             <!--logged in menu-->
-            <Grid x:Name="openMenuGrid" Grid.Row="3" IsVisible="false" Grid.RowSpan="3" Margin="20, 0, 20, 10" HeightRequest="40">
+            <Grid x:Name="openMenuGrid" IsVisible="false" Grid.RowSpan="3" Margin="20, 0, 20, 10" HeightRequest="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

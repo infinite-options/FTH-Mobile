@@ -12,41 +12,50 @@ namespace FTH.Model
     public class GetItemsResponse
     {
         public string message { get; set; }
-        public int code { get; set; }
+        //public int code { get; set; }
         public BusinessInfo[] result { get; set; }
     }
 
     public class BusinessInfo
     {
-        public string package_uid { get; set; }
-        public string package_item_uid { get; set; }
-        public string SKU { get; set; }
-        public string package_num { get; set; }
-        public string package_unit { get; set; }
-        public string measure_num { get; set; }
-        public string measure_unit { get; set; }
-        public string item_num { get; set; }
-        public string item_unit { get; set; }
-        public string item_uid { get; set; }
-        public string created_at { get; set; }
-        public string item_name { get; set; }
-        public string item_info { get; set; }
-        public string item_type { get; set; }
-        public string item_desc { get; set; }
-        public string brand_name { get; set; }
-        public string item_photo { get; set; }
-        public string item_display { get; set; }
-        public string item_tags { get; set; }
         public string supply_uid { get; set; }
-        public string supply_created_at { get; set; }
-        public string itm_business_uid { get; set; }
-        public string sup_package_uid { get; set; }
+        public string sup_created_at { get; set; }
+        public string sup_brand_uid { get; set; }
+        public string sup_item_uid { get; set; }
+        public string sup_desc { get; set; }
         public string sup_type { get; set; }
-        public string item_qty { get; set; }
+        public string sup_num { get; set; }
+        public string sup_measure { get; set; }
+        public string sup_unit { get; set; }
+        public string detailed_num { get; set; }
+        public string detailed_measure { get; set; }
+        public string detailed_unit { get; set; }
+        public string item_photo { get; set; }
+        public string package_upc { get; set; }
+        public string brand_uid { get; set; }
+        public string brand_name { get; set; }
+        public string brand_address { get; set; }
+        public string brand_unit { get; set; }
+        public string brand_city { get; set; }
+        public string brand_state { get; set; }
+        public string brand_zip { get; set; }
+        public string brand_contact_first_name { get; set; }
+        public string brand_contact_last_name { get; set; }
+        public string brand_phone_num1 { get; set; }
+        public string brand_phone_num2 { get; set; }
+        public string item_uid { get; set; }
+        public string item_name { get; set; }
+        public string item_desc { get; set; }
+        public string item_type { get; set; }
+        public string item_tags { get; set; }
+        public string receive_uid { get; set; }
+        public string receive_supply_uid { get; set; }
+        public string receive_business_uid { get; set; }
+        public string donation_type { get; set; }
+        public string qty_received { get; set; }
         public string receive_date { get; set; }
         public string available_date { get; set; }
         public string exp_date { get; set; }
-        public string item_status { get; set; }
-        public double business_price { get; set; }
+
     }
 }

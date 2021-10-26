@@ -230,42 +230,7 @@ namespace FTH.ViewModel
             }
         }
 
-        void clickedPickup(System.Object sender, System.EventArgs e)
-        {
-            if (switchButton.Text == "Pickup")
-            {
-                optionChosen = "pickup";
-                deliveryPickupHeader.Text = "Pickup Information";
-                SetFullAddress(chosenFb.address, chosenFb.city, chosenFb.state, chosenFb.zip);
-                switchButton.Text = "Delivery";
-
-                checkoutobj.delivery_address = chosenFb.address;
-                checkoutobj.delivery_unit = chosenFb.unit;
-                checkoutobj.delivery_city = chosenFb.city;
-                checkoutobj.delivery_state = chosenFb.state;
-                checkoutobj.delivery_zip = chosenFb.zip;
-                checkoutobj.delivery_latitude = bankLat;
-                checkoutobj.delivery_longitude = bankLong;
-            }
-            //text == Delivery
-            else
-            {
-                optionChosen = "delivery";
-                deliveryPickupHeader.Text = "Delivery Information";
-                SetFullAddress(custAddress, custCity, custState, custZip);
-                switchButton.Text = "Pickup";
-
-                checkoutobj.delivery_address = custAddress;
-                checkoutobj.delivery_unit = "";
-                checkoutobj.delivery_city = custCity;
-                checkoutobj.delivery_state = custState;
-                checkoutobj.delivery_zip = custZip;
-                checkoutobj.delivery_latitude = custLat;
-                checkoutobj.delivery_longitude = custLong;
-            }
-        }
-
-
+        
 
         void SetFoodBank(string name, string totalQuantity, string picture)
         {
@@ -448,6 +413,75 @@ namespace FTH.ViewModel
             Application.Current.MainPage = new LoginPage();
         }
 
+
         //end of menu functions
+
+        void delivPickupSwitch_Toggled(System.Object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+            //pickup chosen
+            if (e.Value == true)
+            {
+                optionChosen = "pickup";
+                deliveryPickupHeader.Text = "Pickup Information";
+                SetFullAddress(chosenFb.address, chosenFb.city, chosenFb.state, chosenFb.zip);
+
+                checkoutobj.delivery_address = chosenFb.address;
+                checkoutobj.delivery_unit = chosenFb.unit;
+                checkoutobj.delivery_city = chosenFb.city;
+                checkoutobj.delivery_state = chosenFb.state;
+                checkoutobj.delivery_zip = chosenFb.zip;
+                checkoutobj.delivery_latitude = bankLat;
+                checkoutobj.delivery_longitude = bankLong;
+            }
+            else //delivery chosen if unselected
+            {
+                optionChosen = "delivery";
+                deliveryPickupHeader.Text = "Delivery Information";
+                SetFullAddress(custAddress, custCity, custState, custZip);
+
+                checkoutobj.delivery_address = custAddress;
+                checkoutobj.delivery_unit = "";
+                checkoutobj.delivery_city = custCity;
+                checkoutobj.delivery_state = custState;
+                checkoutobj.delivery_zip = custZip;
+                checkoutobj.delivery_latitude = custLat;
+                checkoutobj.delivery_longitude = custLong;
+            }
+        }
+
+        //void clickedPickup(System.Object sender, System.EventArgs e)
+        //{
+        //    if (switchButton.Text == "Pickup")
+        //    {
+        //        optionChosen = "pickup";
+        //        deliveryPickupHeader.Text = "Pickup Information";
+        //        SetFullAddress(chosenFb.address, chosenFb.city, chosenFb.state, chosenFb.zip);
+        //        switchButton.Text = "Delivery";
+
+        //        checkoutobj.delivery_address = chosenFb.address;
+        //        checkoutobj.delivery_unit = chosenFb.unit;
+        //        checkoutobj.delivery_city = chosenFb.city;
+        //        checkoutobj.delivery_state = chosenFb.state;
+        //        checkoutobj.delivery_zip = chosenFb.zip;
+        //        checkoutobj.delivery_latitude = bankLat;
+        //        checkoutobj.delivery_longitude = bankLong;
+        //    }
+        //    //text == Delivery
+        //    else
+        //    {
+        //        optionChosen = "delivery";
+        //        deliveryPickupHeader.Text = "Delivery Information";
+        //        SetFullAddress(custAddress, custCity, custState, custZip);
+        //        switchButton.Text = "Pickup";
+
+        //        checkoutobj.delivery_address = custAddress;
+        //        checkoutobj.delivery_unit = "";
+        //        checkoutobj.delivery_city = custCity;
+        //        checkoutobj.delivery_state = custState;
+        //        checkoutobj.delivery_zip = custZip;
+        //        checkoutobj.delivery_latitude = custLat;
+        //        checkoutobj.delivery_longitude = custLong;
+        //    }
+        //}
     }
 }

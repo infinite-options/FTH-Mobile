@@ -202,7 +202,7 @@ namespace FTH.ViewModel
                 Preferences.Set("isWV", true);
             else Preferences.Set("isWV", false);
             if (!formFilled)
-                Navigation.PushAsync(new ClientIntakeForm(chosenFb, itemAmounts), false);
+                Navigation.PushAsync(new ClientIntakeForm(false, chosenFb, itemAmounts), false);
             else Navigation.PushAsync(new CheckoutPage(chosenFb, itemAmounts), false);
         }
 

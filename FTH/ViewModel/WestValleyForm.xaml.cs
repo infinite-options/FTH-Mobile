@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using FTH.Model;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -35,9 +36,11 @@ namespace FTH.ViewModel
         string calfresh; CheckBox prevC; //done
         string contactClient; CheckBox prevCC;
         FoodBanks chosenFb;
+        bool fromProfile;
 
-        public WestValleyForm(FoodBanks foodbank, Dictionary<StoreItem, int> itmAmts)
+        public WestValleyForm(bool fromProfilepg, FoodBanks foodbank, Dictionary<StoreItem, int> itmAmts)
         {
+            fromProfile = fromProfilepg;
             chosenFb = foodbank;
             homelessnessExtent = ""; gender = ""; maritalStatus = ""; education = ""; highestGrade = "";
             hispanicOrigin = ""; primaryEthnicity = ""; veteran = ""; disability = ""; disabilityDesc = ""; 
@@ -54,12 +57,240 @@ namespace FTH.ViewModel
             Console.WriteLine("Height = " + height.ToString());
 
             InitializeComponent();
+            autofillForm();
 
             MembersColl.Add(new HouseholdComp
             {
                 MemberTitle = "Member 1:"
             });
 
+            membersCollView.ItemsSource = MembersColl;
+        }
+
+        async void autofillForm()
+        {
+
+
+            var request = new HttpRequestMessage();
+            request.RequestUri = new Uri("https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/households");
+            request.Method = HttpMethod.Get;
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var message = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    var data = JsonConvert.DeserializeObject<FormsGet>(message);
+                    var receivedList = data.result;
+                    for (int i = receivedList.Count - 1; i >= 0; i--)
+                    {
+                        if (receivedList[i].customer_uid == (string)Application.Current.Properties["user_id"] &&
+                            receivedList[i].english_fluency != null && receivedList[i].english_fluency != "")
+                        {
+                            Debug.WriteLine("id matched");
+
+                            zipCodeEntry.Text = receivedList[i].last_permanent_zip;
+                            cityEntry.Text = receivedList[i].last_sleep_city;
+                            emergencyNameEntry.Text = receivedList[i].emergency_name;
+                            emergencyNumEntry.Text = receivedList[i].emergency_phone;
+                            emergencyRelationEntry.Text = receivedList[i].emergency_relationship;
+
+
+                            string householdMems = receivedList[i].household_members;
+                            JArray membersArray = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(householdMems);
+
+                            foreach (JObject member in membersArray)
+                            {
+                                MembersColl.Add(new HouseholdComp
+                                {
+                                    MemberTitle = "Member " + memberNum.ToString() + ":",
+                                    MemberName = (string)member["name"],
+                                    MemberSSN = (string)member["last4_ss"],
+                                    MemberAge = (string)member["age"],
+                                    MemberDOB = (string)member["dob"],
+                                    MemberRelationship = (string)member["relationship"]
+                                });
+
+                                membersCollView.ItemsSource = MembersColl;
+                                if (memberNum != 1)
+                                    membersCollView.HeightRequest += 300;
+                                memberNum++;
+                            }
+
+                            //search for extent of homelessness (1)
+                            foreach (var item in checkboxText)
+                            {
+                                Debug.WriteLine("comparing strings: " + item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() + " and " + receivedList[i].extent_homelessness.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "1" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].extent_homelessness.ToLower())
+                                {
+                                    Debug.WriteLine("inside first if");
+                                    foreach (var outerElement in firstPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            Debug.WriteLine("inside second if");
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    Debug.WriteLine("inside third if");
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for gender (2)
+                            if (receivedList[i].gender.ToLower().Contains("other:"))
+                            {
+                                otherGenderBox.IsChecked = true;
+                                otherGenderEntry.Text = receivedList[i].gender.Substring(receivedList[i].gender.ToLower().IndexOf("other:") + 7);
+                            }
+                            else
+                            {
+                                foreach (var item in checkboxText)
+                                {
+                                    if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "2" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].gender.ToLower())
+                                    {
+                                        foreach (var outerElement in firstPage.Children)
+                                        {
+                                            if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                            {
+                                                var grid = (Grid)outerElement;
+                                                foreach (var innerElement in grid.Children)
+                                                {
+                                                    if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                    {
+                                                        var checkbox = (CheckBox)innerElement;
+                                                        if (checkbox.AnchorX == item.Key)
+                                                            checkbox.IsChecked = true;
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for marital_status (3)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "3" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].marital_status.ToLower())
+                                {
+                                    foreach (var outerElement in firstPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for education (4)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "4" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].education.ToLower())
+                                {
+                                    foreach (var outerElement in firstPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for highest_grade_level (5)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "5" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].highest_grade_level.ToLower())
+                                {
+                                    foreach (var outerElement in firstPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            return;
+                        }
+
+                    }
+                    //if (data.customer_uid == )
+                    //FNameEntry.Text = data.name;
+
+                }
+                catch
+                {
+                    //MembersColl.Add(new HouseholdMembers
+                    //{
+                    //    MemberTitle = "Member 1:"
+                    //});
+
+                    memberNum++;
+                    membersCollView.ItemsSource = MembersColl;
+                    Debug.WriteLine("something went wrong when fetching autofill info from households");
+                    return;
+                }
+            }
+            else
+            {
+                Debug.WriteLine("something went wrong when fetching autofill info from households");
+            }
+
+            //MembersColl.Add(new HouseholdMembers
+            //{
+            //    MemberTitle = "Member 1:"
+            //});
+
+            memberNum++;
             membersCollView.ItemsSource = MembersColl;
         }
 

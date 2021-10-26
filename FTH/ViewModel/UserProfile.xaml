@@ -101,7 +101,7 @@
                     <ImageButton Grid.Column="2" Clicked="clientFormClicked" Source="editIcon" VerticalOptions="Fill" HorizontalOptions="Fill" />
 
                     <Label Grid.Row="1" x:Name="wvForm" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Column="1" Text="West Valley Community Services Form" FontSize="15" TextColor="Black" HorizontalOptions="Fill"/>
-                    <ImageButton Grid.Row="1" Grid.Column="2" Source="editIcon" VerticalOptions="Fill" HorizontalOptions="Fill"/>
+                    <ImageButton Grid.Row="1" Grid.Column="2" Clicked="wvFormClicked" Source="editIcon" VerticalOptions="Fill" HorizontalOptions="Fill"/>
 
                 </Grid>
 
