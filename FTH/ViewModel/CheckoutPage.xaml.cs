@@ -423,6 +423,8 @@ namespace FTH.ViewModel
             {
                 optionChosen = "pickup";
                 deliveryPickupHeader.Text = "Pickup Information";
+                pickupText.TextColor = Color.FromHex("#E7404A");
+                delivText.TextColor = Color.Black;
                 SetFullAddress(chosenFb.address, chosenFb.city, chosenFb.state, chosenFb.zip);
 
                 checkoutobj.delivery_address = chosenFb.address;
@@ -437,6 +439,8 @@ namespace FTH.ViewModel
             {
                 optionChosen = "delivery";
                 deliveryPickupHeader.Text = "Delivery Information";
+                delivText.TextColor = Color.FromHex("#E7404A");
+                pickupText.TextColor = Color.Black;
                 SetFullAddress(custAddress, custCity, custState, custZip);
 
                 checkoutobj.delivery_address = custAddress;

@@ -645,7 +645,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="55"/>
+                    <CheckBox x:Name="otherDisabilityBox" CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="55"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="otherDisability" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
@@ -713,7 +713,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="61"/>
+                    <CheckBox x:Name="otherLangBox" CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="61"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Other: " FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="otherLang" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
@@ -938,7 +938,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="81"/>
+                    <CheckBox x:Name="yesBox" CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="81"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="Yes, Monthly Amount: $" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                     <Frame x:Name="amt" Grid.Column="2" Padding="20,10" BackgroundColor="White" HasShadow="False"
                           BorderColor="Black" CornerRadius="17" HeightRequest="35" VerticalOptions="Center">
@@ -952,7 +952,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="82"/>
+                    <CheckBox x:Name="noBox" CheckedChanged="checkboxSelected" HeightRequest="30" WidthRequest="30" Color="Black" AnchorX="82"/>
                     <Label Grid.Column="1" VerticalOptions="Center" Text="No" FontSize="16" HorizontalOptions="Start" TextColor="Black"/>
                 </Grid>
 

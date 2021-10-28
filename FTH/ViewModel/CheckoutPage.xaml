@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Frame x:Name="userFrame" HasShadow="False" BorderColor="#E7404A" WidthRequest="86" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="86" CornerRadius="45" Padding="0">
+                    <Frame x:Name="userFrame" HasShadow="False" BorderColor="#E7404A" IsClippedToBounds="True" WidthRequest="86" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="86" CornerRadius="45" Padding="0">
                         <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFit"/>
                     </Frame>
 
@@ -166,9 +166,9 @@
 
                 <StackLayout Orientation="Horizontal" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End">
 
-                <Label Text="Delivery" VerticalOptions="Center" FontSize="8" TextColor="Black" HorizontalOptions="Start"/>
-                <Switch x:Name="delivPickupSwitch" Toggled="delivPickupSwitch_Toggled" OnColor="Transparent"/>
-                <Label Text="Pickup" VerticalOptions="Center" FontSize="8" TextColor="Black" HorizontalOptions="End"/>
+                <Label x:Name="delivText" Text="Delivery" VerticalOptions="Center" FontSize="8" TextColor="#E7404A" HorizontalOptions="Start"/>
+                <Switch x:Name="delivPickupSwitch" ThumbColor="#E7404A" Toggled="delivPickupSwitch_Toggled" OnColor="Transparent"/>
+                <Label x:Name="pickupText" Text="Pickup" VerticalOptions="Center" FontSize="8" TextColor="Black" HorizontalOptions="End"/>
                 </StackLayout>
 
                 <!--<Button x:Name="switchButton" Grid.Column="1" Text="Pickup" Clicked="clickedPickup" HorizontalOptions="Center" TextColor="#E7404A" HeightRequest="30" BackgroundColor="White" BorderColor="#E7404A" WidthRequest="80" CornerRadius="15"/>-->

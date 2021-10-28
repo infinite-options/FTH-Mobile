@@ -59,12 +59,12 @@ namespace FTH.ViewModel
             InitializeComponent();
             autofillForm();
 
-            MembersColl.Add(new HouseholdComp
-            {
-                MemberTitle = "Member 1:"
-            });
+            //MembersColl.Add(new HouseholdComp
+            //{
+            //    MemberTitle = "Member 1:"
+            //});
 
-            membersCollView.ItemsSource = MembersColl;
+            //membersCollView.ItemsSource = MembersColl;
         }
 
         async void autofillForm()
@@ -259,6 +259,315 @@ namespace FTH.ViewModel
                                 }
                             }
 
+                            //search for hispanic_origin (6)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "6" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].hispanic_origin.ToLower())
+                                {
+                                    foreach (var outerElement in secondPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for primary_ethnicity (7)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "7" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].primary_ethnicity.ToLower())
+                                {
+                                    foreach (var outerElement in secondPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for veteran (8)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "8" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].veteran.ToLower())
+                                {
+                                    foreach (var outerElement in secondPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for disability long duration (9)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "9" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].long_disability.ToLower())
+                                {
+                                    foreach (var outerElement in secondPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for long disability desc (10)
+                            if (receivedList[i].long_disability_desc.ToLower().Contains("other:"))
+                            {
+                                otherDisabilityBox.IsChecked = true;
+                                otherDisabilityEntry.Text = receivedList[i].long_disability_desc.Substring(receivedList[i].long_disability_desc.ToLower().IndexOf("other:") + 7);
+                            }
+                            else
+                            {
+                                foreach (var item in checkboxText)
+                                {
+                                    if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "10" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].long_disability_desc.ToLower())
+                                    {
+                                        foreach (var outerElement in secondPage.Children)
+                                        {
+                                            if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                            {
+                                                var grid = (Grid)outerElement;
+                                                foreach (var innerElement in grid.Children)
+                                                {
+                                                    if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                    {
+                                                        var checkbox = (CheckBox)innerElement;
+                                                        if (checkbox.AnchorX == item.Key)
+                                                            checkbox.IsChecked = true;
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for primary lang (11)
+                            if (receivedList[i].primary_lang.ToLower().Contains("other:"))
+                            {
+                                otherLangBox.IsChecked = true;
+                                otherLangEntry.Text = receivedList[i].primary_lang.Substring(receivedList[i].primary_lang.ToLower().IndexOf("other:") + 7);
+                            }
+                            else
+                            {
+                                foreach (var item in checkboxText)
+                                {
+                                    if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "11" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].primary_lang.ToLower())
+                                    {
+                                        foreach (var outerElement in secondPage.Children)
+                                        {
+                                            if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                            {
+                                                var grid = (Grid)outerElement;
+                                                foreach (var innerElement in grid.Children)
+                                                {
+                                                    if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                    {
+                                                        var checkbox = (CheckBox)innerElement;
+                                                        if (checkbox.AnchorX == item.Key)
+                                                            checkbox.IsChecked = true;
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for english_fluency (12)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "12" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].english_fluency.ToLower())
+                                {
+                                    foreach (var outerElement in secondPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for employment_status (13)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "13" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].employment_status.ToLower())
+                                {
+                                    foreach (var outerElement in thirdPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for medical_insurance (14)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "14" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].medical_insurance.ToLower())
+                                {
+                                    foreach (var outerElement in thirdPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //search for special_nutrition (15)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "15" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].special_nutrition.ToLower())
+                                {
+                                    foreach (var outerElement in thirdPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (receivedList[i].calfresh.ToLower() == "yes")
+                            {
+                                yesBox.IsChecked = true;
+                                amtEntry.Text = receivedList[i].calfresh_amount;
+                            }
+                            else noBox.IsChecked = true;
+
+
+                            //search for is_client (17)
+                            foreach (var item in checkboxText)
+                            {
+                                //Debug.WriteLine("comparing strings: " + item.Value.Substring(1).ToLower() + " and " + receivedList[i].housing_status.ToLower());
+                                if (item.Value.Substring(0, item.Value.IndexOf(" ")) == "17" && item.Value.Substring(item.Value.IndexOf(" ") + 1).ToLower() == receivedList[i].emergency_client.ToLower())
+                                {
+                                    foreach (var outerElement in thirdPage.Children)
+                                    {
+                                        if (outerElement.ToString() == "Xamarin.Forms.Grid")
+                                        {
+                                            var grid = (Grid)outerElement;
+                                            foreach (var innerElement in grid.Children)
+                                            {
+                                                if (innerElement.ToString() == "Xamarin.Forms.CheckBox")
+                                                {
+                                                    var checkbox = (CheckBox)innerElement;
+                                                    if (checkbox.AnchorX == item.Key)
+                                                        checkbox.IsChecked = true;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
                             return;
                         }
 
@@ -269,6 +578,11 @@ namespace FTH.ViewModel
                 }
                 catch
                 {
+                    MembersColl.Add(new HouseholdComp
+                    {
+                        MemberTitle = "Member 1:"
+                    });
+
                     //MembersColl.Add(new HouseholdMembers
                     //{
                     //    MemberTitle = "Member 1:"
@@ -284,6 +598,11 @@ namespace FTH.ViewModel
             {
                 Debug.WriteLine("something went wrong when fetching autofill info from households");
             }
+
+            MembersColl.Add(new HouseholdComp
+            {
+                MemberTitle = "Member 1:"
+            });
 
             //MembersColl.Add(new HouseholdMembers
             //{
@@ -384,7 +703,7 @@ namespace FTH.ViewModel
 
         void addMemberClicked(System.Object sender, System.EventArgs e)
         {
-            memberNum++;
+            
 
             MembersColl.Add(new HouseholdComp
             {
@@ -393,6 +712,7 @@ namespace FTH.ViewModel
 
             membersCollView.ItemsSource = MembersColl;
             membersCollView.HeightRequest += 300;
+            memberNum++;
         }
 
         async void submitClicked(System.Object sender, System.EventArgs e)
@@ -505,7 +825,9 @@ namespace FTH.ViewModel
             Debug.WriteLine("RESPONSE TO WV HOUSEHOLDS   " + response.Result);
             Debug.WriteLine("WV HOUSEHOLDS JSON OBJECT BEING SENT: " + submitFormJSONString);
 
-            await Navigation.PushAsync(new CheckoutPage(chosenFb, itemAmounts));
+            if (fromProfile)
+                await Navigation.PushAsync(new UserProfile());
+            else await Navigation.PushAsync(new CheckoutPage(chosenFb, itemAmounts));
         }
 
         void backClicked(System.Object sender, System.EventArgs e)

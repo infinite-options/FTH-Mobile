@@ -135,9 +135,10 @@ namespace FTH.ViewModel
 
         async void wvFormClicked(System.Object sender, System.EventArgs e)
         {
-            FoodBanks emptyFb = new FoodBanks();
-            Dictionary<StoreItem, int> emptyDict = new Dictionary<StoreItem, int>();
-            await Navigation.PushAsync(new WestValleyForm(true, emptyFb, emptyDict));
+            //FoodBanks emptyFb = new FoodBanks();
+            //Dictionary<StoreItem, int> emptyDict = new Dictionary<StoreItem, int>();
+            await Navigation.PushAsync(new EditWVForm());
+            //await Navigation.PushAsync(new WestValleyForm(true, emptyFb, emptyDict));
 
         }
 

@@ -27,7 +27,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Frame x:Name="userFrame" HasShadow="False" BorderColor="#E7404A" WidthRequest="86" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="86" CornerRadius="45" Padding="0">
+                    <Frame x:Name="userFrame" HasShadow="False" IsClippedToBounds="True" BorderColor="#E7404A" WidthRequest="86" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="86" CornerRadius="45" Padding="0">
                         <Image x:Name="foodBankPicture" HorizontalOptions="Center" Aspect="AspectFit"/>
                     </Frame>
 
