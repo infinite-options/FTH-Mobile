@@ -1264,6 +1264,11 @@ namespace FTH.ViewModel
             Navigation.PushAsync(new Filter());
         }
 
+        void faqClicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new FAQPage(false));
+        }
+
         void browseClicked(System.Object sender, System.EventArgs e)
         {
             //Application.Current.MainPage = new FoodBanksMap();

@@ -77,7 +77,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame Padding="0" HeightRequest="170" HasShadow="False" BorderColor="LightGray" CornerRadius="10">
+                                <Frame Padding="0" HeightRequest="185" HasShadow="False" BorderColor="LightGray" CornerRadius="10">
                                     <Grid RowSpacing="0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"></RowDefinition>
@@ -87,12 +87,14 @@
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="80"/>
-                                                    <RowDefinition Height="45"/>
+                                                    <RowDefinition Height="40"/>
+                                                    <RowDefinition Height="30"/>
                                                 </Grid.RowDefinitions>
 
                                                 <ImageButton Grid.Row="0" Source="{Binding image}" HeightRequest="70" Margin="3,0" CornerRadius="10"/>
-                                                <Label Grid.Row="1" Margin="3,0" Text="{Binding name}" HorizontalTextAlignment="Center" VerticalOptions="Center" VerticalTextAlignment="Center" LineBreakMode="WordWrap" MaxLines="2" FontSize="14"/>
-
+                                                <Label Grid.Row="1" Margin="3,-5" Text="{Binding name}" HorizontalTextAlignment="Center" VerticalOptions="Center" VerticalTextAlignment="Center" LineBreakMode="WordWrap" MaxLines="2" FontSize="14"/>
+                                                <Label Grid.Row="2" Margin="0,-5,0,0" Text="{Binding measure}" HorizontalTextAlignment="Center"
+                                                       VerticalOptions="Start" FontSize="12" TextColor="#E7404A"/>
                                             </Grid>
                                             <!--<StackLayout VerticalOptions="Center">
                                                 <Frame HeightRequest="70" Padding="5" HasShadow="False" CornerRadius="10">

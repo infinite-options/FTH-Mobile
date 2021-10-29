@@ -147,6 +147,7 @@ namespace FTH.ViewModel
                     {
                         image = business.item_photo,
                         name = business.item_name,
+                        measure = business.detailed_measure,
                         quantity = 0,
                         type = business.item_type,
                         availableAmt = item_quantity,

@@ -16,6 +16,7 @@ namespace FTH.Model
         public int price { get; set; }
         public string item_uid { get; set; }
         public string itm_business_uid { get; set; }
+        public string measure { get; set; }
 
         public int quantityUpdate
         {
