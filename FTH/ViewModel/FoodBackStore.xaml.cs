@@ -90,7 +90,7 @@ namespace FTH.ViewModel
         {
             try
             {
-                string url = "https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/getItems?business_uid=" + bankUid;
+                string url = "https://c1zwsl05s5.execute-api.us-west-1.amazonaws.com/dev/api/v2/getItems?receive_business_uid=" + bankUid;
                 Debug.WriteLine("url for getItems: " + url);
                 var request3 = new HttpRequestMessage();
                 request3.RequestUri = new Uri(url);
@@ -171,7 +171,7 @@ namespace FTH.ViewModel
             }
             catch
             {
-                await DisplayAlert("Oops", "This food bank currently has no items available.", "OK");
+                //await DisplayAlert("Oops", "This food bank currently has no items available.", "OK");
 
                 //commented out for testing
                 //await Navigation.PopAsync();
